@@ -1,0 +1,55 @@
+/*
+    DialogBox CSS styles
+*/
+
+/* primary blocks */
+.dialogbox-overlay      { width: 100%; height: 100%; opacity: 0.5; background: #000; position: absolute; top: 0; left: 0; z-index: 100; display: block;
+                        visibility: hidden; overflow: hidden; margin: 0; padding: 0; }
+.dialogbox              { width: auto; height: auto; margin: auto; padding: 0; position: fixed; background: #fff; z-index: 101; display: block;
+                        visibility: hidden; overflow: hidden; }
+.dialogbox-header       { clear: both; width: 100%; height: 42px; display: block; }
+.dialogbox-content      { clear: both; padding: 0 12px; margin: 2px 0; overflow-y: auto; display: block; }
+.dialogbox-footer       { clear: both; width: 100%; height: 42px; display: block; }
+
+/* secondary blocks */
+.dialogbox-title        { float: left; margin: 8px; }
+.dialogbox-closer       { float: right; margin: 8px; margin-top: 16px; }
+
+/* global styles */
+.dialogbox              { font: normal 13px/16px "Helvetica Neue",Helvetica,Arial,sans-serif; 
+                        border: none; border-radius: 6px; box-shadow: 4px 4px 4px rgba(200,200,200,0.5); }
+.dialogbox label        { font-size: 1em; font-weight: bold; line-height: 2em; }
+.dialogbox input, .dialogbox textarea
+                        { width: 96%; margin: 2px auto; padding: 4px; outline: none; border-radius: 4px; 
+                        border: 1px solid #CCC; font-size: 1em; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+                        transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s; }
+.dialogbox input:focus, .dialogbox textarea:focus
+                        { box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6); }
+.dialogbox input.error, .dialogbox textarea.error
+                        { box-shadow: 0 0 6px #F8B9B7; border-color: #E9322D; }
+button.dialogbox-button, a.dialogbox-button, input.dialogbox-button {
+	position: relative; padding: 4px 16px; margin: 0; display: inline-block; cursor: pointer;
+    text-align: center; color: #fff; background: #0074CC; text-decoration: none;
+	font-weight: bold; line-height: 1; width: auto; font-size: .9em;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); border: 1px solid rgba(0,0,0,0.25); border-radius: 5px;
+}
+button.dialogbox-button:hover, a.dialogbox-button:hover, input.dialogbox-button:hover {
+    color: #0074CC; background: #fff;
+}
+
+/* header styles */
+.dialogbox-header           { border-bottom: 1px dotted #ddd; }
+.dialogbox-header h3        { font-weight: bold; color: #0074CC; font-size: 1.3em; margin: 16px 12px; padding: 0; border: none; }
+.dialogbox.draggable .dialogbox-header h3 { cursor: move; }
+.dialogbox-closer a         { text-decoration: none; color: #ddd; font-weight: bold; font-size: 1em; padding-right: 6px; }
+.dialogbox-closer a .closer-text { color: #fff; padding-right: 2px; }
+.dialogbox-closer a .closer-x { font-size: 1.4em; }
+.dialogbox-closer a:hover, .dialogbox-closer a:hover .closer-text { color: #aaa; }
+
+/* content styles */
+.dialogbox-content          { text-align: left; color: #404040; font-size: 1em; }
+
+/* footer styles */
+.dialogbox-footer           { border-top: 1px dotted #ddd;margin:0; padding: 0; }
+.dialogbox-footer-content   { margin: 4px 12px; padding: 0; text-align: right; }
+

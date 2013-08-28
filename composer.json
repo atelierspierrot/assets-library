@@ -1,0 +1,30 @@
+{
+    "name": "atelierspierrot/js-library",
+    "type": "library-assets",
+    "description": "The javascript library of Les Ateliers.",
+    "keywords": [ "javascript library" ],
+    "homepage": "http://github.com/atelierspierrot/js-library",
+    "version": "0.0.1",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Les Ateliers Pierrot & contributors",
+            "email": "contact@ateliers-pierrot.fr",
+            "homepage": "http://www.ateliers-pierrot.fr/"
+        },{
+            "name": "Pierre Cassat",
+            "email": "piero.wbmstr@gmail.com",
+            "homepage": "https://github.com/PieroWbmstr"
+        }
+    ],
+    "require": {
+    },
+    "require-dev": {
+        "sami/sami": "dev-master"
+    },
+    "autoload": { 
+    },
+    "extra": {
+        "views-functions": "src/I18n/aliases.php"
+    }
+}

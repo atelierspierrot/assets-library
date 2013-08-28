@@ -1,0 +1,13 @@
+/*
+    Draggable styles
+*/
+
+.draggable  { position: relative; border: 1px dotted #ccc; border-radius: 5px; padding: 2px; }
+.draggable.dragged { z-index: 100; position: absolute; float: none; }
+.dragger    {
+    background: #fff url(icon_draggable.gif) repeat-x top left; height: 13px; margin: 0 1px; padding: 2px; width: 99%;
+    display: block; position: absolute; top: 0; left: 0;
+    border-top: 1px dotted #ccc; cursor: move;
+}
+.ghost      { position: absolute; display: inline-block; background: #fff; border: 1px dotted #404040; 
+            z-index: 99; zoom: 1; opacity: 0.5;}
