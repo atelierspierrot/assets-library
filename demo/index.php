@@ -72,7 +72,7 @@ if (!empty($_GET['page']) && $_GET['page']==='menu') :
     <header id="top" role="banner">
         <hgroup>
             <h1>JS Library</h1>
-            <h2 class="slogan">The javascript library of Les Ateliers.</h2>
+            <h2 class="slogan">The javascript & css library of Les Ateliers.</h2>
         </hgroup>
     </header>
     <br />
@@ -110,7 +110,7 @@ endforeach;
     </ul>
 
     <div class="info">
-        <p><a href="http://github.com/atelierspierrot/js-library">See online on GitHub</a></p>
+        <p><a href="http://github.com/atelierspierrot/assets-library">See online on GitHub</a></p>
         <p class="comment">The sources of this plugin are hosted on <a href="http://github.com">GitHub</a>. To follow sources updates, report a bug or read opened bug tickets and any other information, please see the GitHub website above.</p>
     </div>
 
@@ -121,7 +121,7 @@ endforeach;
 		    This page is <a href="" title="Check now online" id="html_validation">HTML5</a> & <a href="" title="Check now online" id="css_validation">CSS3</a> valid.
 		</div>
 		<div class="credits float-right">
-		    <a href="http://github.com/atelierspierrot/js-library">atelierspierrot/internationalization</a> package by <a href="https://github.com/PieroWbmstr">Piero Wbmstr</a> under <a href="http://opensource.org/licenses/GPL-3.0">GNU GPL v.3</a> license.
+		    <a href="http://github.com/atelierspierrot/assets-library">atelierspierrot/internationalization</a> package by <a href="https://github.com/PieroWbmstr">Piero Wbmstr</a> under <a href="http://opensource.org/licenses/GPL-3.0">GNU GPL v.3</a> license.
 		</div>
     </footer>
 </body>
