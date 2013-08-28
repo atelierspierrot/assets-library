@@ -56,7 +56,7 @@ if (!empty($_GET['page']) && $_GET['page']==='menu') :
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Test & documentation of "JS Library" package</title>
+    <title>Test & documentation of "Assets Library" package</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="assets/html5boilerplate/css/normalize.css" />
@@ -71,7 +71,7 @@ if (!empty($_GET['page']) && $_GET['page']==='menu') :
 
     <header id="top" role="banner">
         <hgroup>
-            <h1>JS Library</h1>
+            <h1>Assets Library</h1>
             <h2 class="slogan">The javascript & css library of Les Ateliers.</h2>
         </hgroup>
     </header>
@@ -121,7 +121,7 @@ endforeach;
 		    This page is <a href="" title="Check now online" id="html_validation">HTML5</a> & <a href="" title="Check now online" id="css_validation">CSS3</a> valid.
 		</div>
 		<div class="credits float-right">
-		    <a href="http://github.com/atelierspierrot/assets-library">atelierspierrot/internationalization</a> package by <a href="https://github.com/PieroWbmstr">Piero Wbmstr</a> under <a href="http://opensource.org/licenses/GPL-3.0">GNU GPL v.3</a> license.
+		    <a href="http://github.com/atelierspierrot/assets-library">atelierspierrot/assets-library</a> package by <a href="https://github.com/PieroWbmstr">Piero Wbmstr</a> under <a href="http://opensource.org/licenses/GPL-3.0">GNU GPL v.3</a> license.
 		</div>
     </footer>
 </body>
@@ -131,7 +131,7 @@ endforeach;
     <html>
     <head>
         <meta charset="utf-8" />
-        <title>Test & documentation of "JS Library" package</title>
+        <title>Test & documentation of "Assets Library" package</title>
         <meta name="description" content="" />
     </head>
     <!--
