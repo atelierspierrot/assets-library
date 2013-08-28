@@ -26,7 +26,7 @@
 /**
  * Get an element positions
  * @param object element The element from which to get the attribute
- * @return object An array like { left:X, top:Y, right:W, bottom:Z, width:w, height:h }
+ * @return object An array like ( left:X, top:Y, right:W, bottom:Z, width:w, height:h )
  */
 function getOffset( element ) {
     if (element===undefined || element===null) {

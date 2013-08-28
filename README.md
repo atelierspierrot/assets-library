@@ -1,4 +1,12 @@
-js-library
-==========
+Assets Library
+==============
 
-The javascript library of Les Ateliers
+The javascript & css library of Les Ateliers Pierrot.
+
+
+## Documentation
+
+To build a document, run:
+
+    ../path/to/jsdoc -c conf.json
+

@@ -23,9 +23,6 @@
 #
 # ***** END LICENSE BLOCK ***** */
 
-
-/**
- */
 function getDocumentSizes() {
 	var sizes = {
 		width: getDocumentWidth(),
