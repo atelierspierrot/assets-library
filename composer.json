@@ -23,6 +23,32 @@
     "autoload": { 
     },
     "extra": {
-        "assets-dir": "src"
+        "assets-dir": "src",
+        "assets-presets": {
+            "debug": { "js": "js/debug/debug.js" },
+            "extend": { "js": "js/extend/extend.js" },
+            "cookies": { "js": "js/cookies/cookies.js" },
+            "document_load": { "js": "js/document/document_load.js" },
+            "get_document_sizes": { "js": "js/document/get_document_sizes.js" },
+            "document": { "require": [ "document_load", "get_document_sizes" ] },
+            "classes": { "js": "js/node/classes.js" },
+            "get_offset": { "js": "js/node/get_offset.js" },
+            "get_style_attribute": { "js": "js/node/get_style_attribute.js" },
+            "select": { "js": "js/node/select.js" },
+            "node": { "require": [ "classes", "get_offset", "get_style_attribute", "select" ] },
+            "form_serialize": { "js": "js/form_serialize/form_serialize.js" },
+            "uniqid": { "js": "js/system/uniqid.js" },
+            "is_defined": { "js": "js/system/is_defined.js" },
+            "system": { "require": [ "uniqid", "is_defined" ] },
+            "accordion": {
+                "js": "js/accordion/accordion.js",
+                "css": "js/accordion/accordion.css",
+                "require": [ "debug", "cookies", "extend", "document_load", "classes" ]
+            },
+            "ajax": {
+                "js": "js/ajax/ajax.js",
+                "require": [ "debug", "clone", "extend", "document_load", "form_serialize", "node", "uniqid", "in_array" ]
+            }
+        }
     }
 }
