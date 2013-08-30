@@ -23,6 +23,6 @@
     "autoload": { 
     },
     "extra": {
-        "views-functions": "src/I18n/aliases.php"
+        "assets-dir": "src"
     }
 }
