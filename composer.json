@@ -28,7 +28,7 @@
         "assets-presets": {
             "reset": { "css": "css/commons/reset.css.php" },
             "typography": { "css": "css/commons/typography.css.php" },
-            "forms": { "css": "css/commons/forms.css.php" },
+            "forms": { "css": "css/commons/form.css.php" },
             "utilities": { "css": "css/commons/utilities.css.php" },
             "css-commons": { "css": "css/commons/commons.css.php" },
             "boxes": { "css": "css/boxes/boxes.css.php" },
