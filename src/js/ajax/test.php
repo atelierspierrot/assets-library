@@ -97,11 +97,11 @@ function test_ajax_txt_timeout() {
 		url:'test/demo.htm', 
 		load_in: 'TextDiv',
 		timeout: 2000,
-//		loader: "<?php echo _IMG_HTTP; ?>/indicator.gif"
-//		loader: "<?php echo _IMG_HTTP; ?>/indicator_mini.gif"
-//		loader: "<?php echo _IMG_HTTP; ?>/loadingAnimation.gif"
-//		loader: "<?php echo _IMG_HTTP; ?>/loader.gif"
-//		loader: "<?php echo _IMG_HTTP; ?>/reloading.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/indicator.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/indicator_mini.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/loadingAnimation.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/loader.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/reloading.gif"
 	});
 }
 
@@ -112,11 +112,11 @@ function test_ajax_txt_timeout_disabled() {
 		load_in: 'TextDiv',
 		timeout: 2000,
 		dom_disabled: true,
-//		loader: "<?php echo _IMG_HTTP; ?>/indicator.gif"
-//		loader: "<?php echo _IMG_HTTP; ?>/indicator_mini.gif"
-//		loader: "<?php echo _IMG_HTTP; ?>/loadingAnimation.gif"
-//		loader: "<?php echo _IMG_HTTP; ?>/loader.gif"
-//		loader: "<?php echo _IMG_HTTP; ?>/reloading.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/indicator.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/indicator_mini.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/loadingAnimation.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/loader.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/reloading.gif"
 	});
 }
 
@@ -148,7 +148,7 @@ function test_ajax_loader( _loader_ ) {
 	Ajax({
 		url:'test/test_sleep.php', 
 		load_in: 'TextDiv',
-		loader: "<?php echo _IMG_HTTP; ?>/"+_loader_
+		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/"+_loader_
 	});
 }
 

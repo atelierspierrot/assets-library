@@ -21,10 +21,16 @@
         "atelierspierrot/templatengine": "1.*"
     },
     "autoload": { 
+        "files": [ "src/assets-library.php" ]
     },
     "extra": {
         "assets-dir": "src",
         "assets-presets": {
+# css
+            "boxes": { "css": "css/boxes/boxes.css.php" },
+            "buttons-base": { "css": "css/buttons/base/base_buttons.css" },
+            "buttons-action": { "css": "css/buttons/callToAction/callToAction_buttons.css" },
+            "commons": { "css": "css/commons/commons.css.php" },
 # array
             "array-remove": { "js": "js/array/array_remove.js" },
             "dump": { "js": "js/array/dump.js" },
@@ -47,7 +53,10 @@
             "registry": { "js": "js/registry/registry.js" },
             "system": { "require": [ "uniqid", "is-defined", "registry" ] },
 # window
-            "popup": { "js": "js/window/popup_set.js" },
+            "popup": {
+                "js": "js/window/popup_set.js",
+                "require": [ "join" ]
+            },
             "window-sizes": { "js": "js/window/get_window_sizes.js" },
             "opener-focus": { "js": "js/window/opener_focus.js" },
             "window": { "require": [ "popup", "window-sizes", "opener-focus" ] },
@@ -56,7 +65,10 @@
             "document-sizes": { "js": "js/document/get_document_sizes.js" },
             "document": { "require": [ "document-load", "document-sizes" ] },
 # dom blocks
-            "show-hide": { "js": "js/dom_blocks/show_hide.js" },
+            "show-hide": {
+                "js": "js/dom_blocks/show_hide.js",
+                "require": [ "classes" ]
+            },
             "trigger-click": { "js": "js/links/trigger_click.js" },
             "dom-blocks": { "require": [ "show-hide" ] },
 # url

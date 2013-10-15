@@ -28,9 +28,6 @@ settings['default_popup_name']='popup';
 settings['default_popup_width']='400';
 settings['default_popup_height']='400';
 
-// Inclusion of 'join' in Array prototype
-include('array/join.js');
-
 /**
  * Popup Set - Function to open a popup window.
  *

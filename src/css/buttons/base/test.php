@@ -48,17 +48,17 @@ $requirements = array(
     <div class="buttons">
 
         <button type="submit" class="positive">
-            <img src="<?php echo _IMG_HTTP; ?>/tick.png" alt="" /> 
+            <img src="<?php echo _ASSETSLIB_IMG_HTTP; ?>/tick.png" alt="" /> 
             Save
         </button>
         
         <a href="/password/reset/">
-            <img src="<?php echo _IMG_HTTP; ?>/textfield_key.png" alt="" />
+            <img src="<?php echo _ASSETSLIB_IMG_HTTP; ?>/textfield_key.png" alt="" />
             Change Password
         </a>
         
         <a href="#" class="negative">
-            <img src="<?php echo _IMG_HTTP; ?>/cross.png" alt="" />
+            <img src="<?php echo _ASSETSLIB_IMG_HTTP; ?>/cross.png" alt="" />
             Cancel
         </a>
 

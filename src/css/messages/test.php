@@ -33,28 +33,28 @@ $requirements = array(
 <style type="text/css">
 
 .message.message-icon {
-    background: #eee url("<?php echo _IMG_HTTP; ?>/help.png") no-repeat 14px center;
+    background: #eee url("<?php echo _ASSETSLIB_IMG_HTTP; ?>/help.png") no-repeat 14px center;
     padding-left: 44px;
 }
 
 .message.message-icon.ok {
     background-color: #e0f2cb;
-    background-image: url("<?php echo _IMG_HTTP; ?>/tick.png");
+    background-image: url("<?php echo _ASSETSLIB_IMG_HTTP; ?>/tick.png");
 }
 
 .message.message-icon.error {
     background-color: #fbd3b1;
-    background-image: url("<?php echo _IMG_HTTP; ?>/exclamation.png");
+    background-image: url("<?php echo _ASSETSLIB_IMG_HTTP; ?>/exclamation.png");
 }
 
 .message.message-icon.info {
     background-color: #e4edf5;
-    background-image: url("<?php echo _IMG_HTTP; ?>/information.png");
+    background-image: url("<?php echo _ASSETSLIB_IMG_HTTP; ?>/information.png");
 }
 
 .message.message-icon.warning {
     background-color: #fff4cc;
-    background-image: url("<?php echo _IMG_HTTP; ?>/error.png");
+    background-image: url("<?php echo _ASSETSLIB_IMG_HTTP; ?>/error.png");
 }
 </style>
 </head>

@@ -17,7 +17,7 @@ require_once __DIR__.'/../../assets-library.php';
 function include(fileName)
 {
     "use strict";
-	document.write("<script type='text/javascript' src='/<?php echo _JS_HTTP; ?>"+fileName+"'><\/"+"script>" );
+	document.write("<script type='text/javascript' src='/<?php echo _ASSETSLIB_JS_HTTP; ?>"+fileName+"'><\/"+"script>" );
 	if (typeof window._dbg === 'function') {
 		_dbg("Inclusion of file ["+fileName+"]");
 	}

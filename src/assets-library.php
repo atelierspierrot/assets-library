@@ -47,37 +47,37 @@ if (!empty($_POST)) {
 /**
  * @var string Realpath of JS directory
  */
-@define('_JS_PATH', realpath(__DIR__.DIRECTORY_SEPARATOR.'js').DIRECTORY_SEPARATOR);
+@define('_ASSETSLIB_JS_PATH', realpath(__DIR__.DIRECTORY_SEPARATOR.'js').DIRECTORY_SEPARATOR);
 
 /**
  * @var string Web JS directory
  */
-@define('_JS_HTTP', str_replace($_SERVER['DOCUMENT_ROOT'], '/', _JS_PATH));
+@define('_ASSETSLIB_JS_HTTP', str_replace($_SERVER['DOCUMENT_ROOT'], '/', _ASSETSLIB_JS_PATH));
 
 /**
  * @var string Realpath of CSS directory
  */
-@define('_CSS_PATH', realpath(__DIR__.DIRECTORY_SEPARATOR.'css').DIRECTORY_SEPARATOR);
+@define('_ASSETSLIB_CSS_PATH', realpath(__DIR__.DIRECTORY_SEPARATOR.'css').DIRECTORY_SEPARATOR);
 
 /**
  * @var string Web CSS directory
  */
-@define('_CSS_HTTP', str_replace($_SERVER['DOCUMENT_ROOT'], '/', _CSS_PATH));
+@define('_ASSETSLIB_CSS_HTTP', str_replace($_SERVER['DOCUMENT_ROOT'], '/', _ASSETSLIB_CSS_PATH));
+
+/**
+ * @var string Realpath of IMG directory
+ */
+@define('_ASSETSLIB_IMG_PATH', realpath(__DIR__.DIRECTORY_SEPARATOR.'img').DIRECTORY_SEPARATOR);
+
+/**
+ * @var string Web IMG directory
+ */
+@define('_ASSETSLIB_IMG_HTTP', str_replace($_SERVER['DOCUMENT_ROOT'], '/', _ASSETSLIB_IMG_PATH));
 
 /**
  * @var string CSS orientation
  */
 @define('_CSS_DIRECTION', isset($request['dir']) ? $request['dir'] : 'ltr');
-
-/**
- * @var string Realpath of IMG directory
- */
-@define('_IMG_PATH', realpath(__DIR__.DIRECTORY_SEPARATOR.'img').DIRECTORY_SEPARATOR);
-
-/**
- * @var string Web IMG directory
- */
-@define('_IMG_HTTP', str_replace($_SERVER['DOCUMENT_ROOT'], '/', _IMG_PATH));
 
 // -------------------------
 // Library
@@ -130,13 +130,13 @@ if (!function_exists('library_include'))
             switch ($type) {
                 case 'js':
                     $extension = 'js';
-                    $root_dir = _JS_PATH;
-                    $http_dir = _JS_HTTP;
+                    $root_dir = _ASSETSLIB_JS_PATH;
+                    $http_dir = _ASSETSLIB_JS_HTTP;
                     break;
                 case 'css':
                     $extension = 'css';
-                    $root_dir = _CSS_PATH;
-                    $http_dir = _CSS_HTTP;
+                    $root_dir = _ASSETSLIB_CSS_PATH;
+                    $http_dir = _ASSETSLIB_CSS_HTTP;
                     break;
                 default:
                     $extension = $root_dir = $http_dir = '';

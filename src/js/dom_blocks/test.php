@@ -68,10 +68,10 @@ onDocumentLoad(function() {
 .floated { float: left; width: 260px; margin-left: 40px; }
 
 /* ShowHide handlers */
-.showhide_closed_handler_right 	{ background: url("<?php echo _IMG_HTTP; ?>/right.gif") no-repeat top left; padding-left: 12px; }
-.showhide_closed_handler_left 	{ background: url("<?php echo _IMG_HTTP; ?>/left.gif") no-repeat top right; padding-right: 12px; }
-.showhide_opened_handler_right 	{ background: url("<?php echo _IMG_HTTP; ?>/bottom.gif") no-repeat top left; padding-left: 12px; }
-.showhide_opened_handler_left 	{ background: url("<?php echo _IMG_HTTP; ?>/bottom.gif") no-repeat top right; padding-right: 12px; }
+.showhide_closed_handler_right 	{ background: url("<?php echo _ASSETSLIB_IMG_HTTP; ?>/right.gif") no-repeat top left; padding-left: 12px; }
+.showhide_closed_handler_left 	{ background: url("<?php echo _ASSETSLIB_IMG_HTTP; ?>/left.gif") no-repeat top right; padding-right: 12px; }
+.showhide_opened_handler_right 	{ background: url("<?php echo _ASSETSLIB_IMG_HTTP; ?>/bottom.gif") no-repeat top left; padding-left: 12px; }
+.showhide_opened_handler_left 	{ background: url("<?php echo _ASSETSLIB_IMG_HTTP; ?>/bottom.gif") no-repeat top right; padding-right: 12px; }
 a.showhide_handler 				{ text-decoration: none; }
 
 </style>
