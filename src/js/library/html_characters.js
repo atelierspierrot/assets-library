@@ -21,10 +21,6 @@
 #
 # Ce programme est un logiciel libre distribué sous licence GNU/GPL.
 #
-# ***** SVN PROPERTIES *****
-# $Revision: 605 $
-# $Date: 2011-06-23 20:10:17 +0200 (Thu, 23 Jun 2011) $
-# $Id: html_characters.js 605 2011-06-23 18:10:17Z pierrecap $
 # ***** END LICENSE BLOCK ***** */
 
 

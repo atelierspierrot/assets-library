@@ -5,7 +5,7 @@
 .resizable  { position: relative; border: 1px dotted #ccc; border-radius: 5px; padding: 2px; overflow: auto; }
 .resizable.resize-active { width: auto; height: auto; }
 .resizer    {
-    background: #fff url(icon_resize.gif) no-repeat 99.5% 60%; height: 13px; margin: 0; margin-left: 1px; padding: 2px; width: 99%;
+    background: #fff url(../../img/icon_resize.gif) no-repeat 99.5% 60%; height: 13px; margin: 0; margin-left: 1px; padding: 2px; width: 99%;
     display: block; position: absolute; bottom: 0; left: 0;
     border-top: 1px dotted #ccc; cursor: se-resize;
 }
