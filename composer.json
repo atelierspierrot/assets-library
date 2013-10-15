@@ -15,6 +15,7 @@
         "homepage": "https://github.com/PieroWbmstr"
     }],
     "require": {
+        "atelierspierrot/assets-manager": "1.*"
     },
     "require-dev": {
         "atelierspierrot/templatengine": "1.*"
