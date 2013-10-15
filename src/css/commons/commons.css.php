@@ -34,7 +34,7 @@ body    {
 echo library_include('css', 'commons', 'typography');
 
 // form
-echo library_include('css', 'commons', 'forms');
+echo library_include('css', 'commons', 'form');
 
 // utilities
 echo library_include('css', 'commons', 'utilities');
