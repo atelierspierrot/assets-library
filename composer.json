@@ -21,10 +21,19 @@
         "atelierspierrot/templatengine": "1.*"
     },
     "autoload": { 
+        "files": [ "src/assets-library.php" ]
     },
     "extra": {
         "assets-dir": "src",
         "assets-presets": {
+            "reset": { "css": "css/commons/reset.css.php" },
+            "typography": { "css": "css/commons/typography.css.php" },
+            "forms": { "css": "css/commons/forms.css.php" },
+            "utilities": { "css": "css/commons/utilities.css.php" },
+            "css-commons": { "css": "css/commons/commons.css.php" },
+            "boxes": { "css": "css/boxes/boxes.css.php" },
+            "buttons-base": { "css": "css/buttons/base/base_buttons.css" },
+            "buttons-action": { "css": "css/buttons/callToAction/callToAction_buttons.css" },
             "array-remove": { "js": "js/array/array_remove.js" },
             "dump": { "js": "js/array/dump.js" },
             "each": { "js": "js/array/each.js" },
@@ -42,14 +51,20 @@
             "is-defined": { "js": "js/system/is_defined.js" },
             "registry": { "js": "js/registry/registry.js" },
             "system": { "require": [ "uniqid", "is-defined", "registry" ] },
-            "popup": { "js": "js/window/popup_set.js" },
+            "popup": {
+                "js": "js/window/popup_set.js",
+                "require": [ "join" ]
+            },
             "window-sizes": { "js": "js/window/get_window_sizes.js" },
             "opener-focus": { "js": "js/window/opener_focus.js" },
             "window": { "require": [ "popup", "window-sizes", "opener-focus" ] },
             "document-load": { "js": "js/document/document_load.js" },
             "document-sizes": { "js": "js/document/get_document_sizes.js" },
             "document": { "require": [ "document-load", "document-sizes" ] },
-            "show-hide": { "js": "js/dom_blocks/show_hide.js" },
+            "show-hide": {
+                "js": "js/dom_blocks/show_hide.js",
+                "require": [ "classes" ]
+            },
             "trigger-click": { "js": "js/links/trigger_click.js" },
             "dom-blocks": { "require": [ "show-hide" ] },
             "get-url": { "js": "js/url/get_url.js" },

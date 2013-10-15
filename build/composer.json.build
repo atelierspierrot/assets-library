@@ -27,10 +27,14 @@
         "assets-dir": "src",
         "assets-presets": {
 # css
+            "reset": { "css": "css/commons/reset.css.php" },
+            "typography": { "css": "css/commons/typography.css.php" },
+            "forms": { "css": "css/commons/forms.css.php" },
+            "utilities": { "css": "css/commons/utilities.css.php" },
+            "css-commons": { "css": "css/commons/commons.css.php" },
             "boxes": { "css": "css/boxes/boxes.css.php" },
             "buttons-base": { "css": "css/buttons/base/base_buttons.css" },
             "buttons-action": { "css": "css/buttons/callToAction/callToAction_buttons.css" },
-            "commons": { "css": "css/commons/commons.css.php" },
 # array
             "array-remove": { "js": "js/array/array_remove.js" },
             "dump": { "js": "js/array/dump.js" },
