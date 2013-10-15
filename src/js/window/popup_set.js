@@ -1,23 +1,10 @@
 /*
 # ***** BEGIN LICENSE BLOCK *****
-# This file is part of the PiWi Framework, an apen source PHP/JavaScript library by Les Ateliers Pierrot
-# Copyright (c) 2010 Pierre Cassat and contributors
-#
-# <http://www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
-#
-# PiWi Library is a free software; you can redistribute it and/or modify it under the terms 
-# of the GNU General Public License as published by the Free Software Foundation; either version 
-# 3 of the License, or (at your option) any later version.
-#
-# PiWi Library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
-# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along with this program; 
-# if not, write to the :
-#     Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-# or see the page :
-#    <http://www.opensource.org/licenses/gpl-3.0.html>
+# Assets Library - The open source PHP/JavaScript/CSS library of Les Ateliers Pierrot
+# Copyleft (c) 2013 Pierre Cassat and contributors
+# <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
+# License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
+# Sources <http://github.com/atelierspierrot/assets-library>
 #
 # Ce programme est un logiciel libre distribué sous licence GNU/GPL.
 #
@@ -40,9 +27,6 @@ var settings; if(settings===undefined) settings = [];
 settings['default_popup_name']='popup';
 settings['default_popup_width']='400';
 settings['default_popup_height']='400';
-
-// Inclusion of 'join' in Array prototype
-include('array/join.js');
 
 /**
  * Popup Set - Function to open a popup window.
@@ -74,7 +58,7 @@ function popup_set(url, w, h, focus, options, name) {
 		'left': (screen.width - width)/2,
 		'top': (screen.height - height)/2
 	};
-	var opt_f = _join(explode_options(options), '', ',');
+	var opt_f = join(explode_options(options), '', ',');
 	// function to analyze options to pass
 	function explode_options(options) {
 		if (!options) return opt_set;

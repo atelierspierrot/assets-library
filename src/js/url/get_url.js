@@ -1,40 +1,26 @@
 /*
 # ***** BEGIN LICENSE BLOCK *****
-# This file is part of the PiWi Framework, an apen source PHP/JavaScript library by Les Ateliers Pierrot
-# Copyright (c) 2010 Pierre Cassat and contributors
-#
-# <http://www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
-#
-# PiWi Library is a free software; you can redistribute it and/or modify it under the terms 
-# of the GNU General Public License as published by the Free Software Foundation; either version 
-# 3 of the License, or (at your option) any later version.
-#
-# PiWi Library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
-# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along with this program; 
-# if not, write to the :
-#     Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-# or see the page :
-#    <http://www.opensource.org/licenses/gpl-3.0.html>
+# Assets Library - The open source PHP/JavaScript/CSS library of Les Ateliers Pierrot
+# Copyleft (c) 2013 Pierre Cassat and contributors
+# <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
+# License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
+# Sources <http://github.com/atelierspierrot/assets-library>
 #
 # Ce programme est un logiciel libre distribué sous licence GNU/GPL.
 #
-# ***** SVN PROPERTIES *****
-# $Revision: 605 $
-# $Date: 2011-06-23 20:10:17 +0200 (Thu, 23 Jun 2011) $
-# $Id: get_url.js 605 2011-06-23 18:10:17Z pierrecap $
 # ***** END LICENSE BLOCK ***** */
 
 
 /**
- * <b>Get Url</b>
+ * Get Url
+ *
  * Function that returns current url
  * Params : 'type' : 'param' 'base' or empty to the all url
  *
  * @param string type Set if you want to returns just the url's parametres, or base | optional | default is empty
  * @param string req_url The url you want to analyze | optional | default is current window url
+ *
+ * @return string
  */
 function get_url(type, req_url) {
 	var url;

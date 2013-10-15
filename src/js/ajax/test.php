@@ -1,40 +1,55 @@
-<!--
+<?php
 /*
 # ***** BEGIN LICENSE BLOCK *****
-# This file is part of the PiWi Framework, an apen source PHP/JavaScript library by Les Ateliers Pierrot
-# Copyright (c) 2010 Pierre Cassat and contributors
-#
-# <http://www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
-#
-# PiWi Library is a free software; you can redistribute it and/or modify it under the terms 
-# of the GNU General Public License as published by the Free Software Foundation; either version 
-# 3 of the License, or (at your option) any later version.
-#
-# PiWi Library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
-# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along with this program; 
-# if not, write to the :
-#     Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-# or see the page :
-#    <http://www.opensource.org/licenses/gpl-3.0.html>
+# Assets Library - The open source PHP/JavaScript/CSS library of Les Ateliers Pierrot
+# Copyleft (c) 2013 Pierre Cassat and contributors
+# <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
+# License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
+# Sources <http://github.com/atelierspierrot/assets-library>
 #
 # Ce programme est un logiciel libre distribué sous licence GNU/GPL.
 #
 # ***** END LICENSE BLOCK ***** */
---><html>
+
+@ini_set('display_errors',1); @error_reporting(E_ALL ^ E_NOTICE); 
+require_once __DIR__.'/../../assets-library.php';
+
+$requirements = array(
+    'js'=>array(
+        'commons'=>array(
+            'commons',
+            'clone',
+        ),
+        'extend',
+        'document'=>'document_load',
+        'form_serialize',
+        'node'=>array(
+            'classes',
+            'get_style_attribute',
+            'get_offset',
+        ),
+        'system'=>'uniqid',
+        'array'=>'in_array'
+    ),
+    'css'=>array(
+        'commons'=>array(
+            'commons',
+            'clone',
+        ),
+        'extend',
+        'document'=>'document_load',
+        'form_serialize'
+    ),
+);
+
+?><html>
 <head>
 <title>Test of Ajax javascript class</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
-<!-- Commons -->
-<script type="text/javascript" src="../commons.js.php"></script>
-<link href="../../css/commons.css.php" rel="stylesheet" type="text/css" />
-
-<!-- Requirements : clone | extend | document load | form_serialize | node/classes | node/get_style_attribute | node/get_offset | system/uniqid | array/in_array -->
-<script type="text/javascript" src="../library.js.php?clone&extend&document=document_load&form_serialize&node[]=classes&node[]=get_style_attribute&node[]=get_offset&system=uniqid&array=in_array"></script>
-<link href="../library.css.php?clone&extend&document=document_load&form_serialize" media="screen" rel="stylesheet" type="text/css" />
+<!-- Requirements -->
+<script type="text/javascript" src="<?php echo build_requirements('js', $requirements['js']); ?>"></script>
+<link href="<?php echo build_requirements('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
 
 <!-- Ajax -->
 <script type="text/javascript" src="ajax.js"></script>  
@@ -82,11 +97,11 @@ function test_ajax_txt_timeout() {
 		url:'test/demo.htm', 
 		load_in: 'TextDiv',
 		timeout: 2000,
-//		loader: "img/indicator.gif"
-//		loader: "img/indicator_mini.gif"
-//		loader: "img/loadingAnimation.gif"
-//		loader: "img/loader.gif"
-//		loader: "img/reloading.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/indicator.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/indicator_mini.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/loadingAnimation.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/loader.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/reloading.gif"
 	});
 }
 
@@ -97,11 +112,11 @@ function test_ajax_txt_timeout_disabled() {
 		load_in: 'TextDiv',
 		timeout: 2000,
 		dom_disabled: true,
-//		loader: "img/indicator.gif"
-//		loader: "img/indicator_mini.gif"
-//		loader: "img/loadingAnimation.gif"
-//		loader: "img/loader.gif"
-//		loader: "img/reloading.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/indicator.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/indicator_mini.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/loadingAnimation.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/loader.gif"
+//		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/reloading.gif"
 	});
 }
 
@@ -133,7 +148,7 @@ function test_ajax_loader( _loader_ ) {
 	Ajax({
 		url:'test/test_sleep.php', 
 		load_in: 'TextDiv',
-		loader: "img/"+_loader_
+		loader: "<?php echo _ASSETSLIB_IMG_HTTP; ?>/"+_loader_
 	});
 }
 
