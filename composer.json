@@ -111,7 +111,7 @@
             },
             "ajax": {
                 "js": "js/ajax/ajax.js",
-                "require": [ "debug", "clone", "extend", "document-load", "form_serialize", "node", "uniqid", "in-array" ]
+                "require": [ "debug", "clone", "extend", "document-load", "form-serialize", "node", "uniqid", "in-array" ]
             },
             "dialog-box": {
                 "js": "js/dialog-box/dialog-box.js",
