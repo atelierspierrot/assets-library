@@ -1,36 +1,36 @@
-<!--
+<?php
 /*
 # ***** BEGIN LICENSE BLOCK *****
-# This file is part of the PiWi Framework, an apen source PHP/JavaScript library by Les Ateliers Pierrot
-# Copyright (c) 2010 Pierre Cassat and contributors
-#
-# <http://www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
-#
-# PiWi Library is a free software; you can redistribute it and/or modify it under the terms 
-# of the GNU General Public License as published by the Free Software Foundation; either version 
-# 3 of the License, or (at your option) any later version.
-#
-# PiWi Library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
-# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along with this program; 
-# if not, write to the :
-#     Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-# or see the page :
-#    <http://www.opensource.org/licenses/gpl-3.0.html>
+# Assets Library - The open source PHP/JavaScript/CSS library of Les Ateliers Pierrot
+# Copyleft (c) 2013 Pierre Cassat and contributors
+# <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
+# License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
+# Sources <http://github.com/atelierspierrot/assets-library>
 #
 # Ce programme est un logiciel libre distribué sous licence GNU/GPL.
 #
 # ***** END LICENSE BLOCK ***** */
---><html>
+
+@ini_set('display_errors',1); @error_reporting(E_ALL ^ E_NOTICE); 
+require_once __DIR__.'/../../assets-library.php';
+
+$requirements = array(
+    'js'=>array(
+        'commons',
+    ),
+    'css'=>array(
+        'commons',
+    ),
+);
+
+?><html>
 <head>
 <title>Test of Nodes javascript functions</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
-<!-- Commons -->
-<script type="text/javascript" src="../commons.js.php"></script>
-<link href="../../css/commons.css.php" rel="stylesheet" type="text/css" />
+<!-- Requirements -->
+<script type="text/javascript" src="<?php echo build_requirements('js', $requirements['js']); ?>"></script>
+<link href="<?php echo build_requirements('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
 
 <!-- Node -->
 <script type="text/javascript" src="classes.js"></script>  

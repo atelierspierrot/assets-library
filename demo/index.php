@@ -47,6 +47,28 @@ function _getCssWebPath($path)
     return str_replace(_slashDirname(DEMO_CSS_DIR), _slashDirname(DEMO_CSS_WEBDIR), $path);
 }
 
+function poolDirLoop($path, $type, $prefix = null)
+{
+    if (!file_exists($path) || !is_dir($path)) return '';
+    if (!in_array($type, array('js', 'css'))) {
+        throw new \Exception(sprintf('Unknown type "%s"!', $type));
+    }
+    $str = '';
+    foreach (scandir($path) as $_f) {
+        $_fp = _slashDirname($path).$_f;
+        if (!in_array($_f, array('.', '..')) && is_dir($_fp)) {
+            $_fp_test = _slashDirname($_fp).DEMO_TEST_FILE;
+            $label = !empty($prefix) ? $prefix.'/'.$_f : $_f;
+            if (file_exists($_fp_test)) {
+                $link = $type==='js' ? _getJsWebPath($_fp_test) : _getCssWebPath($_fp_test);
+                $str .= "\n".'<li><a href="'.$link.'" target="content">'.$label.'</a></li>';
+            }
+            $str .= poolDirLoop($_fp, $type, $label);
+        }
+    }
+    return $str;
+}
+
 if (!empty($_GET['page']) && $_GET['page']==='menu') :
 ?><!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -78,35 +100,11 @@ if (!empty($_GET['page']) && $_GET['page']==='menu') :
     <br />
     <h2>Javascripts</h2>
     <ul class="menu" role="navigation">
-<?php
-foreach (scandir(DEMO_JS_DIR) as $_f) :
-    $_fp = _slashDirname(DEMO_JS_DIR).$_f;
-    if (!in_array($_f, array('.', '..')) && is_dir($_fp)) :
-        $_fp_test = _slashDirname($_fp).DEMO_TEST_FILE;
-        if (file_exists($_fp_test)) :
-?>
-        <li><a href="<?php echo _getJsWebPath($_fp_test); ?>" target="content"><?php echo $_f; ?></a></li>
-<?php
-        endif;
-    endif;
-endforeach;
-?>
+        <?php echo poolDirLoop(DEMO_JS_DIR, 'js'); ?>
     </ul>
     <h2>CSS</h2>
     <ul class="menu" role="navigation">
-<?php
-foreach (scandir(DEMO_CSS_DIR) as $_f) :
-    $_fp = _slashDirname(DEMO_CSS_DIR).$_f;
-    if (!in_array($_f, array('.', '..')) && is_dir($_fp)) :
-        $_fp_test = _slashDirname($_fp).DEMO_TEST_FILE;
-        if (file_exists($_fp_test)) :
-?>
-        <li><a href="<?php echo _getCssWebPath($_fp_test); ?>" target="content"><?php echo $_f; ?></a></li>
-<?php
-        endif;
-    endif;
-endforeach;
-?>
+        <?php echo poolDirLoop(DEMO_CSS_DIR, 'css'); ?>
     </ul>
 
     <div class="info">
@@ -154,7 +152,7 @@ endforeach;
     -->
     <frameset cols="200,*" frameborder="0" border="0" framespacing="0">
         <frame name="menu" src="index.php?page=menu" marginheight="0" marginwidth="0" scrolling="auto" noresize>
-        <frame name="content" src="" marginheight="0" marginwidth="0" scrolling="auto" noresize>
+        <frame name="content" src="howto.html" marginheight="0" marginwidth="0" scrolling="auto" noresize>
         <noframes>
             <p>Your browser doesn't support HTML frameset, you will have to navigate <a href="../src/">in the code</a>.</p>
         </noframes>

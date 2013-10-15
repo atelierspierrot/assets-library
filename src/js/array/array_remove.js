@@ -21,12 +21,54 @@
 #
 # Ce programme est un logiciel libre distribué sous licence GNU/GPL.
 #
-# ***** SVN PROPERTIES *****
-# $Revision: 605 $
-# $Date: 2011-06-23 20:10:17 +0200 (Thu, 23 Jun 2011) $
-# $Id: array_remove.js 605 2011-06-23 18:10:17Z pierrecap $
 # ***** END LICENSE BLOCK ***** */
 
+
+/**
+ * Extension of Array objects, to remove a list of specific items
+ * Pierre Cassat - 03_2009
+ *
+ * Usage : 
+ *		theArray.remove( toRemove );
+ * With :
+ * 'theArray' => a true javascript array : [ a, b, c, d, ]
+ * 'toRemove' => comma-separated string list of items to remove, each has to be string
+ *				( numbers must be written between quotes )
+ *
+ * Full example :
+ * var a = [ 1, 3, 8, 9, 11, 35 ]; 
+ * var b = [ "entree", "de", "test" ]; 
+ * alert(a);
+ * alert(a.remove("3"));
+ * alert(a.remove("3","11"));
+ * alert(b);
+ * alert(b.remove("de"));
+ * alert(b.remove("de","test"));
+ */
+function array_remove(arr, items) {
+    "use strict";
+	if (typeof arr !== "object") { return; }
+	var k=arguments.length, i;
+	if (k > 1) {
+	    for (i=1; i<k; i++) { do_array_remove(arr, arguments[i]); }
+	} else {
+	    do_array_remove(arr, items);
+	}
+	return arr;
+}
+
+function do_array_remove(arr, item) {
+    "use strict";
+	var j;
+	for (j=0; j<arr.length; j++) {
+		if (typeof arr[j] === 'string') {
+			var reg = new RegExp('('+item+') {1}', "g");
+			if (arr[j].match(reg)) { arr.splice(j, 1); }
+		}
+		else if (arr[j] === item) { arr.splice(j, 1); } 
+	}
+	return arr;
+}
 
 /**
  * Extension of Array objects, to remove a list of specific items

@@ -1,23 +1,10 @@
 /*
 # ***** BEGIN LICENSE BLOCK *****
-# This file is part of the PiWi Framework, an apen source PHP/JavaScript library by Les Ateliers Pierrot
-# Copyright (c) 2010 Pierre Cassat and contributors
-#
-# <http://www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
-#
-# PiWi Library is a free software; you can redistribute it and/or modify it under the terms 
-# of the GNU General Public License as published by the Free Software Foundation; either version 
-# 3 of the License, or (at your option) any later version.
-#
-# PiWi Library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
-# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along with this program; 
-# if not, write to the :
-#     Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-# or see the page :
-#    <http://www.opensource.org/licenses/gpl-3.0.html>
+# Assets Library - The open source PHP/JavaScript/CSS library of Les Ateliers Pierrot
+# Copyleft (c) 2013 Pierre Cassat and contributors
+# <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
+# License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
+# Sources <http://github.com/atelierspierrot/assets-library>
 #
 # Ce programme est un logiciel libre distribué sous licence GNU/GPL.
 #
@@ -92,7 +79,7 @@
 				}
 				else if( arg.toLowerCase() === "data" ) {
 					_args = arguments[0][arg];
-					dbg_info += "\n    Send data : "+_dump(_args, true);
+					dbg_info += "\n    Send data : "+dump(_args, true);
 				}
 				else if( arg.toLowerCase() === "success" ) {
 					_callback.success = arguments[0][arg];
@@ -106,11 +93,11 @@
 				}
 				else if( arg.toLowerCase() === "load_in" ) {
 					_dom_id = arguments[0][arg];
-					dbg_info += "\n    DOM ID concerned : "+_dump(_dom_id);
+					dbg_info += "\n    DOM ID concerned : "+dump(_dom_id);
 				}
 				else if( arg.toLowerCase() === "dom_id" ) {
 					_dom_id = arguments[0][arg];
-					dbg_info += "\n    DOM ID concerned : "+_dump(_dom_id);
+					dbg_info += "\n    DOM ID concerned : "+dump(_dom_id);
 				}
 				else if( arg.toLowerCase() === "dom_disabled" ) {
 					_dom_disabled = arguments[0][arg];
@@ -118,11 +105,11 @@
 				}
 				else if( arg.toLowerCase() === "disabled_opacity" ) {
 					_disabled_opacity = arguments[0][arg];
-					dbg_info += "\n    Disabled opacity is setted to "+_dump(_disabled_opacity);
+					dbg_info += "\n    Disabled opacity is setted to "+dump(_disabled_opacity);
 				}
 				else if( arg.toLowerCase() === "loader" ) {
 					_loader = arguments[0][arg];
-					dbg_info += "\n    Loader setted to : "+_dump(_loader);
+					dbg_info += "\n    Loader setted to : "+dump(_loader);
 				}
 				else if( arg.toLowerCase() === "timeout" ) {
 					_timeout = arguments[0][arg];
@@ -130,15 +117,15 @@
 				}
 				else if( arg.toLowerCase() === "contenttype" ) {
 					_content_type = arguments[0][arg];
-					dbg_info += "\n    Content Type : "+_dump(_content_type);
+					dbg_info += "\n    Content Type : "+dump(_content_type);
 				}
 				else if( arg.toLowerCase() === "if_modified" ) {
 					_if_modified = arguments[0][arg];
-					dbg_info += "\n    If modified : "+_dump(_if_modified);
+					dbg_info += "\n    If modified : "+dump(_if_modified);
 				}
 				else if( arg.toLowerCase() === "asynch" && arguments[0][arg] === false ) {
 					_asynch = false;
-					dbg_info += "\n    Asynchronous : "+_dump(_asynch);
+					dbg_info += "\n    Asynchronous : "+dump(_asynch);
 				}
 			}
 		}
@@ -146,7 +133,7 @@
 				+"\n    URL : "+_url
 				+"\n    Method : "+_method
 				+"\n    Response format : "+_format
-				+"\n    Callback(s) :\n"+_dump(_callback, true, 1)
+				+"\n    Callback(s) :\n"+dump(_callback, true, 1)
 				+"\nUser params :"
 				+dbg_info;
 	
@@ -206,7 +193,7 @@
 		_token_ = uniqid();
 		_response = null;
 		_req_statut = null;
-		_loader = "img/indicator.gif";
+		_loader = "../../img/indicator.gif";
 	    _loader_style = "margin:1em";
 	    _content_type = "application/x-www-form-urlencoded; charset=UTF-8";
 	    _if_modified = false;
@@ -278,7 +265,7 @@
     },
 
    Commit = function() {
-        _dbg("Entering 'Commit' with data : "+_dump(_args));
+        _dbg("Entering 'Commit' with data : "+dump(_args));
         if (_request) {
            return _request.send(_args);
         }
@@ -437,7 +424,7 @@ console.debug(_pos_test);
             break;
          case 4:
          	_response_headers = _request.getAllResponseHeaders();
-         	_dbg("[ Response ] Getting a response with status '"+_request.status+" "+_request.statusText+"'\n Complete response headers : \n"+_dump(_response_headers, true, 1));
+         	_dbg("[ Response ] Getting a response with status '"+_request.status+" "+_request.statusText+"'\n Complete response headers : \n"+dump(_response_headers, true, 1));
             if (_request.status == 200) {
                _OnSuccess();
             }
@@ -540,7 +527,7 @@ console.debug(_pos_test);
         switch (_format) {
          case 'TEXT' :
             _response = _GetResponseText();
-	        _dbg("Response received : "+_dump(_response));
+	        _dbg("Response received : "+dump(_response));
 	        if (_eval_js) { _evalJavascript(); }
             break;
          case 'XML' :
@@ -581,7 +568,7 @@ console.debug(_pos_test);
 				var value=arr[item];
 				if(typeof(value)=='object') {
 					dumped_text += level_padding+"'"+item+"' ...\n";
-					dumped_text += _dump(value,nocut,level+1);
+					dumped_text += dump(value,nocut,level+1);
 				} 
 				else{
 					if(typeof(value)!='function') 

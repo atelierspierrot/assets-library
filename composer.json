@@ -4,7 +4,6 @@
     "description": "The javascript & css library of Les Ateliers.",
     "keywords": [ "javascript library" ],
     "homepage": "http://github.com/atelierspierrot/assets-library",
-    "version": "0.0.1",
     "license": "GPL-3.0",
     "authors": [{
         "name": "Les Ateliers Pierrot & contributors",
@@ -18,37 +17,110 @@
     "require": {
     },
     "require-dev": {
-        "sami/sami": "dev-master"
+        "atelierspierrot/templatengine": "1.*"
     },
     "autoload": { 
     },
     "extra": {
         "assets-dir": "src",
         "assets-presets": {
+            "array-remove": { "js": "js/array/array_remove.js" },
+            "dump": { "js": "js/array/dump.js" },
+            "each": { "js": "js/array/each.js" },
+            "join": { "js": "js/array/join.js" },
+            "in-array": { "js": "js/array/in_array.js" },
+            "array": { "require": [ "array-remove", "dump", "each", "join", "in-array" ] },
+            "ucfirst": { "js": "js/string/ucfirst.js" },
+            "string": { "require": [ "ucfirst" ] },
             "debug": { "js": "js/debug/debug.js" },
             "extend": { "js": "js/extend/extend.js" },
             "cookies": { "js": "js/cookies/cookies.js" },
-            "document_load": { "js": "js/document/document_load.js" },
-            "get_document_sizes": { "js": "js/document/get_document_sizes.js" },
-            "document": { "require": [ "document_load", "get_document_sizes" ] },
-            "classes": { "js": "js/node/classes.js" },
-            "get_offset": { "js": "js/node/get_offset.js" },
-            "get_style_attribute": { "js": "js/node/get_style_attribute.js" },
-            "select": { "js": "js/node/select.js" },
-            "node": { "require": [ "classes", "get_offset", "get_style_attribute", "select" ] },
-            "form_serialize": { "js": "js/form_serialize/form_serialize.js" },
+            "clone": { "js": "js/commons/clone.js" },
+            "apply-callback": { "js": "js/commons/apply_callback.js" },
             "uniqid": { "js": "js/system/uniqid.js" },
-            "is_defined": { "js": "js/system/is_defined.js" },
-            "system": { "require": [ "uniqid", "is_defined" ] },
+            "is-defined": { "js": "js/system/is_defined.js" },
+            "registry": { "js": "js/registry/registry.js" },
+            "system": { "require": [ "uniqid", "is-defined", "registry" ] },
+            "popup": { "js": "js/window/popup_set.js" },
+            "window-sizes": { "js": "js/window/get_window_sizes.js" },
+            "opener-focus": { "js": "js/window/opener_focus.js" },
+            "window": { "require": [ "popup", "window-sizes", "opener-focus" ] },
+            "document-load": { "js": "js/document/document_load.js" },
+            "document-sizes": { "js": "js/document/get_document_sizes.js" },
+            "document": { "require": [ "document-load", "document-sizes" ] },
+            "show-hide": { "js": "js/dom_blocks/show_hide.js" },
+            "trigger-click": { "js": "js/links/trigger_click.js" },
+            "dom-blocks": { "require": [ "show-hide" ] },
+            "get-url": { "js": "js/url/get_url.js" },
+            "is-url": { "js": "js/url/is_url.js" },
+            "url": { "require": [ "get-url", "is-url" ] },
+            "classes": { "js": "js/node/classes.js" },
+            "offset": { "js": "js/node/get_offset.js" },
+            "style-attribute": { "js": "js/node/get_style_attribute.js" },
+            "select": { "js": "js/node/select.js" },
+            "node": { "require": [ "classes", "offset", "style-attribute", "select" ] },
+            "font-tools": { "js": "js/font_tools/font_tools.js" },
+            "effect": {
+                "js": "js/effects/effect.js",
+                "require": [ "registry", "extend", "style-attribute", "offset" ]
+            },
+            "effect-blind": {
+                "js": "js/effects/blind/blind.js",
+                "require": [ "effect" ]
+            },
+            "effect-slide": {
+                "js": "js/effects/slide/slide.js",
+                "require": [ "effect" ]
+            },
+            "effect-fade": {
+                "js": "js/effects/fade/fade.js",
+                "require": [ "effect" ]
+            },
+            "effects": { "require": [ "effect-blind", "effect-slide", "effect-fade" ] },
+            "checkboxes-change-class-onchange": { "js": "js/forms/checkboxes/change_class_onchange.js" },
+            "checkboxes-check-all": { "js": "js/forms/checkboxes/check_all.js" },
+            "checkboxes": { "require": [ "checkboxes-change-class-onchange", "checkboxes-check-all" ] },
+            "form-serialize": { "js": "js/forms/form_serialize/form_serialize.js" },
+            "field-toggler": { "js": "js/forms/field_toggler/field_toggler.js" },
+            "fields-collection": { "js": "js/forms/fields_collection/fields_collection.js" },
+            "forms": { "require": [ "checkboxes", "form_serialize", "field-toggler", "fields-collection" ] },
             "accordion": {
                 "js": "js/accordion/accordion.js",
                 "css": "js/accordion/accordion.css",
-                "require": [ "debug", "cookies", "extend", "document_load", "classes" ]
+                "require": [ "debug", "cookies", "extend", "document-load", "classes" ]
+            },
+            "tab-content": {
+                "js": "js/tab-content/tab-content.js",
+                "css": "js/tab-content/tab-content.css",
+                "require": [ "extend", "document-load", "classes", "cookies" ]
+            },
+            "tooltips": {
+                "js": "js/tooltips/tooltips.js",
+                "css": "js/tooltips/tooltips.css",
+                "require": [ "extend", "document-load", "registry", "classes" ]
+            },
+            "draggable": {
+                "js": "js/draggable/draggable.js",
+                "css": "js/draggable/draggable.css",
+                "require": [ "clone", "extend", "document-load", "classes", "style-attribute", "offset", "document-sizes" ]
+            },
+            "resizable": {
+                "js": "js/resizable/resizable.js",
+                "css": "js/resizable/resizable.css",
+                "require": [ "clone", "extend", "document-load", "classes", "style-attribute" ]
             },
             "ajax": {
                 "js": "js/ajax/ajax.js",
-                "require": [ "debug", "clone", "extend", "document_load", "form_serialize", "node", "uniqid", "in_array" ]
+                "require": [ "debug", "clone", "extend", "document-load", "form_serialize", "node", "uniqid", "in-array" ]
+            },
+            "dialog-box": {
+                "js": "js/dialog-box/dialog-box.js",
+                "css": "js/dialog-box/dialog-box.css",
+                "require": [ "draggable", "classes", "window-sizes", "ajax" ]
             }
+        },
+        "branch-alias": {
+            "dev-master": "1.0-dev"
         }
     }
 }

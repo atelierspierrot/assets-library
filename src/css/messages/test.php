@@ -1,60 +1,60 @@
-<?php @ini_set('display_errors',1); @error_reporting(E_ALL ^ E_NOTICE); ?><!--
+<?php
 /*
 # ***** BEGIN LICENSE BLOCK *****
-# This file is part of the PiWi Framework, an apen source PHP/JavaScript library by Les Ateliers Pierrot
-# Copyright (c) 2010 Pierre Cassat and contributors
-#
-# <http://www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
-#
-# PiWi Library is a free software; you can redistribute it and/or modify it under the terms 
-# of the GNU General Public License as published by the Free Software Foundation; either version 
-# 3 of the License, or (at your option) any later version.
-#
-# PiWi Library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
-# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along with this program; 
-# if not, write to the :
-#     Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-# or see the page :
-#    <http://www.opensource.org/licenses/gpl-3.0.html>
+# Assets Library - The open source PHP/JavaScript/CSS library of Les Ateliers Pierrot
+# Copyleft (c) 2013 Pierre Cassat and contributors
+# <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
+# License GPL-3.0 <http://www.opensource.org/licenses/gpl-3.0.html>
+# Sources <http://github.com/atelierspierrot/assets-library>
 #
 # Ce programme est un logiciel libre distribué sous licence GNU/GPL.
 #
 # ***** END LICENSE BLOCK ***** */
---><html>
+
+@ini_set('display_errors',1); @error_reporting(E_ALL ^ E_NOTICE); 
+require_once __DIR__.'/../../assets-library.php';
+
+$requirements = array(
+    'js'=>array(
+    ),
+    'css'=>array(
+        'commons'
+    ),
+);
+
+?><html>
 <head>
 <title>Test of CSS MESSAGES</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<link rel="stylesheet" href="../commons.css.php" type="text/css" />
+<!-- Requirements -->
+<link href="<?php echo build_requirements('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
 <script language="Javascript" type="text/javascript">
 </script>
 <style type="text/css">
 
 .message.message-icon {
-    background: #eee url("img/help.png") no-repeat 14px center;
+    background: #eee url("<?php echo _IMG_HTTP; ?>/help.png") no-repeat 14px center;
     padding-left: 44px;
 }
 
 .message.message-icon.ok {
     background-color: #e0f2cb;
-    background-image: url("img/tick.png");
+    background-image: url("<?php echo _IMG_HTTP; ?>/tick.png");
 }
 
 .message.message-icon.error {
     background-color: #fbd3b1;
-    background-image: url("img/exclamation.png");
+    background-image: url("<?php echo _IMG_HTTP; ?>/exclamation.png");
 }
 
 .message.message-icon.info {
     background-color: #e4edf5;
-    background-image: url("img/information.png");
+    background-image: url("<?php echo _IMG_HTTP; ?>/information.png");
 }
 
 .message.message-icon.warning {
     background-color: #fff4cc;
-    background-image: url("img/error.png");
+    background-image: url("<?php echo _IMG_HTTP; ?>/error.png");
 }
 </style>
 </head>
