@@ -12,6 +12,7 @@
 # ***** END LICENSE BLOCK ***** */
 @ini_set('display_errors',1); @error_reporting(E_ALL ^ E_NOTICE); 
 require_once __DIR__.'/../../assets-library.php';
+css_header();
 
 $dir_left = defined('_CSS_DIRECTION') && _CSS_DIRECTION==='rtl' ? 'right' : 'left';
 $dir_right = defined('_CSS_DIRECTION') && _CSS_DIRECTION==='rtl' ? 'left' : 'right';

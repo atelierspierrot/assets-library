@@ -12,6 +12,7 @@
 # ***** END LICENSE BLOCK ***** */
 @ini_set('display_errors',1); @error_reporting(E_ALL ^ E_NOTICE); 
 require_once __DIR__.'/../../assets-library.php';
+css_header();
 ?>
 /* --------------------------------
     Global Default CSS Styles
