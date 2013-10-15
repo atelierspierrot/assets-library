@@ -21,7 +21,7 @@
         "atelierspierrot/templatengine": "1.*"
     },
     "autoload": { 
-        "files": [ "src/assets-library.php" ]
+        "files": [ "src/assets-library.php" ]
     },
     "extra": {
         "assets-dir": "src",
