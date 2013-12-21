@@ -4,6 +4,16 @@ Assets Library
 The javascript & css library of Les Ateliers Pierrot.
 
 
+## Presentation
+
+This package is a collection of "self-made" assets features (Javascript and CSS) defined
+as a set of "presets" that can be handled by the [Assets Manager](https://github.com/atelierspierrot/assets-manager)
+package.
+
+## Demo
+
+For a full demo, browse to `http://path/to/package/demo/`.
+
 ## Documentation
 
 A documentation can be built using [JSDoc](http://usejsdoc.org/). To build it, run:

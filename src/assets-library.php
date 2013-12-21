@@ -30,6 +30,16 @@ if (!empty($_POST)) {
 // -------------------------
 
 /**
+ * @var string Realpath of the package
+ */
+@define('_ASSETSLIB_ROOTPATH', realpath(__DIR__.'/../'));
+
+/**
+ * @var string Realpath of package manifest to load presets dependencies
+ */
+@define('_ASSETSLIB_MANIFEST', _ASSETSLIB_ROOTPATH.'/composer.json');
+
+/**
  * @var string Realpath of this file
  */
 @define('_ASSETSLIB_PATH', realpath(__FILE__));
@@ -83,7 +93,53 @@ if (!empty($_POST)) {
 // Library
 // -------------------------
 
-if (!function_exists('build_requirements'))
+if (!function_exists('build_preset_url'))
+{
+    /**
+     * Build the URL for preset calls
+     *
+     * @param string $type
+     * @param string $preset
+     * @return string
+     */
+    function build_preset_url($type, $preset)
+    {
+        return urldecode(_ASSETSLIB_HTTP.'?type='.$type.'&preset='.$preset);
+    }
+}
+
+if (!function_exists('prepare_preset_include'))
+{
+    /**
+     * Build a preset requirements and include it
+     *
+     * @param string $type 'js' or 'css'
+     * @param string $preset
+     * @return void
+     */
+    function prepare_preset_include($type, $preset)
+    {
+        require_once __DIR__.'/DependenciesManager.php';
+        $presets = new DependenciesManager(_ASSETSLIB_MANIFEST);
+        $deps = $presets->findDependencies($preset);
+        if (!empty($deps) && isset($deps[$type])) {
+            $str = '';
+            foreach ($deps[$type] as $item) {
+                $str .= library_include($item);
+            }
+            if (!empty($str)) {
+                if ($type==='css') {
+                    css_header();
+                } elseif ($type==='js') {
+                    javascript_header();
+                }
+                echo $str;
+            }
+        }
+    }
+}
+
+if (!function_exists('build_requirements_url'))
 {
     /**
      * Include a library script script
@@ -92,7 +148,7 @@ if (!function_exists('build_requirements'))
      * @param array $requirements
      * @return string
      */
-    function build_requirements($type, array $requirements = null)
+    function build_requirements_url($type, array $requirements = null)
     {
         $url_args[] = 'type='.$type;
         if (!empty($requirements)) {
@@ -112,17 +168,17 @@ if (!function_exists('build_requirements'))
     }
 }
 
-if (!function_exists('library_include'))
+if (!function_exists('prepare_library_include'))
 {
     /**
-     * Include a library script
+     * Prepare the inclusion of a library script
      *
      * @param string $type
      * @param string $tool_name
      * @param string $file_name
      * @return string
      */
-    function library_include($type, $tool_name, $file_name = null)
+    function prepare_library_include($type, $tool_name, $file_name = null)
     {
         $str = '';
         if (!empty($tool_name)) {
@@ -142,22 +198,7 @@ if (!function_exists('library_include'))
                     $extension = $root_dir = $http_dir = '';
                     break;
             }
-            $_f = $tool_name.DIRECTORY_SEPARATOR.(!empty($file_name) ? $file_name : $tool_name).'.'.$extension;
-            if (file_exists($root_dir.$_f)) {
-                $ctt = file_get_contents($root_dir.$_f);
-                $str = "\n".'/* LIBRARY TOOL : Insert '.$cc_type.' file "'.$_f.'" */'
-                    ."\n".strip_license_block($ctt);
-
-            } elseif (file_exists($root_dir.$_f.'.php')) {
-                $_f .= '.php';
-                ob_start();
-                include $root_dir.$_f;
-                $str = "\n".'/* LIBRARY TOOL : Insert '.$cc_type.' file "'.$_f.'" */'
-                    ."\n".strip_license_block(ob_get_contents());
-                ob_end_clean();
-            } else {
-                $str = "\n".'/* LIBRARY TOOL ERROR : '.$cc_type.' file "'.$_f.'" not found ! */';
-            }
+            $str = library_include($root_dir.$tool_name.DIRECTORY_SEPARATOR.(!empty($file_name) ? $file_name : $tool_name).'.'.$extension);
         }
         return $str;
     }
@@ -184,13 +225,54 @@ if (!function_exists('treat_request'))
             foreach ($request as $tool=>$i) {
                 if (!empty($i) && is_array($i)) {
                     foreach ($i as $_file) {
-                        $str .= library_include($type, $tool, $_file);
+                        $str .= prepare_library_include($type, $tool, $_file);
                     }
                 } elseif (!empty($i)) {
-                    $str .= library_include($type, $tool, $i);
+                    $str .= prepare_library_include($type, $tool, $i);
                 } else {
-                    $str .= library_include($type, $tool);
+                    $str .= prepare_library_include($type, $tool);
                 }
+            }
+        }
+        return $str;
+    }
+}
+
+if (!function_exists('library_include'))
+{
+    /**
+     * Include a library script
+     *
+     * @param string $file_name
+     * @return string
+     */
+    function library_include($file_name)
+    {
+        $str = '';
+        if (!empty($file_name)) {
+            if (false!==($end = substr($file_name, -(strlen('.php')))) && $end==='.php') {
+                $file_name = substr($file_name, 0, -(strlen('.php')));
+            }
+            if (!file_exists($file_name) && (
+                file_exists(_ASSETSLIB_PATH.$file_name) || file_exists(_ASSETSLIB_PATH.$file_name.'.php')
+            )) {
+                $file_name = _ASSETSLIB_PATH.$file_name;
+            }
+            $cc_type = strtoupper(pathinfo($file_name, PATHINFO_EXTENSION));
+            if (file_exists($file_name)) {
+                $ctt = file_get_contents($file_name);
+                $str = "\n".'/* LIBRARY TOOL : Insert '.$cc_type.' file "'.$file_name.'" */'
+                    ."\n".strip_license_block($ctt);
+
+            } elseif (file_exists($file_name.'.php')) {
+                $file_name .= '.php';
+                ob_start();
+                include $file_name;
+                $str = "\n".'/* LIBRARY TOOL (PHP source) : Insert '.$cc_type.' file "'.$file_name.'" */'
+                    ."\n".strip_license_block(ob_get_contents());
+                ob_end_clean();
+            } else {
+                $str = "\n".'/* LIBRARY TOOL ERROR : '.$cc_type.' file "'.$file_name.'" not found ! */';
             }
         }
         return $str;
@@ -262,6 +344,7 @@ if (!function_exists('css3_rule'))
     }
 }
 
+
 // -------------------------
 // Interface
 // -------------------------
@@ -274,17 +357,31 @@ if (is_null($type)) {
     unset($request['type']);
 }
 
-// process
+// 'preset' case
+$preset = null;
+if (isset($request['preset'])) {
+    $preset = $request['preset'];
+    unset($request['preset']);
+}
+
+// process the rest
+$str = '';
 switch ($type) {
     case 'js': case 'javascript':
-        $str = treat_request('js', $request);
+        if (!empty($preset)) {
+            $str .= prepare_preset_include('js', $preset);
+        }
+        $str .= treat_request('js', $request);
         if (!empty($str)) {
             javascript_header();
             echo $str;
         }
         break;
-    case 'css':
-        $str = treat_request('css', $request);
+    case 'css': case 'stylesheet':
+        if (!empty($preset)) {
+            $str .= prepare_preset_include('css', $preset);
+        }
+        $str .= treat_request('css', $request);
         if (!empty($str)) {
             css_header();
             echo $str;

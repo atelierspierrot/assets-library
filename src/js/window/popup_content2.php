@@ -15,26 +15,20 @@
 require_once __DIR__.'/../../assets-library.php';
 
 $requirements = array(
-    'js'=>array(
-        'commons',
-        'array'=>'join'
-    ),
-    'css'=>array(
-        'commons',
-    ),
+    'js'=>array('commons'),
+    'css'=>array('commons'),
 );
 
 ?><html>
 <head>
 
 <!-- Requirements -->
-<script type="text/javascript" src="<?php echo build_requirements('js', $requirements['js']); ?>"></script>
-<link href="<?php echo build_requirements('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo build_requirements_url('js', $requirements['js']); ?>"></script>
+<link href="<?php echo build_requirements_url('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
 
-<!-- Window -->
-<script type="text/javascript" src="popup_set.js"></script>
-<script type="text/javascript" src="get_window_sizes.js"></script>
-<script type="text/javascript" src="opener_focus.js"></script>
+<!-- Preset "window" -->
+<script type="text/javascript" src="<?php echo build_preset_url('js', 'window'); ?>"></script>
+<link href="<?php echo build_preset_url('css', 'window'); ?>" media="screen" rel="stylesheet" type="text/css" />
 
 </head>
 <body>

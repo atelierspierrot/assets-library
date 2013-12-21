@@ -15,22 +15,8 @@
 require_once __DIR__.'/../../../assets-library.php';
 
 $requirements = array(
-    'js'=>array(
-        'commons',
-        'registry',
-        'extend',
-        'node'=>array(
-            'get_style_attribute', 'get_offset'
-        ),
-    ),
-    'css'=>array(
-        'commons',
-        'registry',
-        'extend',
-        'node'=>array(
-            'get_style_attribute', 'get_offset'
-        ),
-    ),
+    'js'=>array('commons'),
+    'css'=>array('commons'),
 );
 
 ?><html>
@@ -39,12 +25,12 @@ $requirements = array(
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
 <!-- Requirements -->
-<script type="text/javascript" src="<?php echo build_requirements('js', $requirements['js']); ?>"></script>
-<link href="<?php echo build_requirements('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo build_requirements_url('js', $requirements['js']); ?>"></script>
+<link href="<?php echo build_requirements_url('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
 
-<!-- Effect + Fade -->
-<script type="text/javascript" src="../effect.js"></script>  
-<script type="text/javascript" src="fade.js"></script>  
+<!-- Preset "effect-fade" -->
+<script type="text/javascript" src="<?php echo build_preset_url('js', 'effect-fade'); ?>"></script>
+<link href="<?php echo build_preset_url('css', 'effect-fade'); ?>" media="screen" rel="stylesheet" type="text/css" />
 
 <script language="Javascript" type="text/javascript">
 

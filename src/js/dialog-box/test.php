@@ -15,6 +15,12 @@
 require_once __DIR__.'/../../assets-library.php';
 
 $requirements = array(
+    'js'=>array('commons'),
+    'css'=>array('commons'),
+);
+
+/*
+$requirements = array(
     'js'=>array(
         'commons'=>array(
             'commons',
@@ -49,6 +55,12 @@ $requirements = array(
         'draggable',
     ),
 );
+            "dialog-box": {
+                "js": "js/dialog-box/dialog-box.js",
+                "css": "js/dialog-box/dialog-box.css",
+                "require": [ "draggable", "classes", "window-sizes", "ajax" ]
+            }
+*/
 
 ?><html>
 <head>
@@ -56,12 +68,12 @@ $requirements = array(
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
 <!-- Requirements -->
-<script type="text/javascript" src="<?php echo build_requirements('js', $requirements['js']); ?>"></script>
-<link href="<?php echo build_requirements('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo build_requirements_url('js', $requirements['js']); ?>"></script>
+<link href="<?php echo build_requirements_url('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
 
-<!-- Dialog-Box -->
-<script type="text/javascript" src="dialog-box.js"></script>  
-<link href="dialog-box.css" media="screen" rel="stylesheet" type="text/css" />
+<!-- Preset "dialog-box" -->
+<script type="text/javascript" src="<?php echo build_preset_url('js', 'dialog-box'); ?>"></script>
+<link href="<?php echo build_preset_url('css', 'dialog-box'); ?>" media="screen" rel="stylesheet" type="text/css" />
 
 <script language="Javascript" type="text/javascript">
 

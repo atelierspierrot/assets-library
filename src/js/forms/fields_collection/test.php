@@ -12,7 +12,7 @@
 # ***** END LICENSE BLOCK ***** */
 
 @ini_set('display_errors',1); @error_reporting(E_ALL ^ E_NOTICE); 
-require_once __DIR__.'/../../assets-library.php';
+require_once __DIR__.'/../../../assets-library.php';
 
 $requirements = array(
     'js'=>array(
@@ -30,11 +30,13 @@ $requirements = array(
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
 <!-- Requirements -->
-<script type="text/javascript" src="<?php echo build_requirements('js', $requirements['js']); ?>"></script>
-<link href="<?php echo build_requirements('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo build_requirements_url('js', $requirements['js']); ?>"></script>
+<link href="<?php echo build_requirements_url('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
 
-<!-- Fields Collection -->
-<script type="text/javascript" src="fields_collection.js"></script>  
+<!-- Preset "fields-collection" -->
+<script type="text/javascript" src="<?php echo build_preset_url('js', 'fields-collection'); ?>"></script>
+<link href="<?php echo build_preset_url('css', 'fields-collection'); ?>" media="screen" rel="stylesheet" type="text/css" />
+
 <script language="Javascript" type="text/javascript">
 </script>
 <style type="text/css">
