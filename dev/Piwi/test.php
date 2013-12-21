@@ -33,8 +33,8 @@ $requirements = array(
 <title>Test of the Piwi javascript framework</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <!-- Requirements -->
-<script type="text/javascript" src="<?php echo build_requirements('js', $requirements['js']); ?>"></script>
-<link href="<?php echo build_requirements('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo build_requirements_url('js', $requirements['js']); ?>"></script>
+<link href="<?php echo build_requirements_url('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="Piwi.js"></script>
 <style type="text/css">
 pre { color: #404040; border: 1px dotted #ccc; padding: 4px; }

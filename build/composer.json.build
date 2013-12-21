@@ -106,9 +106,9 @@
             },
             "effects": { "require": [ "effect-blind", "effect-slide", "effect-fade" ] },
 # form
-            "checkboxes-change-class-onchange": { "js": "js/forms/checkboxes/change_class_onchange.js" },
+            "checkboxes-change-class-oncheck": { "js": "js/forms/checkboxes/change_class_oncheck.js" },
             "checkboxes-check-all": { "js": "js/forms/checkboxes/check_all.js" },
-            "checkboxes": { "require": [ "checkboxes-change-class-onchange", "checkboxes-check-all" ] },
+            "checkboxes": { "require": [ "checkboxes-change-class-oncheck", "checkboxes-check-all" ] },
             "form-serialize": { "js": "js/forms/form_serialize/form_serialize.js" },
             "field-toggler": { "js": "js/forms/field_toggler/field_toggler.js" },
             "fields-collection": { "js": "js/forms/fields_collection/fields_collection.js" },
