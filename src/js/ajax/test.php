@@ -15,31 +15,8 @@
 require_once __DIR__.'/../../assets-library.php';
 
 $requirements = array(
-    'js'=>array(
-        'commons'=>array(
-            'commons',
-            'clone',
-        ),
-        'extend',
-        'document'=>'document_load',
-        'form_serialize',
-        'node'=>array(
-            'classes',
-            'get_style_attribute',
-            'get_offset',
-        ),
-        'system'=>'uniqid',
-        'array'=>'in_array'
-    ),
-    'css'=>array(
-        'commons'=>array(
-            'commons',
-            'clone',
-        ),
-        'extend',
-        'document'=>'document_load',
-        'form_serialize'
-    ),
+    'js'=>array('commons'),
+    'css'=>array('commons'),
 );
 
 ?><html>
@@ -48,11 +25,12 @@ $requirements = array(
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
 <!-- Requirements -->
-<script type="text/javascript" src="<?php echo build_requirements('js', $requirements['js']); ?>"></script>
-<link href="<?php echo build_requirements('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo build_requirements_url('js', $requirements['js']); ?>"></script>
+<link href="<?php echo build_requirements_url('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
 
-<!-- Ajax -->
-<script type="text/javascript" src="ajax.js"></script>  
+<!-- Preset "ajax" -->
+<script type="text/javascript" src="<?php echo build_preset_url('js', 'ajax'); ?>"></script>
+<link href="<?php echo build_preset_url('css', 'ajax'); ?>" media="screen" rel="stylesheet" type="text/css" />
 
 <script language="Javascript" type="text/javascript">
 
@@ -314,5 +292,7 @@ filter:alpha(opacity=40);
 	</tr></table>
 	<hr />
    <div id="TextDiv">Text</div>
+	<hr />
+   <div><small>Footer test</small></div>
 </body>
 </html>

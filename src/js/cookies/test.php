@@ -31,11 +31,12 @@ $requirements = array(
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
 <!-- Requirements -->
-<script type="text/javascript" src="<?php echo build_requirements('js', $requirements['js']); ?>"></script>
-<link href="<?php echo build_requirements('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo build_requirements_url('js', $requirements['js']); ?>"></script>
+<link href="<?php echo build_requirements_url('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
 
-<!-- Cookies -->
-<script type="text/javascript" src="cookies.js"></script>  
+<!-- Preset "cookies" -->
+<script type="text/javascript" src="<?php echo build_preset_url('js', 'cookies'); ?>"></script>
+<link href="<?php echo build_preset_url('css', 'cookies'); ?>" media="screen" rel="stylesheet" type="text/css" />
 
 <script language="Javascript" type="text/javascript">
 

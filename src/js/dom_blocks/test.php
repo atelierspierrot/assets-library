@@ -18,12 +18,10 @@ $requirements = array(
     'js'=>array(
         'commons',
         'document'=>'document_load',
-        'node'=>'classes',
     ),
     'css'=>array(
         'commons',
         'document'=>'document_load',
-        'node'=>'classes',
     ),
 );
 
@@ -33,11 +31,12 @@ $requirements = array(
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
 <!-- Requirements -->
-<script type="text/javascript" src="<?php echo build_requirements('js', $requirements['js']); ?>"></script>
-<link href="<?php echo build_requirements('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo build_requirements_url('js', $requirements['js']); ?>"></script>
+<link href="<?php echo build_requirements_url('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
 
-<!-- Show/Hide -->
-<script type="text/javascript" src="show_hide.js"></script>  
+<!-- Preset "show-hide" -->
+<script type="text/javascript" src="<?php echo build_preset_url('js', 'show-hide'); ?>"></script>
+<link href="<?php echo build_preset_url('css', 'show-hide'); ?>" media="screen" rel="stylesheet" type="text/css" />
 
 <script language="Javascript" type="text/javascript">
 

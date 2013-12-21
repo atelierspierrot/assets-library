@@ -39,7 +39,7 @@ var settings; if (settings===undefined) settings = [];
 
 <?php
 // Inclusion of debugger
-echo library_include('js', 'debug');
+echo prepare_library_include('js', 'debug');
 ?>
 
 // Endfile

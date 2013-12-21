@@ -21,6 +21,9 @@ var settings; if (settings===undefined) settings = [];
  */
 function _dbg(str, title)
 {
+    if (window.settings['debug']!==undefined && window.settings['debug']==false) {
+        return;
+    }
 	if (!title) { title = ""; }
 	else { title = title+" : "; }
 	if (window.console && window.console.log) { window.console.log(title + str); }
@@ -34,6 +37,9 @@ function _dbg(str, title)
  */
 function _dbg_info(str, title)
 {
+    if (window.settings['debug']!==undefined && window.settings['debug']==false) {
+        return;
+    }
 	if (!title) { title = ""; }
 	else { title = title+" : "; }
 	if (window.console && window.console.info) { window.console.info(title + str); }
@@ -44,6 +50,9 @@ function _dbg_info(str, title)
  */
 function _dbg_log()
 {
+    if (window.settings['debug']!==undefined && window.settings['debug']==false) {
+        return;
+    }
 	if (window.console && window.console.log) {
 		window.console.log.apply(null, arguments);
 	}
