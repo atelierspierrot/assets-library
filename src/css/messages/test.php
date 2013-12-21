@@ -26,8 +26,11 @@ $requirements = array(
 <head>
 <title>Test of CSS MESSAGES</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+
 <!-- Requirements -->
-<link href="<?php echo build_requirements('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
+<link href="<?php echo build_requirements_url('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
+
 <script language="Javascript" type="text/javascript">
 </script>
 <style type="text/css">

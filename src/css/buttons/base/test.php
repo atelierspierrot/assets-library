@@ -26,9 +26,13 @@ $requirements = array(
 <head>
 <title>Test of CSS BASE buttons</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
 <!-- Requirements -->
-<link href="<?php echo build_requirements('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="base_buttons.css" type="text/css" media="screen" />
+<link href="<?php echo build_requirements_url('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
+
+<!-- Preset "buttons-base" -->
+<link href="<?php echo build_preset_url('css', 'buttons-base'); ?>" media="screen" rel="stylesheet" type="text/css" />
+
 <script language="Javascript" type="text/javascript">
 </script>
 <style type="text/css">

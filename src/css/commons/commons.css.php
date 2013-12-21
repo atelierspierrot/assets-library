@@ -32,11 +32,11 @@ body    {
 
 <?php
 // typography
-echo library_include('css', 'commons', 'typography');
+echo prepare_library_include('css', 'commons', 'typography');
 
 // form
-echo library_include('css', 'commons', 'form');
+echo prepare_library_include('css', 'commons', 'form');
 
 // utilities
-echo library_include('css', 'commons', 'utilities');
+echo prepare_library_include('css', 'commons', 'utilities');
 ?>

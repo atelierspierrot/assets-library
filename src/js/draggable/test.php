@@ -14,29 +14,12 @@
 @ini_set('display_errors',1); @error_reporting(E_ALL ^ E_NOTICE); 
 require_once __DIR__.'/../../assets-library.php';
 
+/*
+"require": [ "clone", "extend", "document-load", "classes", "style-attribute", "offset", "document-sizes" ]
+*/
 $requirements = array(
-    'js'=>array(
-        'commons'=>array(
-            'commons',
-            'clone',
-        ),
-        'extend',
-        'document'=>array(
-            'document_load',
-            'get_document_sizes',
-        ),
-        'node'=>array(
-            'classes',
-            'get_style_attribute',
-            'get_offset',
-        ),
-    ),
-    'css'=>array(
-        'commons'=>array(
-            'commons',
-            'clone',
-        ),
-    ),
+    'js'=>array('commons'),
+    'css'=>array('commons'),
 );
 
 ?><html>
@@ -45,12 +28,12 @@ $requirements = array(
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
 <!-- Requirements -->
-<script type="text/javascript" src="<?php echo build_requirements('js', $requirements['js']); ?>"></script>
-<link href="<?php echo build_requirements('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo build_requirements_url('js', $requirements['js']); ?>"></script>
+<link href="<?php echo build_requirements_url('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
 
-<!-- Draggable -->
-<script type="text/javascript" src="draggable.js"></script>  
-<link href="draggable.css" media="screen" rel="stylesheet" type="text/css" />
+<!-- Preset "draggable" -->
+<script type="text/javascript" src="<?php echo build_preset_url('js', 'draggable'); ?>"></script>
+<link href="<?php echo build_preset_url('css', 'draggable'); ?>" media="screen" rel="stylesheet" type="text/css" />
 
 <script language="Javascript" type="text/javascript">
 

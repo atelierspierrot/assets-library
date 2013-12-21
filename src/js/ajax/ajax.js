@@ -194,6 +194,7 @@
 		_response = null;
 		_req_statut = null;
 		_loader = "../../img/indicator.gif";
+	    _loader_alt_text = "Loading AJAX request ...";
 	    _loader_style = "margin:1em";
 	    _content_type = "application/x-www-form-urlencoded; charset=UTF-8";
 	    _if_modified = false;
@@ -253,6 +254,7 @@
         	_args = null;
         }
         _request.open( _method, _url, _asynch );
+        _SetRequestHeader("X-Requested-With", "XMLHttpRequest");
         // If 'if modified'
         if( _if_modified ) {
 			var curdate=new Date();
@@ -341,7 +343,7 @@ var _pos_test = _dom_object.getOffset();
 console.debug(_pos_test);
 	    	_loader_img.src = _loader;
 	    	_loader_img.style = _loader_style;
-	    	_loader_img.alt = "Loading AJAX request ...";
+	    	_loader_img.alt = _loader_alt_text;
 		    _loader_img.style.top = _pos[1]+"px";
 			_loader_img.style.left = _pos[0]+"px";
 			if (_dom_disabled) {
@@ -595,6 +597,9 @@ console.debug(_pos_test);
     },
     
     _first_dbg = function(str) {
+        if (window.settings!==undefined && window.settings['debug']!==undefined && window.settings['debug']==false) {
+            return;
+        }
         if(window.console && window.console.log) {
             window.console.info("[ Ajax ] [ Version "+ClassVersion+" ] [ this.Token = '"+_token_+"' ]\n"+str);
         }

@@ -12,7 +12,7 @@
 # ***** END LICENSE BLOCK ***** */
 
 @ini_set('display_errors',1); @error_reporting(E_ALL ^ E_NOTICE); 
-require_once __DIR__.'/../../assets-library.php';
+require_once __DIR__.'/../../../assets-library.php';
 
 $requirements = array(
     'js'=>array(
@@ -30,11 +30,12 @@ $requirements = array(
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
 <!-- Requirements -->
-<script type="text/javascript" src="<?php echo build_requirements('js', $requirements['js']); ?>"></script>
-<link href="<?php echo build_requirements('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo build_requirements_url('js', $requirements['js']); ?>"></script>
+<link href="<?php echo build_requirements_url('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
 
-<!-- Field Toggler -->
-<script type="text/javascript" src="field_toggler.js"></script>  
+<!-- Preset "field-toggler" -->
+<script type="text/javascript" src="<?php echo build_preset_url('js', 'field-toggler'); ?>"></script>
+<link href="<?php echo build_preset_url('css', 'field-toggler'); ?>" media="screen" rel="stylesheet" type="text/css" />
 
 <script language="Javascript" type="text/javascript">
 
@@ -84,7 +85,7 @@ function getFileField( $name )
 	if (!empty($_FILES) && isset($_FILES[$name]) && !empty($_FILES[$name]['tmp_name']))
 	{
 		$_f = 'tmp/'.uniqid();
-		$a = copy($_FILES[$name]['tmp_name'], $_f);
+		$a = rename($_FILES[$name]['tmp_name'], $_f);
 		return $_f;
 	}
 	elseif (!empty($_POST) && isset($_POST[$name]))
