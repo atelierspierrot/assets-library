@@ -23,11 +23,11 @@ function setCookie(value, name) {
     var argv = setCookie.arguments;
     var argc = setCookie.arguments.length;
     if (value===undefined || value===null) {
-		throw new Error('No value defined for cookie!');
+        throw new Error('No value defined for cookie!');
         return false;
     }
     if (name===undefined || name===null) {
-		throw new Error('No name defined for cookie!');
+       throw new Error('No name defined for cookie!');
         return false;
     }
     var expires = (argc > 2) ? argv[2] : null;
@@ -60,7 +60,7 @@ function setCookie(value, name) {
 
 function getCookie(name) {
     if (name===undefined || name===null) {
-		throw new Error('No name defined for cookie!');
+       throw new Error('No name defined for cookie!');
         return false;
     }
     var arg = name+"=";
@@ -88,7 +88,7 @@ function getCookieValue(offset) {
 
 function deleteCookie(name) {
     if (name===undefined || name===null) {
-		throw new Error('No name defined for cookie!');
+       throw new Error('No name defined for cookie!');
         return false;
     }
     var _zero = new Date( 0 );

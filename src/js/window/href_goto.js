@@ -15,13 +15,13 @@
  * Simulate a clic link href
  */
 function href_goto(url, opener, close) {
-	if (!url || !_is_url) { return; }
-	if (opener) {
-		window.opener.location = url;
-		window.opener.focus();
-		if (close) { window.close(); }
-	}
-	else window.location = url;
+    if (!url || !_is_url) { return; }
+    if (opener) {
+        window.opener.location = url;
+        window.opener.focus();
+        if (close) { window.close(); }
+    }
+    else window.location = url;
 }
 
 // Endfie

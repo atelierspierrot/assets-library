@@ -28,44 +28,44 @@ var FIELDTOGGLER_INNERHTML={};
  */
 function field_toggler( id, field_name, field_model, action )
 {
-	if (typeof this.window['_dbg_info'] == 'function')
-		_dbg_info('[field_toggler()] Toggling field ['+field_name+'] for id=['+id+'] with model=['+field_model+']');
-	var _parent = document.getElementById( id ),
-		_action = action || 'replace';
-	if (_parent)
-	{
-		if (_action=='replace' || _action=='add')
-		{
-			// make sure we have a model
-			var mod = field_model || FIELDTOGGLER_MODELS[id] || _parent.getAttribute('data-prototype');
-			if (FIELDTOGGLER_MODELS[id]==undefined) {
-				FIELDTOGGLER_MODELS[id] = mod;
-			}
-			if (typeof this.window['_dbg'] == 'function') {
-				_dbg('getting field model ['+mod+']');
-			}
-			if (mod==undefined)
-			{
-				throw new Error('No model set and no data-prototype attribute found!');
-				return;
-			}
-			if (FIELDTOGGLER_INNERHTML[id]==undefined) {
-				FIELDTOGGLER_INNERHTML[id] = _parent.innerHTML;
-			}
-			if (_action=='replace') {
-				_parent.innerHTML = FIELDTOGGLER_MODELS[id];
-			}
-			else if (_action=='add') {
-				_parent.innerHTML += FIELDTOGGLER_MODELS[id];
-			}
-		}
-		else if (_action=='back')
-		{
-			if (FIELDTOGGLER_INNERHTML[id]!=undefined) {
-				_parent.innerHTML = FIELDTOGGLER_INNERHTML[id];
-			}
-		}
-	}
+    if (typeof this.window['_dbg_info'] == 'function')
+        _dbg_info('[field_toggler()] Toggling field ['+field_name+'] for id=['+id+'] with model=['+field_model+']');
+    var _parent = document.getElementById( id ),
+        _action = action || 'replace';
+    if (_parent)
+    {
+        if (_action=='replace' || _action=='add')
+        {
+            // make sure we have a model
+            var mod = field_model || FIELDTOGGLER_MODELS[id] || _parent.getAttribute('data-prototype');
+            if (FIELDTOGGLER_MODELS[id]==undefined) {
+                FIELDTOGGLER_MODELS[id] = mod;
+            }
+            if (typeof this.window['_dbg'] == 'function') {
+                _dbg('getting field model ['+mod+']');
+            }
+            if (mod==undefined)
+            {
+                throw new Error('No model set and no data-prototype attribute found!');
+                return;
+            }
+            if (FIELDTOGGLER_INNERHTML[id]==undefined) {
+                FIELDTOGGLER_INNERHTML[id] = _parent.innerHTML;
+            }
+            if (_action=='replace') {
+                _parent.innerHTML = FIELDTOGGLER_MODELS[id];
+            }
+            else if (_action=='add') {
+                _parent.innerHTML += FIELDTOGGLER_MODELS[id];
+            }
+        }
+        else if (_action=='back')
+        {
+            if (FIELDTOGGLER_INNERHTML[id]!=undefined) {
+                _parent.innerHTML = FIELDTOGGLER_INNERHTML[id];
+            }
+        }
+    }
 }
 
 // Endfile

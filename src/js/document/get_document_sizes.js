@@ -11,11 +11,11 @@
 # ***** END LICENSE BLOCK ***** */
 
 function getDocumentSizes() {
-	var sizes = {
-		width: getDocumentWidth(),
-		height: getDocumentHeight()
-	};
-	return sizes;
+    var sizes = {
+        width: getDocumentWidth(),
+        height: getDocumentHeight()
+    };
+    return sizes;
 }
 
 function getDocumentHeight() {

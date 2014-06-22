@@ -18,10 +18,10 @@ javascript_header();
 function include(fileName)
 {
     "use strict";
-	document.write("<script type='text/javascript' src='/<?php echo _ASSETSLIB_JS_HTTP; ?>"+fileName+"'><\/"+"script>" );
-	if (typeof window._dbg === 'function') {
-		_dbg("Inclusion of file ["+fileName+"]");
-	}
+    document.write("<script type='text/javascript' src='/<?php echo _ASSETSLIB_JS_HTTP; ?>"+fileName+"'><\/"+"script>" );
+    if (typeof window._dbg === 'function') {
+        _dbg("Inclusion of file ["+fileName+"]");
+    }
 }
 
 // from http://javascript.about.com/library/bladdjs.htm

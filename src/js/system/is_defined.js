@@ -7,20 +7,20 @@
  * @param string type The type you want verify 'str' is | optional
  */
 function is_defined(str, type){
-	try {
-		str = (str.charAt(str.length-1) == ')') ? str.substring(0, str.length-2) : str;
-	} catch(e) { }
-	try {
-		var tested = self.eval(str);
-		if(tested != undefined && typeof(tested) != undefined){
-			if(!type) return true;
-			else {
-				if(typeof(tested) == type) return true;
-				else return false;
-			}
-		}
-	} catch(e) {
-		return false;
-	}
-	return false;
+    try {
+        str = (str.charAt(str.length-1) == ')') ? str.substring(0, str.length-2) : str;
+    } catch(e) { }
+    try {
+        var tested = self.eval(str);
+        if(tested != undefined && typeof(tested) != undefined){
+            if(!type) return true;
+            else {
+                if(typeof(tested) == type) return true;
+                else return false;
+            }
+        }
+    } catch(e) {
+        return false;
+    }
+    return false;
 }

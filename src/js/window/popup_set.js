@@ -40,47 +40,47 @@ settings['default_popup_height']='400';
  * - name : popup name | default is described ahead
  */
 function popup_set(url, w, h, focus, options, name) {
-	// defaults or args
-	var width = (!w || w==="") ? settings.default_popup_width : w;
-	var height = (!h || h==="") ? settings.default_popup_height : h;
-	var name_f = (!name) ? settings.default_popup_name : name;
-	// options
-	var opt_set = {
-		'directories': 0, 
-		'menubar': 0, 
-		'status': 0, 
-		'location': 1, 
-		'scrollbars': 1, 
-		'resizable': 1, 
-		'fullscreen': 0, 
-		'width': width, 
-		'height': height,
-		'left': (screen.width - width)/2,
-		'top': (screen.height - height)/2
-	};
-	var opt_f = join(explode_options(options), '', ',');
-	// function to analyze options to pass
-	function explode_options(options) {
-		if (!options) return opt_set;
-		var opt_send = opt_set;
-		var reg_first = new RegExp("[ ,]+", "g");
-		var reg_second = new RegExp("[ =]+", "g");
-		var opt_list = options.split(reg_first);
-		for (var i=0; i<opt_list.length; i++) {
-			var opt_tag = opt_list[i].split(reg_second);
-			opt_send[opt_tag[0]] = opt_tag[1];
-		}
-		return opt_send;
-	}
-	if (typeof this.window['_dbg'] == 'function') {
-		_dbg(url+" , "+name_f+" , "+opt_f, "Opening POPUP");
-	}
-	// create the new window
-	NEWPOPUPWINDOW = window.open(url, name_f, opt_f);
-	if (!focus || focus!==false) {
-	    NEWPOPUPWINDOW.focus();
-	}
-	return false;
+    // defaults or args
+    var width = (!w || w==="") ? settings.default_popup_width : w;
+    var height = (!h || h==="") ? settings.default_popup_height : h;
+    var name_f = (!name) ? settings.default_popup_name : name;
+    // options
+    var opt_set = {
+        'directories': 0,
+        'menubar': 0,
+        'status': 0,
+        'location': 1,
+        'scrollbars': 1,
+        'resizable': 1,
+        'fullscreen': 0,
+        'width': width,
+        'height': height,
+        'left': (screen.width - width)/2,
+        'top': (screen.height - height)/2
+    };
+    var opt_f = join(explode_options(options), '', ',');
+    // function to analyze options to pass
+    function explode_options(options) {
+        if (!options) return opt_set;
+        var opt_send = opt_set;
+        var reg_first = new RegExp("[ ,]+", "g");
+        var reg_second = new RegExp("[ =]+", "g");
+        var opt_list = options.split(reg_first);
+        for (var i=0; i<opt_list.length; i++) {
+            var opt_tag = opt_list[i].split(reg_second);
+            opt_send[opt_tag[0]] = opt_tag[1];
+        }
+        return opt_send;
+    }
+    if (typeof this.window['_dbg'] == 'function') {
+        _dbg(url+" , "+name_f+" , "+opt_f, "Opening POPUP");
+    }
+    // create the new window
+    NEWPOPUPWINDOW = window.open(url, name_f, opt_f);
+    if (!focus || focus!==false) {
+        NEWPOPUPWINDOW.focus();
+    }
+    return false;
 }
 
 // Endfile

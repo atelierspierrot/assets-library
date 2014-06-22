@@ -67,64 +67,64 @@ var COLLECTION_MODELS={};
  */
 function add_collection_field( id, child_type, counter, field_model, _value )
 {
-	if (typeof this.window['_dbg_info'] == 'function')
-		_dbg_info('[add_collection_field()] Adding a field for id=['+id+']'
-			+"\n"+' with counter=['+(counter || COLLECTION_COUNTERS[id])+']'
-			+"\n"+' with model=['+(field_model || COLLECTION_MODELS[id])+']'
-			+"\n"+' with child_type=['+child_type+']'
-			+"\n"+' with _value=['+_value+']');
-	var _parent = document.getElementById( id );
-	if (_parent)
-	{
-		// make sure we have a count
-		var count = COLLECTION_COUNTERS[id] || counter ||
-		 	_parent.getAttribute('data-counter') || _parent.getElementsByTagName( child_type ).length+1;
-		if (COLLECTION_COUNTERS[id]==undefined)
-			COLLECTION_COUNTERS[id] = count;
-		if (typeof this.window['_dbg'] == 'function')
-			_dbg('getting counter : ['+count+']');
+    if (typeof this.window['_dbg_info'] == 'function')
+        _dbg_info('[add_collection_field()] Adding a field for id=['+id+']'
+            +"\n"+' with counter=['+(counter || COLLECTION_COUNTERS[id])+']'
+            +"\n"+' with model=['+(field_model || COLLECTION_MODELS[id])+']'
+            +"\n"+' with child_type=['+child_type+']'
+            +"\n"+' with _value=['+_value+']');
+    var _parent = document.getElementById( id );
+    if (_parent)
+    {
+        // make sure we have a count
+        var count = COLLECTION_COUNTERS[id] || counter ||
+            _parent.getAttribute('data-counter') || _parent.getElementsByTagName( child_type ).length+1;
+        if (COLLECTION_COUNTERS[id]==undefined)
+            COLLECTION_COUNTERS[id] = count;
+        if (typeof this.window['_dbg'] == 'function')
+            _dbg('getting counter : ['+count+']');
 
-		// make sure we have a model
-		var mod = field_model || COLLECTION_MODELS[id] || _parent.getAttribute('data-prototype');
-		if (mod==undefined)
-		{
-			throw new Error('No model set and no data-prototype attribute found!');
-			return;
-		}
-		if (COLLECTION_MODELS[id]==undefined)
-			COLLECTION_MODELS[id] = mod;
-		if (typeof this.window['_dbg'] == 'function')
-			_dbg('getting field model : ['+mod+']');
+        // make sure we have a model
+        var mod = field_model || COLLECTION_MODELS[id] || _parent.getAttribute('data-prototype');
+        if (mod==undefined)
+        {
+            throw new Error('No model set and no data-prototype attribute found!');
+            return;
+        }
+        if (COLLECTION_MODELS[id]==undefined)
+            COLLECTION_MODELS[id] = mod;
+        if (typeof this.window['_dbg'] == 'function')
+            _dbg('getting field model : ['+mod+']');
 
-		// create our new node
-		var _new_id = id+'-'+count;
-		var val = _value || '';
-		if (typeof this.window['_dbg'] == 'function')
-			_dbg('getting value : ['+val+']');
+        // create our new node
+        var _new_id = id+'-'+count;
+        var val = _value || '';
+        if (typeof this.window['_dbg'] == 'function')
+            _dbg('getting value : ['+val+']');
 
-		var new_child = document.createElement( child_type );
-		if (new_child)
-		{
-			new_child.id = _new_id;
+        var new_child = document.createElement( child_type );
+        if (new_child)
+        {
+            new_child.id = _new_id;
             mod = mod.replace(/\$\$counter\$\$/g, count);
-			if (typeof(_value) == 'object') {
-				for(var key in _value) {
-					_patrn = new RegExp('\\$\\$value\\['+key+'\\]\\$\\$', 'ig');
-					_dbg('pattern is : ['+_patrn+']');
-		            mod = mod.replace(_patrn, _value[key]);
-				}
-			} else {
-				_patrn = new RegExp('\\$\\$value\\$\\$', 'ig');
-				_dbg('pattern is : ['+_patrn+']');
-	            mod = mod.replace(_patrn, val);
-	        }
-			if (typeof this.window['_dbg'] == 'function')
-				_dbg('new model is : ['+mod+']');
-		    new_child.innerHTML = mod;
-	    	_parent.appendChild( new_child );
-			COLLECTION_COUNTERS[id]++;
-	    }
-	}
+            if (typeof(_value) == 'object') {
+                for(var key in _value) {
+                    _patrn = new RegExp('\\$\\$value\\['+key+'\\]\\$\\$', 'ig');
+                    _dbg('pattern is : ['+_patrn+']');
+                    mod = mod.replace(_patrn, _value[key]);
+                }
+            } else {
+                _patrn = new RegExp('\\$\\$value\\$\\$', 'ig');
+                _dbg('pattern is : ['+_patrn+']');
+                mod = mod.replace(_patrn, val);
+            }
+            if (typeof this.window['_dbg'] == 'function')
+                _dbg('new model is : ['+mod+']');
+            new_child.innerHTML = mod;
+            _parent.appendChild( new_child );
+            COLLECTION_COUNTERS[id]++;
+        }
+    }
 }
 
 /**
@@ -134,13 +134,13 @@ function add_collection_field( id, child_type, counter, field_model, _value )
  */
 function remove_collection_field( id )
 {
-	if (typeof this.window['_dbg_info'] == 'function')
-		_dbg_info('[remove_collection_field] removing a field for id['+id+']');
-	var _node = document.getElementById( id );
-	if (_node)
-	{
-		_node.parentNode.removeChild( _node );
-	}
+    if (typeof this.window['_dbg_info'] == 'function')
+        _dbg_info('[remove_collection_field] removing a field for id['+id+']');
+    var _node = document.getElementById( id );
+    if (_node)
+    {
+        _node.parentNode.removeChild( _node );
+    }
 }
 
 // Endfile

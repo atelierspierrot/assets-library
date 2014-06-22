@@ -7,7 +7,7 @@ The javascript & css library of Les Ateliers Pierrot.
 ## Presentation
 
 This package is a collection of "self-made" assets features (Javascript and CSS) defined
-as a set of "presets" that can be handled by the [Assets Manager](https://github.com/atelierspierrot/assets-manager)
+as a set of "presets" that can be handled by the [Assets Manager](http://github.com/atelierspierrot/assets-manager)
 package.
 
 ## Demo

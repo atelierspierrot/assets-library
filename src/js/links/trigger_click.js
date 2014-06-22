@@ -28,13 +28,13 @@
  * Trigger a click on any link with 'element_id'
  */
 function trigger_click(element_id) {
-	try { 
-		document.getElementById(element_id).click();
-	} catch(e) {
-		var evt = document.createEvent("MouseEvents");
-		evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-		var cb = document.getElementById(element_id);
-		cb.dispatchEvent(evt);
-	}
+    try {
+        document.getElementById(element_id).click();
+    } catch(e) {
+        var evt = document.createEvent("MouseEvents");
+        evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        var cb = document.getElementById(element_id);
+        cb.dispatchEvent(evt);
+    }
 }
 

@@ -22,17 +22,17 @@ var NEWPOPUPWINDOW;
  */
 function opener_focus( opener_window, opener_url ) 
 {
-	var _opnr = (opener_window!=undefined && opener_window!=null) ? opener_window : (
-		(NEWPOPUPWINDOW!=undefined && NEWPOPUPWINDOW!=null) ? NEWPOPUPWINDOW : window.opener
-	);
-	if (_opnr) {
-		if (opener_url!=undefined) {
-			_opnr.location.href = opener_url;
-		}
-		_opnr.focus();
-		window.blur();
-		return false;
-	}
+    var _opnr = (opener_window!=undefined && opener_window!=null) ? opener_window : (
+        (NEWPOPUPWINDOW!=undefined && NEWPOPUPWINDOW!=null) ? NEWPOPUPWINDOW : window.opener
+    );
+    if (_opnr) {
+        if (opener_url!=undefined) {
+            _opnr.location.href = opener_url;
+        }
+        _opnr.focus();
+        window.blur();
+        return false;
+    }
 }
 
 // Endfie
