@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: js/forms/field_toggler/field_toggler.js</title>
+    <title>JSDoc: Source: vendor/atelierspierrot/templatengine/vendor_assets/jquery.metadata.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: js/forms/field_toggler/field_toggler.js</h1>
+    <h1 class="page-title">Source: vendor/atelierspierrot/templatengine/vendor_assets/jquery.metadata.js</h1>
     
     
 
@@ -26,76 +26,127 @@
     <section>
         <article>
             <pre class="prettyprint source"><code>/*
-# ***** BEGIN LICENSE BLOCK *****
-# Assets Library - The open source PHP/JavaScript/CSS library of Les Ateliers Pierrot
-# Copyleft (c) 2013-2014 Pierre Cassat and contributors
-# &lt;www.ateliers-pierrot.fr> - &lt;contact@ateliers-pierrot.fr>
-# License GPL-3.0 &lt;http://www.opensource.org/licenses/gpl-3.0.html>
-# Sources &lt;http://github.com/atelierspierrot/assets-library>
-#
-# Ce programme est un logiciel libre distribué sous licence GNU/GPL.
-#
-# ***** END LICENSE BLOCK ***** */
-
-
-// Keep traces of all fields models by id
-var FIELDTOGGLER_MODELS={};
-
-// Keep traces of all dom original innerHTML by id
-var FIELDTOGGLER_INNERHTML={};
+ * Metadata - jQuery plugin for parsing metadata from elements
+ *
+ * Copyright (c) 2006 John Resig, Yehuda Katz, J�örn Zaefferer, Paul McLanahan
+ *
+ * Dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
+ *
+ * Revision: $Id$
+ *
+ */
 
 /**
- * Toggle a field in a dom object
- * @param string id The ID string of the collection holder (parent) | required
- * @param string field_name The name of the toggled field
- * @param string field_model The HTML string to put in the collection item | optional, if not set, the function will try to get
- *                    the "data-prototype" attribute of the parent
- * @param string action The action to execute for the toggling : 'replace' (default) to replace the content, 'add' to add the model after the block content, 
- *                    'back' to put the original content back
+ * Sets the type of metadata to use. Metadata is encoded in JSON, and each property
+ * in the JSON will become a property of the element itself.
+ *
+ * There are three supported types of metadata storage:
+ *
+ *   attr:  Inside an attribute. The name parameter indicates *which* attribute.
+ *          
+ *   class: Inside the class attribute, wrapped in curly braces: { }
+ *   
+ *   elem:  Inside a child element (e.g. a script tag). The
+ *          name parameter indicates *which* element.
+ *          
+ * The metadata for an element is loaded the first time the element is accessed via jQuery.
+ *
+ * As a result, you can define the metadata type, use $(expr) to load the metadata into the elements
+ * matched by expr, then redefine the metadata type and run another $(expr) for other elements.
+ * 
+ * @name $.metadata.setType
+ *
+ * @example &lt;p id="one" class="some_class {item_id: 1, item_label: 'Label'}">This is a p&lt;/p>
+ * @before $.metadata.setType("class")
+ * @after $("#one").metadata().item_id == 1; $("#one").metadata().item_label == "Label"
+ * @desc Reads metadata from the class attribute
+ * 
+ * @example &lt;p id="one" class="some_class" data="{item_id: 1, item_label: 'Label'}">This is a p&lt;/p>
+ * @before $.metadata.setType("attr", "data")
+ * @after $("#one").metadata().item_id == 1; $("#one").metadata().item_label == "Label"
+ * @desc Reads metadata from a "data" attribute
+ * 
+ * @example &lt;p id="one" class="some_class">&lt;script>{item_id: 1, item_label: 'Label'}&lt;/script>This is a p&lt;/p>
+ * @before $.metadata.setType("elem", "script")
+ * @after $("#one").metadata().item_id == 1; $("#one").metadata().item_label == "Label"
+ * @desc Reads metadata from a nested script element
+ * 
+ * @param String type The encoding type
+ * @param String name The name of the attribute to be used to get metadata (optional)
+ * @cat Plugins/Metadata
+ * @descr Sets the type of encoding to be used when loading metadata for the first time
+ * @type undefined
+ * @see metadata()
  */
-function field_toggler( id, field_name, field_model, action )
-{
-    if (typeof this.window['_dbg_info'] == 'function')
-        _dbg_info('[field_toggler()] Toggling field ['+field_name+'] for id=['+id+'] with model=['+field_model+']');
-    var _parent = document.getElementById( id ),
-        _action = action || 'replace';
-    if (_parent)
-    {
-        if (_action=='replace' || _action=='add')
-        {
-            // make sure we have a model
-            var mod = field_model || FIELDTOGGLER_MODELS[id] || _parent.getAttribute('data-prototype');
-            if (FIELDTOGGLER_MODELS[id]==undefined) {
-                FIELDTOGGLER_MODELS[id] = mod;
-            }
-            if (typeof this.window['_dbg'] == 'function') {
-                _dbg('getting field model ['+mod+']');
-            }
-            if (mod==undefined)
-            {
-                throw new Error('No model set and no data-prototype attribute found!');
-                return;
-            }
-            if (FIELDTOGGLER_INNERHTML[id]==undefined) {
-                FIELDTOGGLER_INNERHTML[id] = _parent.innerHTML;
-            }
-            if (_action=='replace') {
-                _parent.innerHTML = FIELDTOGGLER_MODELS[id];
-            }
-            else if (_action=='add') {
-                _parent.innerHTML += FIELDTOGGLER_MODELS[id];
-            }
-        }
-        else if (_action=='back')
-        {
-            if (FIELDTOGGLER_INNERHTML[id]!=undefined) {
-                _parent.innerHTML = FIELDTOGGLER_INNERHTML[id];
-            }
-        }
-    }
-}
 
-// Endfile</code></pre>
+(function($) {
+
+$.extend({
+	metadata : {
+		defaults : {
+			type: 'class',
+			name: 'metadata',
+			cre: /({.*})/,
+			single: 'metadata'
+		},
+		setType: function( type, name ){
+			this.defaults.type = type;
+			this.defaults.name = name;
+		},
+		get: function( elem, opts ){
+			var settings = $.extend({},this.defaults,opts);
+			// check for empty string in single property
+			if ( !settings.single.length ) settings.single = 'metadata';
+			
+			var data = $.data(elem, settings.single);
+			// returned cached data if it already exists
+			if ( data ) return data;
+			
+			data = "{}";
+			
+			if ( settings.type == "class" ) {
+				var m = settings.cre.exec( elem.className );
+				if ( m )
+					data = m[1];
+			} else if ( settings.type == "elem" ) {
+				if( !elem.getElementsByTagName )
+					return undefined;
+				var e = elem.getElementsByTagName(settings.name);
+				if ( e.length )
+					data = $.trim(e[0].innerHTML);
+			} else if ( elem.getAttribute != undefined ) {
+				var attr = elem.getAttribute( settings.name );
+				if ( attr )
+					data = attr;
+			}
+			
+			if ( data.indexOf( '{' ) &lt;0 )
+			data = "{" + data + "}";
+			
+			data = eval("(" + data + ")");
+			
+			$.data( elem, settings.single, data );
+			return data;
+		}
+	}
+});
+
+/**
+ * Returns the metadata object for the first member of the jQuery object.
+ *
+ * @name metadata
+ * @descr Returns element's metadata object
+ * @param Object opts An object contianing settings to override the defaults
+ * @type jQuery
+ * @cat Plugins/Metadata
+ */
+$.fn.metadata = function( opts ){
+	return $.metadata.get( this[0], opts );
+};
+
+})(jQuery);</code></pre>
         </article>
     </section>
 

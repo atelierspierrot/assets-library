@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: dom_blocks/show_hide.js</title>
+    <title>JSDoc: Source: js/dom_blocks/show_hide.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Source: dom_blocks/show_hide.js</h1>
+    <h1 class="page-title">Source: js/dom_blocks/show_hide.js</h1>
     
     
 
@@ -28,7 +28,7 @@
             <pre class="prettyprint source"><code>/*
 # ***** BEGIN LICENSE BLOCK *****
 # Assets Library - The open source PHP/JavaScript/CSS library of Les Ateliers Pierrot
-# Copyleft (c) 2013 Pierre Cassat and contributors
+# Copyleft (c) 2013-2014 Pierre Cassat and contributors
 # &lt;www.ateliers-pierrot.fr> - &lt;contact@ateliers-pierrot.fr>
 # License GPL-3.0 &lt;http://www.opensource.org/licenses/gpl-3.0.html>
 # Sources &lt;http://github.com/atelierspierrot/assets-library>
@@ -61,40 +61,40 @@ var ShowHideSettings = {};
  * @param array|object The options table
  */
 function show_hide_init(options) {
-	hide_class = options.hide_class || settings.hide_class || null;
-	if (hide_class!==null) {
-		ShowHideSettings.hide_class = hide_class;
-		document.write(
-			"&lt;style type='text/css'"+">"
-			+"."+ShowHideSettings.hide_class+"{display:none;visibility:hidden}"
-			+"&lt;\/"+"style>"
-		);
-	}
-	show_class = options.show_class || settings.show_class || null;
-	if (show_class!==null) {
-		ShowHideSettings.show_class = show_class;
-		document.write(
-			"&lt;style type='text/css'"+">"
-			+"."+ShowHideSettings.show_class+"{display:block;visibility:visible}"
-			+"&lt;\/"+"style>"
-		);
-	}
-	handler_hide_class = options.handler_hide_class || settings.handler_hide_class || null;
-	if (handler_hide_class!==null) {
-		ShowHideSettings.handler_hide_class = handler_hide_class;
-	}
-	handler_show_class = options.handler_show_class || settings.handler_show_class || null;
-	if (handler_show_class!==null) {
-		ShowHideSettings.handler_show_class = handler_show_class;
-	}
-	handler_hidden_content = options.handler_hidden_content || settings.handler_hidden_content || null;
-	if (handler_hidden_content!==null) {
-		ShowHideSettings.handler_hidden_content = handler_hidden_content;
-	}
-	handler_shown_content = options.handler_shown_content || settings.handler_shown_content || null;
-	if (handler_shown_content!==null) {
-		ShowHideSettings.handler_shown_content = handler_shown_content;
-	}
+    hide_class = options.hide_class || settings.hide_class || null;
+    if (hide_class!==null) {
+        ShowHideSettings.hide_class = hide_class;
+        document.write(
+            "&lt;style type='text/css'"+">"
+            +"."+ShowHideSettings.hide_class+"{display:none;visibility:hidden}"
+            +"&lt;\/"+"style>"
+        );
+    }
+    show_class = options.show_class || settings.show_class || null;
+    if (show_class!==null) {
+        ShowHideSettings.show_class = show_class;
+        document.write(
+            "&lt;style type='text/css'"+">"
+            +"."+ShowHideSettings.show_class+"{display:block;visibility:visible}"
+            +"&lt;\/"+"style>"
+        );
+    }
+    handler_hide_class = options.handler_hide_class || settings.handler_hide_class || null;
+    if (handler_hide_class!==null) {
+        ShowHideSettings.handler_hide_class = handler_hide_class;
+    }
+    handler_show_class = options.handler_show_class || settings.handler_show_class || null;
+    if (handler_show_class!==null) {
+        ShowHideSettings.handler_show_class = handler_show_class;
+    }
+    handler_hidden_content = options.handler_hidden_content || settings.handler_hidden_content || null;
+    if (handler_hidden_content!==null) {
+        ShowHideSettings.handler_hidden_content = handler_hidden_content;
+    }
+    handler_shown_content = options.handler_shown_content || settings.handler_shown_content || null;
+    if (handler_shown_content!==null) {
+        ShowHideSettings.handler_shown_content = handler_shown_content;
+    }
 }
 
 /**
@@ -102,8 +102,8 @@ function show_hide_init(options) {
  * See "toggleShowHide()" for parameters
  */
 function show_hide(id, handler_id, options) {
-	var toggler = toggleShowHide( id, handler_id, options );
-	return true===toggler;
+    var toggler = toggleShowHide( id, handler_id, options );
+    return true===toggler;
 }
 
 /**
@@ -121,111 +121,111 @@ function show_hide(id, handler_id, options) {
  * @param array|object options A set of options to override current ShowHide settings (optional)
  */
 function toggleShowHide(id, handler_id, options) {
-	this.options = options;
-	var domobj = document.getElementById( id ),
-		_hbs = false, // Has Been Shown
-		_hbh = false; // Has Been Hidden
-	if (domobj) {
-		if (typeof this.window['_dbg_info'] == 'function') {
-			_dbg_info('[toggleShowHide()] Working for id=['+id+'] on DOM=['+domobj+'] with handler_id=['+handler_id+']');
-		}
-		if (options && typeof this.window['_dbg_log'] == 'function') {
-			_dbg_log('options are : ', options);
-		}
-		var _visible = domobj.style.visibility,
-			classes = getClasses(domobj),
-			showcls_i = getOption('show_class')!==undefined && getClassNameIndex(domobj, getOption('show_class')),
-			hidecls_i = getOption('hide_class')!==undefined && getClassNameIndex(domobj, getOption('hide_class')),
-			handler_el = handler_id ? document.getElementById( handler_id ) : null;
+    this.options = options;
+    var domobj = document.getElementById( id ),
+        _hbs = false, // Has Been Shown
+        _hbh = false; // Has Been Hidden
+    if (domobj) {
+        if (typeof this.window['_dbg_info'] == 'function') {
+            _dbg_info('[toggleShowHide()] Working for id=['+id+'] on DOM=['+domobj+'] with handler_id=['+handler_id+']');
+        }
+        if (options && typeof this.window['_dbg_log'] == 'function') {
+            _dbg_log('options are : ', options);
+        }
+        var _visible = domobj.style.visibility,
+            classes = getClasses(domobj),
+            showcls_i = getOption('show_class')!==undefined && getClassNameIndex(domobj, getOption('show_class')),
+            hidecls_i = getOption('hide_class')!==undefined && getClassNameIndex(domobj, getOption('hide_class')),
+            handler_el = handler_id ? document.getElementById( handler_id ) : null;
 
-		if (hidecls_i) {
-			if (getOption('show_class')!==undefined) {
-				classes[hidecls_i] = getOption('show_class');
-			} else {
-				classes[hidecls_i] = null;
-			}
-			_hbs=true;
-			domobj.className = classes.join(" ");
-		} else if (showcls_i) {
-			if (getOption('hide_class')!==undefined) {
-				classes[showcls_i] = getOption('hide_class');
-			} else {
-				classes[showcls_i] = null;
-			}
-			_hbh = true;
-			domobj.className = classes.join(" ");
-		} else if (getOption('hide_class')!==undefined) {
-			classes.push( getOption('hide_class') );
-			_hbh = true;
-			domobj.className = classes.join(" ");
-		} else {
-			if (_visible==='hidden') {
-				domobj.style.visibility='visible';
-				domobj.style.display= getOption('display') || 'block';
-				_hbs = true;
-			} else {
-				domobj.style.visibility='hidden';
-				domobj.style.display='none';
-				_hbh = true;
-			}
-		}
+        if (hidecls_i) {
+            if (getOption('show_class')!==undefined) {
+                classes[hidecls_i] = getOption('show_class');
+            } else {
+                classes[hidecls_i] = null;
+            }
+            _hbs=true;
+            domobj.className = classes.join(" ");
+        } else if (showcls_i) {
+            if (getOption('hide_class')!==undefined) {
+                classes[showcls_i] = getOption('hide_class');
+            } else {
+                classes[showcls_i] = null;
+            }
+            _hbh = true;
+            domobj.className = classes.join(" ");
+        } else if (getOption('hide_class')!==undefined) {
+            classes.push( getOption('hide_class') );
+            _hbh = true;
+            domobj.className = classes.join(" ");
+        } else {
+            if (_visible==='hidden') {
+                domobj.style.visibility='visible';
+                domobj.style.display= getOption('display') || 'block';
+                _hbs = true;
+            } else {
+                domobj.style.visibility='hidden';
+                domobj.style.display='none';
+                _hbh = true;
+            }
+        }
 
-		if (handler_id!==undefined && getOption('hash_tag', false)===true) {
-			if (_hbs && window.location.hash!=='#'+handler_id) {
-				window.location.hash = handler_id;
-			}
-			else if (_hbh && window.location.hash==='#'+handler_id) {
-				window.location.hash = '#';
-			}
-		}
+        if (handler_id!==undefined && getOption('hash_tag', false)===true) {
+            if (_hbs && window.location.hash!=='#'+handler_id) {
+                window.location.hash = handler_id;
+            }
+            else if (_hbh && window.location.hash==='#'+handler_id) {
+                window.location.hash = '#';
+            }
+        }
 
-		if (handler_el) {
-			var _h_classes = getClasses(handler_el),
-				_h_showcls_i = getOption('handler_show_class')!==undefined && getClassNameIndex(handler_el, getOption('handler_show_class')),
-				_h_hidecls_i = getOption('handler_hide_class')!==undefined && getClassNameIndex(handler_el, getOption('handler_hide_class'));
-			if (getOption('toggle_handler_class', true)===true) {
-				if (_hbs) {
-					if (getOption('handler_show_class') != undefined) {
-						_h_classes[_h_hidecls_i] = getOption('handler_show_class');
-					} else {
-						_h_classes[_h_hidecls_i] = null;
-					}
-				}
-				else if (_hbh) {
-					if (getOption('handler_show_class') != undefined) {
-						_h_classes[_h_showcls_i] = getOption('handler_hide_class');
-					} else {
-						_h_classes[_h_showcls_i] = null;
-					}
-				}
-				handler_el.className = _h_classes.join(" ");
-			}
-			if (getOption('toggle_handler_content', true)===true) {
-				if (_hbs && getOption('handler_shown_content')!==undefined) {
-					handler_el.innerHTML = getOption('handler_shown_content');
-				}
-				else if (_hbh && getOption('handler_hidden_content')!==undefined) {
-					handler_el.innerHTML = getOption('handler_hidden_content');
-				}
-			}
-		}
+        if (handler_el) {
+            var _h_classes = getClasses(handler_el),
+                _h_showcls_i = getOption('handler_show_class')!==undefined && getClassNameIndex(handler_el, getOption('handler_show_class')),
+                _h_hidecls_i = getOption('handler_hide_class')!==undefined && getClassNameIndex(handler_el, getOption('handler_hide_class'));
+            if (getOption('toggle_handler_class', true)===true) {
+                if (_hbs) {
+                    if (getOption('handler_show_class') != undefined) {
+                        _h_classes[_h_hidecls_i] = getOption('handler_show_class');
+                    } else {
+                        _h_classes[_h_hidecls_i] = null;
+                    }
+                }
+                else if (_hbh) {
+                    if (getOption('handler_show_class') != undefined) {
+                        _h_classes[_h_showcls_i] = getOption('handler_hide_class');
+                    } else {
+                        _h_classes[_h_showcls_i] = null;
+                    }
+                }
+                handler_el.className = _h_classes.join(" ");
+            }
+            if (getOption('toggle_handler_content', true)===true) {
+                if (_hbs && getOption('handler_shown_content')!==undefined) {
+                    handler_el.innerHTML = getOption('handler_shown_content');
+                }
+                else if (_hbh && getOption('handler_hidden_content')!==undefined) {
+                    handler_el.innerHTML = getOption('handler_hidden_content');
+                }
+            }
+        }
 
-	} else {
-		// for onclick triggers on a non-existant dom object
-		return true;
-	}
-	
-	function getOption( str, def ) {
-		if (this.options!==undefined && this.options[str]!==undefined)
-			return this.options[str];
-		if (ShowHideSettings[str]!==undefined)
-			return ShowHideSettings[str];
-		if (settings[str]!==undefined)
-			return settings[str];
-		if (def!==undefined)
-			return def;
-		return undefined;
-	}
+    } else {
+        // for onclick triggers on a non-existant dom object
+        return true;
+    }
+
+    function getOption( str, def ) {
+        if (this.options!==undefined && this.options[str]!==undefined)
+            return this.options[str];
+        if (ShowHideSettings[str]!==undefined)
+            return ShowHideSettings[str];
+        if (settings[str]!==undefined)
+            return settings[str];
+        if (def!==undefined)
+            return def;
+        return undefined;
+    }
 
 }
 
@@ -239,13 +239,13 @@ function toggleShowHide(id, handler_id, options) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#_dbg">_dbg</a></li><li><a href="global.html#_dbg_info">_dbg_info</a></li><li><a href="global.html#_dbg_log">_dbg_log</a></li><li><a href="global.html#add_collection_field">add_collection_field</a></li><li><a href="global.html#addClassName">addClassName</a></li><li><a href="global.html#applyCallback">applyCallback</a></li><li><a href="global.html#array_remove">array_remove</a></li><li><a href="global.html#Blind">Blind</a></li><li><a href="global.html#capitaliseFirstLetter">capitaliseFirstLetter</a></li><li><a href="global.html#change_class_check_onload">change_class_check_onload</a></li><li><a href="global.html#change_class_oncheck">change_class_oncheck</a></li><li><a href="global.html#checkAll">checkAll</a></li><li><a href="global.html#dump">dump</a></li><li><a href="global.html#each">each</a></li><li><a href="global.html#Effect">Effect</a></li><li><a href="global.html#EffectRegistry">EffectRegistry</a></li><li><a href="global.html#extend">extend</a></li><li><a href="global.html#Fade">Fade</a></li><li><a href="global.html#field_toggler">field_toggler</a></li><li><a href="global.html#font_size">font_size</a></li><li><a href="global.html#get_url">get_url</a></li><li><a href="global.html#getClasses">getClasses</a></li><li><a href="global.html#getClassNameIndex">getClassNameIndex</a></li><li><a href="global.html#getOffset">getOffset</a></li><li><a href="global.html#getStyleAttribute">getStyleAttribute</a></li><li><a href="global.html#getWindowSizes">getWindowSizes</a></li><li><a href="global.html#hasClassName">hasClassName</a></li><li><a href="global.html#href_goto">href_goto</a></li><li><a href="global.html#html_characters">html_characters</a></li><li><a href="global.html#in_array">in_array</a></li><li><a href="global.html#is_defined">is_defined</a></li><li><a href="global.html#is_url">is_url</a></li><li><a href="global.html#join">join</a></li><li><a href="global.html#keyboard_unicodes">keyboard_unicodes</a></li><li><a href="global.html#multiExtend">multiExtend</a></li><li><a href="global.html#NEWPOPUPWINDOW">NEWPOPUPWINDOW</a></li><li><a href="global.html#onDocumentLoad">onDocumentLoad</a></li><li><a href="global.html#opener_focus">opener_focus</a></li><li><a href="global.html#popup_set">popup_set</a></li><li><a href="global.html#Registry">Registry</a></li><li><a href="global.html#remove_collection_field">remove_collection_field</a></li><li><a href="global.html#removeClassName">removeClassName</a></li><li><a href="global.html#Select">Select</a></li><li><a href="global.html#setCookie">setCookie</a></li><li><a href="global.html#settings">settings</a></li><li><a href="global.html#show_hide">show_hide</a></li><li><a href="global.html#show_hide_init">show_hide_init</a></li><li><a href="global.html#Slide">Slide</a></li><li><a href="global.html#TabContent">TabContent</a></li><li><a href="global.html#toggleShowHide">toggleShowHide</a></li><li><a href="global.html#TOOLTIP">TOOLTIP</a></li><li><a href="global.html#trigger_click">trigger_click</a></li><li><a href="global.html#uniqid">uniqid</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#_dbg">_dbg</a></li><li><a href="global.html#_dbg_info">_dbg_info</a></li><li><a href="global.html#_dbg_log">_dbg_log</a></li><li><a href="global.html#add_collection_field">add_collection_field</a></li><li><a href="global.html#addClassName">addClassName</a></li><li><a href="global.html#applyCallback">applyCallback</a></li><li><a href="global.html#array_remove">array_remove</a></li><li><a href="global.html#Blind">Blind</a></li><li><a href="global.html#capitaliseFirstLetter">capitaliseFirstLetter</a></li><li><a href="global.html#change_class_check_onload">change_class_check_onload</a></li><li><a href="global.html#change_class_oncheck">change_class_oncheck</a></li><li><a href="global.html#checkAll">checkAll</a></li><li><a href="global.html#dump">dump</a></li><li><a href="global.html#each">each</a></li><li><a href="global.html#Effect">Effect</a></li><li><a href="global.html#EffectRegistry">EffectRegistry</a></li><li><a href="global.html#extend">extend</a></li><li><a href="global.html#Fade">Fade</a></li><li><a href="global.html#field_toggler">field_toggler</a></li><li><a href="global.html#font_size">font_size</a></li><li><a href="global.html#get_url">get_url</a></li><li><a href="global.html#getClasses">getClasses</a></li><li><a href="global.html#getClassNameIndex">getClassNameIndex</a></li><li><a href="global.html#getOffset">getOffset</a></li><li><a href="global.html#getStyleAttribute">getStyleAttribute</a></li><li><a href="global.html#getWindowSizes">getWindowSizes</a></li><li><a href="global.html#hasClassName">hasClassName</a></li><li><a href="global.html#href_goto">href_goto</a></li><li><a href="global.html#html_characters">html_characters</a></li><li><a href="global.html#in_array">in_array</a></li><li><a href="global.html#initHandler">initHandler</a></li><li><a href="global.html#is_defined">is_defined</a></li><li><a href="global.html#is_url">is_url</a></li><li><a href="global.html#join">join</a></li><li><a href="global.html#keyboard_unicodes">keyboard_unicodes</a></li><li><a href="global.html#metadata">metadata</a></li><li><a href="global.html#multiExtend">multiExtend</a></li><li><a href="global.html#NEWPOPUPWINDOW">NEWPOPUPWINDOW</a></li><li><a href="global.html#onDocumentLoad">onDocumentLoad</a></li><li><a href="global.html#opener_focus">opener_focus</a></li><li><a href="global.html#popup_set">popup_set</a></li><li><a href="global.html#Registry">Registry</a></li><li><a href="global.html#remove_collection_field">remove_collection_field</a></li><li><a href="global.html#removeClassName">removeClassName</a></li><li><a href="global.html#Select">Select</a></li><li><a href="global.html#setCookie">setCookie</a></li><li><a href="global.html#settings">settings</a></li><li><a href="global.html#show_hide">show_hide</a></li><li><a href="global.html#show_hide_init">show_hide_init</a></li><li><a href="global.html#Slide">Slide</a></li><li><a href="global.html#TabContent">TabContent</a></li><li><a href="global.html#toggleShowHide">toggleShowHide</a></li><li><a href="global.html#TOOLTIP">TOOLTIP</a></li><li><a href="global.html#trigger_click">trigger_click</a></li><li><a href="global.html#uniqid">uniqid</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Sat Dec 21 2013 13:27:54 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Sun Jun 22 2014 23:37:48 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>
