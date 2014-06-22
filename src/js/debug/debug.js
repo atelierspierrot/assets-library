@@ -24,10 +24,10 @@ function _dbg(str, title)
     if (window.settings['debug']!==undefined && window.settings['debug']==false) {
         return;
     }
-	if (!title) { title = ""; }
-	else { title = title+" : "; }
-	if (window.console && window.console.log) { window.console.log(title + str); }
-	else if (settings.debugg) { alert(title + str); }
+    if (!title) { title = ""; }
+    else { title = title+" : "; }
+    if (window.console && window.console.log) { window.console.log(title + str); }
+    else if (settings.debugg) { alert(title + str); }
 }
 
 /**
@@ -40,9 +40,9 @@ function _dbg_info(str, title)
     if (window.settings['debug']!==undefined && window.settings['debug']==false) {
         return;
     }
-	if (!title) { title = ""; }
-	else { title = title+" : "; }
-	if (window.console && window.console.info) { window.console.info(title + str); }
+    if (!title) { title = ""; }
+    else { title = title+" : "; }
+    if (window.console && window.console.info) { window.console.info(title + str); }
 }
 
 /**
@@ -53,9 +53,9 @@ function _dbg_log()
     if (window.settings['debug']!==undefined && window.settings['debug']==false) {
         return;
     }
-	if (window.console && window.console.log) {
-		window.console.log.apply(null, arguments);
-	}
+    if (window.console && window.console.log) {
+        window.console.log.apply(null, arguments);
+    }
 }
 
 // Endfile

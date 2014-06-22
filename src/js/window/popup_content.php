@@ -32,9 +32,9 @@ $requirements = array(
 
 </head>
 <body>
-	<ul>
-		<li><a href="#" onclick="return opener_focus();">opener focus</a></li>
-		<li><a href="#" onclick="window.close();">close this window</a></li>
-	</ul>
+    <ul>
+        <li><a href="#" onclick="return opener_focus();">opener focus</a></li>
+        <li><a href="#" onclick="window.close();">close this window</a></li>
+    </ul>
 </body>
 </html>

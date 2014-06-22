@@ -20,9 +20,9 @@ var EffectRegistry = Registry();
  * Global effect object
  */
 function Effect(type, id) {
-	var type = type, id = id;
+    var type = type, id = id;
     this.effect_id_attribute = 'effectid';
-	this.current_id = null;
+    this.current_id = null;
 }
 
 // ---------------

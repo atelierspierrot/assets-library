@@ -19,10 +19,10 @@
  * @return bool TRUE if url is a valid url (ftp, http or https)
  */
 function is_url(url) {
-	if (!url) { return; }
-	var good_url = /^(f|ht)tp(s)?:\/\/((\d+\.\d+\.\d+\.\d+)|(([\w-]+\.)+([a-z,A-Z][\w-]*)))(:[1-9][0-9]*)?(\/([\w-.\/:%+@&=]+[\w- .\/?:%+@&=]*)?)?(#(.*))?$/i;
-	if (!good_url.test(url)) { return false; }
-	else { return true; }
+    if (!url) { return; }
+    var good_url = /^(f|ht)tp(s)?:\/\/((\d+\.\d+\.\d+\.\d+)|(([\w-]+\.)+([a-z,A-Z][\w-]*)))(:[1-9][0-9]*)?(\/([\w-.\/:%+@&=]+[\w- .\/?:%+@&=]*)?)?(#(.*))?$/i;
+    if (!good_url.test(url)) { return false; }
+    else { return true; }
 }
 
 // Endfie

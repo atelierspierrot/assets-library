@@ -40,21 +40,21 @@ function Blind(id) {
 
     // initialization
     this.init = function(id) {
-    	self = this.getObject(id);
+        self = this.getObject(id);
         var _id = effect.getEffectIdAttribute(self);
         if (_id===null) {
             if (arguments[1]!==undefined) {
                 effect.extend(this, arguments[1]);
             }
-    	    data = this.getObjectData(self);
-        	_id = effect.setInstance(self, data);
+            data = this.getObjectData(self);
+            _id = effect.setInstance(self, data);
         }
         else {
-        	self = effect.getInstanceElement(_id);
-        	data = effect.getInstanceData(_id);
+            self = effect.getInstanceElement(_id);
+            data = effect.getInstanceData(_id);
         }
-//console.debug('working on div with id['+_id+'] getting self: ', self, ' and data: ', data);
-//        if (getDisplay(self)==='none') {
+    //console.debug('working on div with id['+_id+'] getting self: ', self, ' and data: ', data);
+    //        if (getDisplay(self)==='none') {
         if (data.isCollapsed===true) {
             clearInterval(self.t);
             var expand_meth = 'expandTo'+capitaliseFirstLetter( data.expand );
@@ -93,9 +93,9 @@ function Blind(id) {
 
     // increase the height of the div exponentially
     this.expandToBottom = function(id) {
-//console.debug('expanding el ', id);
-    	self = effect.getInstanceElement(id);
-    	data = effect.getInstanceData(id);
+    //console.debug('expanding el ', id);
+        self = effect.getInstanceElement(id);
+        data = effect.getInstanceData(id);
         setDisplay(self,'block');
         var elh = parseFloat( getHeight(self) );
         if (elh < data.maxHeight) {
@@ -117,9 +117,9 @@ function Blind(id) {
 
     // increase the width of the div exponentially
     this.expandToRight = function(id) {
-//console.debug('expanding el ', id);
-    	self = effect.getInstanceElement(id);
-    	data = effect.getInstanceData(id);
+    //console.debug('expanding el ', id);
+        self = effect.getInstanceElement(id);
+        data = effect.getInstanceData(id);
         var elw = parseFloat( getWidth(self) );
         if (elw < data.maxWidth) {
             var v = Math.round((data.maxWidth - elw) / data.speed);
@@ -140,9 +140,9 @@ function Blind(id) {
 
     // increase the width of the div exponentially and position it as wanted
     this.expandToLeft = function(id) {
-//console.debug('expanding el ', id);
-    	self = effect.getInstanceElement(id);
-    	data = effect.getInstanceData(id);
+    //console.debug('expanding el ', id);
+        self = effect.getInstanceElement(id);
+        data = effect.getInstanceData(id);
         var elw = parseFloat( getWidth(self) );
         if (elw < data.maxWidth) {
             var v = Math.round((data.maxWidth - elw) / data.speed);
@@ -165,9 +165,9 @@ function Blind(id) {
 
     // reduce the height of the div exponentially
     this.collapseToTop = function(id) {
-//console.debug('collapsing el ', id);
-    	self = effect.getInstanceElement(id);
-    	data = effect.getInstanceData(id);
+    //console.debug('collapsing el ', id);
+        self = effect.getInstanceElement(id);
+        data = effect.getInstanceData(id);
         var elh = parseFloat( getHeight(self) );
         if (elh > 0) {
             var v = Math.round(elh / data.speed);
@@ -188,9 +188,9 @@ function Blind(id) {
 
     // reduce the width of the div exponentially
     this.collapseToLeft = function(id) {
-//console.debug('collapsing el ', id);
-    	self = effect.getInstanceElement(id);
-    	data = effect.getInstanceData(id);
+    //console.debug('collapsing el ', id);
+        self = effect.getInstanceElement(id);
+        data = effect.getInstanceData(id);
         setHeight(self,data.maxHeight);
         var elw = parseFloat( getWidth(self) );
         if (elw > 0) {
@@ -211,9 +211,9 @@ function Blind(id) {
 
     // reduce the width of the div exponentially and position it as wanted
     this.collapseToRight = function(id) {
-//console.debug('collapsing el ', id);
-    	self = effect.getInstanceElement(id);
-    	data = effect.getInstanceData(id);
+    //console.debug('collapsing el ', id);
+        self = effect.getInstanceElement(id);
+        data = effect.getInstanceData(id);
         setHeight(self,data.maxHeight);
         var elw = parseFloat( getWidth(self) );
         if (elw > 0) {
@@ -241,7 +241,7 @@ function Blind(id) {
     // get the max height of a div
     function getMaxHeight(d) {
         var original_visibility = getVisibility(d),
-            original_display = getDisplay(d), 
+            original_display = getDisplay(d),
             result;
         setVisibility(d,'hidden');
         setDisplay(d,'block');
@@ -254,7 +254,7 @@ function Blind(id) {
     // get the max width of a div
     function getMaxWidth(d) {
         var original_visibility = getVisibility(d),
-            original_display = getDisplay(d), 
+            original_display = getDisplay(d),
             result;
         setVisibility(d,'hidden');
         setDisplay(d,'block');

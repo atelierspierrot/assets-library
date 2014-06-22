@@ -34,7 +34,7 @@ JS and CSS dependencies:
         .../assets-library.php?type=js&commons&form_serialize
 
 -   `build_preset_url( type , preset )` which will build the "href" or "src" URL to load
-    a preset and all its dependendices ; the final URL is something like:
+    a preset and all its dependencies ; the final URL is something like:
     
         .../assets-library.php?type=js&preset=ajax
 

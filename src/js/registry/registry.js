@@ -67,12 +67,12 @@
 var Registry = function(){
 
     // private properties, not accessible
-	var data = {};
+    var data = {};
 
     // private methods, not accessible
-	var init = function() {
-    	data = {};
-	},
+    var init = function() {
+        data = {};
+    },
     uniqid = function() {
         var newDate = new Date, _id = newDate.getTime();
         while( data[_id]!==undefined ) { _id++; }

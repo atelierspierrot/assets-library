@@ -19,23 +19,23 @@
  * @param char sep_arg The separator of items | optional | default is ';'
  */
 function join(array, sep_arg, sep_item) {
-	var string = '';
-	var s_arg = (!sep_arg || sep_arg == '') ? '=' : sep_arg;
-	var s_item = (!sep_item || sep_item == '') ? ';' : sep_item;
-	if (typeof(array) != 'object') return;
-	else {
-		for (var item in array) {
-			var value = array[item];
- 			if (typeof(value) == 'object') {
-				string += item+s_arg+'(';
-				string += join(value);
-				string += ')'+s_item;
-			} else {
-				string += item+s_arg+value+s_item;
-			}
-		}
-	} 
-	return string;
+    var string = '';
+    var s_arg = (!sep_arg || sep_arg == '') ? '=' : sep_arg;
+    var s_item = (!sep_item || sep_item == '') ? ';' : sep_item;
+    if (typeof(array) != 'object') return;
+    else {
+        for (var item in array) {
+            var value = array[item];
+            if (typeof(value) == 'object') {
+                string += item+s_arg+'(';
+                string += join(value);
+                string += ')'+s_item;
+            } else {
+                string += item+s_arg+value+s_item;
+            }
+        }
+    }
+    return string;
 }
 
 // Endfile
