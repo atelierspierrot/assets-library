@@ -16,27 +16,27 @@
  *
  * USAGE:
  *     onDocumentLoad(function() {
- *     	  my_func( some, arguments);
- *     	  etc ...
+ *       my_func( some, arguments);
+ *       etc ...
  *     });
  */
 function onDocumentLoad() {
-	var _args = arguments[0], 
-		_doc_loaded_done=false,
-    	onDocumentLoaded = function() {
-			if (_doc_loaded_done) { return; }
-			_doc_loaded_done=true;
-			if (_args) {
-				try { _args.apply(); }
-				catch(e) { _dbg("[onDocumentLoad::ERROR] "+e); }
-			}
-		},
-		onDocumentLoaded_readyStateCheckInterval = setInterval(function() {
-			if (document.readyState === "complete") {
-				onDocumentLoaded();
-				clearInterval(onDocumentLoaded_readyStateCheckInterval);
-			}
-		}, 10);
+    var _args = arguments[0],
+        _doc_loaded_done=false,
+        onDocumentLoaded = function() {
+            if (_doc_loaded_done) { return; }
+            _doc_loaded_done=true;
+            if (_args) {
+                try { _args.apply(); }
+                catch(e) { _dbg("[onDocumentLoad::ERROR] "+e); }
+            }
+        },
+        onDocumentLoaded_readyStateCheckInterval = setInterval(function() {
+            if (document.readyState === "complete") {
+                onDocumentLoaded();
+                clearInterval(onDocumentLoaded_readyStateCheckInterval);
+            }
+        }, 10);
 }
 
 // Endfile

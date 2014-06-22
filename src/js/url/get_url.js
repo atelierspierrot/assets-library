@@ -23,25 +23,25 @@
  * @return string
  */
 function get_url(type, req_url) {
-	var url;
-	if(req_url) url = req_url;
-	else url = document.URL;
-	var p_index = url.indexOf("?"), d_index = url.indexOf("#"), 
-	t_url = (d_index!==-1) ? url.substring(0, d_index) : url;
-	switch(type) {
-		case 'param':
-			var f_url = t_url.substr(p_index+1);
-		break;
-		case 'base':
-			var f_url= t_url.substr(0,p_index);
-		break;
-		default:
-			var f_url= t_url;
-		break;
-	}
-	if(typeof this.window['_dbg'] == 'function')
-		_dbg(f_url, "URL Analyze ("+type+")");
-	return f_url;
+    var url;
+    if(req_url) url = req_url;
+    else url = document.URL;
+    var p_index = url.indexOf("?"), d_index = url.indexOf("#"),
+    t_url = (d_index!==-1) ? url.substring(0, d_index) : url;
+    switch(type) {
+        case 'param':
+            var f_url = t_url.substr(p_index+1);
+        break;
+        case 'base':
+            var f_url= t_url.substr(0,p_index);
+        break;
+        default:
+            var f_url= t_url;
+        break;
+    }
+    if(typeof this.window['_dbg'] == 'function')
+        _dbg(f_url, "URL Analyze ("+type+")");
+    return f_url;
 }
 
 // Endfie

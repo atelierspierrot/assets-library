@@ -17,19 +17,19 @@
  */
 function change_class_oncheck(_class, check_id, block_id) 
 {
-	var checkref = document.getElementById(check_id),
-		blockref = document.getElementById(block_id),
-		_patrn = new RegExp(_class, 'i');
-	if(checkref) { 
-		setTimeout(function() {
-			if (checkref.checked && blockref) {
-				blockref.className += " "+_class;
-			} else if (blockref) {
-				blockref.className = blockref.className.replace(_patrn, '');
-			}
-		},10);
-	}
-	return true;
+    var checkref = document.getElementById(check_id),
+        blockref = document.getElementById(block_id),
+        _patrn = new RegExp(_class, 'i');
+    if(checkref) {
+        setTimeout(function() {
+            if (checkref.checked && blockref) {
+                blockref.className += " "+_class;
+            } else if (blockref) {
+                blockref.className = blockref.className.replace(_patrn, '');
+            }
+        },10);
+    }
+    return true;
 }
 
 /**
@@ -38,22 +38,22 @@ function change_class_oncheck(_class, check_id, block_id)
  */
 function change_class_check_onload(_class, _form, check_name, block_type) 
 {
-	if (_form && _form.nodeName.toLowerCase()==='form') {
-		for (i = _form.elements.length - 1; i >= 0; i = i - 1) {
-			if (
-				(_form.elements[i].name===check_name || _form.elements[i].name===check_name+"[]") &&
-				_form.elements[i].checked!==undefined && _form.elements[i].checked && block_type
-			) {
-				var _node = _form.elements[i];
-				while (_node!==null && _node.nodeName.toLowerCase()!==block_type.toLowerCase()) {
-					_node = _node.parentNode;
-				}
-				if (_node) {
-					_node.className += " "+_class;
-				}
-			}
-		}
-	}
+    if (_form && _form.nodeName.toLowerCase()==='form') {
+        for (i = _form.elements.length - 1; i >= 0; i = i - 1) {
+            if (
+                (_form.elements[i].name===check_name || _form.elements[i].name===check_name+"[]") &&
+                _form.elements[i].checked!==undefined && _form.elements[i].checked && block_type
+            ) {
+                var _node = _form.elements[i];
+                while (_node!==null && _node.nodeName.toLowerCase()!==block_type.toLowerCase()) {
+                    _node = _node.parentNode;
+                }
+                if (_node) {
+                    _node.className += " "+_class;
+                }
+            }
+        }
+    }
 }
 
 // Endfile

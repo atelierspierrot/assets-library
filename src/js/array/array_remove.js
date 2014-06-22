@@ -29,11 +29,11 @@
  * Pierre Cassat - 03_2009
  *
  * Usage : 
- *		theArray.remove( toRemove );
+ *      theArray.remove( toRemove );
  * With :
  * 'theArray' => a true javascript array : [ a, b, c, d, ]
  * 'toRemove' => comma-separated string list of items to remove, each has to be string
- *				( numbers must be written between quotes )
+ *              ( numbers must be written between quotes )
  *
  * Full example :
  * var a = [ 1, 3, 8, 9, 11, 35 ]; 
@@ -47,27 +47,27 @@
  */
 function array_remove(arr, items) {
     "use strict";
-	if (typeof arr !== "object") { return; }
-	var k=arguments.length, i;
-	if (k > 1) {
-	    for (i=1; i<k; i++) { do_array_remove(arr, arguments[i]); }
-	} else {
-	    do_array_remove(arr, items);
-	}
-	return arr;
+    if (typeof arr !== "object") { return; }
+    var k=arguments.length, i;
+    if (k > 1) {
+        for (i=1; i<k; i++) { do_array_remove(arr, arguments[i]); }
+    } else {
+        do_array_remove(arr, items);
+    }
+    return arr;
 }
 
 function do_array_remove(arr, item) {
     "use strict";
-	var j;
-	for (j=0; j<arr.length; j++) {
-		if (typeof arr[j] === 'string') {
-			var reg = new RegExp('('+item+') {1}', "g");
-			if (arr[j].match(reg)) { arr.splice(j, 1); }
-		}
-		else if (arr[j] === item) { arr.splice(j, 1); } 
-	}
-	return arr;
+    var j;
+    for (j=0; j<arr.length; j++) {
+        if (typeof arr[j] === 'string') {
+            var reg = new RegExp('('+item+') {1}', "g");
+            if (arr[j].match(reg)) { arr.splice(j, 1); }
+        }
+        else if (arr[j] === item) { arr.splice(j, 1); }
+    }
+    return arr;
 }
 
 /**
@@ -75,11 +75,11 @@ function do_array_remove(arr, item) {
  * Pierre Cassat - 03_2009
  *
  * Usage : 
- *		theArray.remove( toRemove );
+ *      theArray.remove( toRemove );
  * With :
  * 'theArray' => a true javascript array : [ a, b, c, d, ]
  * 'toRemove' => comma-separated string list of items to remove, each has to be string
- *				( numbers must be written between quotes )
+ *          ( numbers must be written between quotes )
  *
  * Full example :
  * var a = [ 1, 3, 8, 9, 11, 35 ]; 
@@ -93,26 +93,26 @@ function do_array_remove(arr, item) {
  */
 Array.prototype.remove = function(items) {
     "use strict";
-	if (typeof this !== "object") { return; }
-	var k=arguments.length, i;
-	if (k > 1) {
-	    for (i=0; i<k; i++) { this.do_remove(arguments[i]); }
-	}
-	else { this.do_remove(items); }
-	return this;
+    if (typeof this !== "object") { return; }
+    var k=arguments.length, i;
+    if (k > 1) {
+        for (i=0; i<k; i++) { this.do_remove(arguments[i]); }
+    }
+    else { this.do_remove(items); }
+    return this;
 };
 
 Array.prototype.do_remove = function(item) {
     "use strict";
-	var j;
-	for (j=0; j<this.length; j++) {
-		if (typeof this[j] === 'string') {
-			var reg = new RegExp('('+item+') {1}', "g");
-			if (this[j].match(reg)) { this.splice(j, 1); }
-		}
-		else if (this[j] === item) { this.splice(j, 1); } 
-	}
-	return this;
+    var j;
+    for (j=0; j<this.length; j++) {
+        if (typeof this[j] === 'string') {
+            var reg = new RegExp('('+item+') {1}', "g");
+            if (this[j].match(reg)) { this.splice(j, 1); }
+        }
+        else if (this[j] === item) { this.splice(j, 1); }
+    }
+    return this;
 };
 
 // Endfile

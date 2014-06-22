@@ -84,7 +84,7 @@ if (!empty($_GET['page']) && $_GET['page']==='menu') :
     <link rel="stylesheet" href="assets/html5boilerplate/css/normalize.css" />
     <link rel="stylesheet" href="assets/html5boilerplate/css/main.css" />
     <script src="assets/html5boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
-	<link rel="stylesheet" href="assets/styles.css" />
+    <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
     <!--[if lt IE 7]>
@@ -115,12 +115,12 @@ if (!empty($_GET['page']) && $_GET['page']==='menu') :
     <p class="credits" id="user_agent"></p>
 
     <footer id="footer">
-		<div class="credits float-left">
-		    This page is <a href="" title="Check now online" id="html_validation">HTML5</a> & <a href="" title="Check now online" id="css_validation">CSS3</a> valid.
-		</div>
-		<div class="credits float-right">
-		    <a href="http://github.com/atelierspierrot/assets-library">atelierspierrot/assets-library</a> package by <a href="https://github.com/piwi">@piwi</a> under <a href="http://opensource.org/licenses/GPL-3.0">GNU GPL v.3</a> license.
-		</div>
+        <div class="credits float-left">
+            This page is <a href="" title="Check now online" id="html_validation">HTML5</a> & <a href="" title="Check now online" id="css_validation">CSS3</a> valid.
+        </div>
+        <div class="credits float-right">
+            <a href="http://github.com/atelierspierrot/assets-library">atelierspierrot/assets-library</a> package by <a href="https://github.com/piwi">@piwi</a> under <a href="http://opensource.org/licenses/GPL-3.0">GNU GPL v.3</a> license.
+        </div>
     </footer>
 </body>
 </html>

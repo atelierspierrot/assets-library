@@ -16,37 +16,37 @@
  */
 function checkAll( form, check_name, handler ) 
 {
-	var _form = typeof(form)==='object' ? form : eval("document."+form);
-	if (typeof this.window['_dbg_info']==='function') {
-		_dbg_info('[checkAll()] Working on form=['+form+'] | check_name=['+check_name+'] | handler=['+handler+'] | our working form is '+_form);
-	}
-	var check_all = handler || check_name+'_all',
-		form_chkall = typeof(form)=='object' ? form.check_all : eval("document."+form+"."+check_all);
-	if (form_chkall===undefined) {
-		for (var i = _form.elements.length - 1; i >= 0; i = i - 1) {
-			if (_form.elements[i].name===check_all) {
-				form_chkall = _form.elements[i];
-			}
-		}
-	}
-	if (form_chkall!==undefined) {
-		setTimeout(function() {
-			for (var i = _form.elements.length - 1; i >= 0; i = i - 1) {
-				var el = _form.elements[i];
-				if (el.name == check_name) {
-					el.checked = form_chkall.checked;
-				}
-				else if (el.name == check_name+"[]") {
-					el.checked = form_chkall.checked;
-				}
-			}
-		},10);
-		return true;
-	}
-	if (typeof this.window['_dbg'] == 'function') {
-		_dbg('ERROR: check_name "'+check_name+'" not found!');
-	}
-	return false;
+    var _form = typeof(form)==='object' ? form : eval("document."+form);
+    if (typeof this.window['_dbg_info']==='function') {
+        _dbg_info('[checkAll()] Working on form=['+form+'] | check_name=['+check_name+'] | handler=['+handler+'] | our working form is '+_form);
+    }
+    var check_all = handler || check_name+'_all',
+        form_chkall = typeof(form)=='object' ? form.check_all : eval("document."+form+"."+check_all);
+    if (form_chkall===undefined) {
+        for (var i = _form.elements.length - 1; i >= 0; i = i - 1) {
+            if (_form.elements[i].name===check_all) {
+                form_chkall = _form.elements[i];
+            }
+        }
+    }
+    if (form_chkall!==undefined) {
+        setTimeout(function() {
+            for (var i = _form.elements.length - 1; i >= 0; i = i - 1) {
+                var el = _form.elements[i];
+                if (el.name == check_name) {
+                    el.checked = form_chkall.checked;
+                }
+                else if (el.name == check_name+"[]") {
+                    el.checked = form_chkall.checked;
+                }
+            }
+        },10);
+        return true;
+    }
+    if (typeof this.window['_dbg'] == 'function') {
+        _dbg('ERROR: check_name "'+check_name+'" not found!');
+    }
+    return false;
 }
 
 // Endfile

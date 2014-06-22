@@ -32,10 +32,10 @@ $requirements = array(
 
 </head>
 <body>
-	<strong>Second popup window</strong>
-	<ul>
-		<li><a href="#" onclick="return opener_focus();">opener focus</a></li>
-		<li><a href="#" onclick="window.close();">close this window</a></li>
-	</ul>
+    <strong>Second popup window</strong>
+    <ul>
+        <li><a href="#" onclick="return opener_focus();">opener focus</a></li>
+        <li><a href="#" onclick="window.close();">close this window</a></li>
+    </ul>
 </body>
 </html>

@@ -25,9 +25,9 @@ echo library_include('css', 'commons', 'reset');
 
 /* body global styles */
 body    {
-	background-color: #fff; margin: 40px;
-	font-size: 82%; font-family: "Lucida Grande", Verdana, Sans-serif; color: #4F5155;
-	direction: <?php echo _CSS_DIRECTION; ?>;
+    background-color: #fff; margin: 40px;
+    font-size: 82%; font-family: "Lucida Grande", Verdana, Sans-serif; color: #4F5155;
+    direction: <?php echo _CSS_DIRECTION; ?>;
 }
 
 <?php

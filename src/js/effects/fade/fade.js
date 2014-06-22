@@ -33,20 +33,20 @@ function Fade(id) {
 
     // initialization
     this.init = function(id) {
-    	self = this.getObject(id);
+        self = this.getObject(id);
         var _id = effect.getEffectIdAttribute(self);
         if (_id===null) {
             if (arguments[1]!==undefined) {
                 effect.extend(this, arguments[1]);
             }
-    	    data = this.getObjectData(self);
-        	_id = effect.setInstance(self, data);
+            data = this.getObjectData(self);
+            _id = effect.setInstance(self, data);
         }
         else {
-        	self = effect.getInstanceElement(_id);
-        	data = effect.getInstanceData(_id);
+            self = effect.getInstanceElement(_id);
+            data = effect.getInstanceData(_id);
         }
-//console.debug('working on div with id['+_id+'] getting self: ', self, ' and data: ', data);
+    //console.debug('working on div with id['+_id+'] getting self: ', self, ' and data: ', data);
         if (data.isCollapsed===true) {
             clearInterval(self.t);
             self.t = setInterval('this.fadeIn("'+_id+'")', data.timer);
@@ -78,9 +78,9 @@ function Fade(id) {
 
     // increase the opacity of the div exponentially
     this.fadeIn = function(id) {
-//console.debug('expanding el ', id);
-    	self = effect.getInstanceElement(id);
-    	data = effect.getInstanceData(id);
+    //console.debug('expanding el ', id);
+        self = effect.getInstanceElement(id);
+        data = effect.getInstanceData(id);
         var elo = getOpacity(self)*100;
         var maxo = data.maxOpacity*100;
         if (elo < maxo) {
@@ -98,9 +98,9 @@ function Fade(id) {
 
     // reduce the opacity of the div exponentially
     this.fadeOut = function(id) {
-//console.debug('collapsing el ', id);
-    	self = effect.getInstanceElement(id);
-    	data = effect.getInstanceData(id);
+    //console.debug('collapsing el ', id);
+        self = effect.getInstanceElement(id);
+        data = effect.getInstanceData(id);
         var elo = getOpacity(self)*100;
         if (elo > 0) {
             var v = (elo - Math.round(elo / data.speed));
