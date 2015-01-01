@@ -1,9 +1,6 @@
 # .gitignore
 # Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
 
-# Hack to allow keeping an empty directory
-!.gitkeep
-
 # OS & software files
 .DS_Store
 .AppleDouble
@@ -47,3 +44,6 @@ demo/tmp*
 user/tmp*
 src/tmp*
 www/tmp*
+
+# Hack to allow keeping an empty directory
+!.gitkeep
