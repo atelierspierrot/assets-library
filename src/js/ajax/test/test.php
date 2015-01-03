@@ -47,7 +47,7 @@ function submitInAjax( form ) {
 		dom_id: 'TextDiv',
 		success:'successFormSubmit',
 		error: function(resp, e) {
-    		alert('An error occured : '+resp);
+    		alert('An error occurred : '+resp);
 		}
 	});
 }

@@ -229,7 +229,7 @@
                 positionBox( null, 'auto' );
             },
             error: function(resp, e) {
-                _this.update( 'An error occured : '+resp );
+                _this.update( 'An error occurred : '+resp );
             }
         });
     };
