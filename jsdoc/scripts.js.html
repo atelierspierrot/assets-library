@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: vendor/atelierspierrot/templatengine/js/scripts.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: vendor/atelierspierrot/templatengine/js/scripts.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/**
+ * Template Engine - PHP framework package
+ * Copyleft (c) 2013-2014 Pierre Cassat and contributors
+ * &lt;www.ateliers-pierrot.fr> - &lt;contact@ateliers-pierrot.fr>
+ * License GPL-3.0 &lt;http://www.opensource.org/licenses/gpl-3.0.html>
+ * Sources &lt;http://github.com/atelierspierrot/templatengine>
+ *
+ * Default Page Scripts
+ *
+ */
+
+function initHandler( _name, opened ){
+    var elt_handler = $('#'+_name+'_handler'),
+        elt_block = $('#'+_name);
+    if (opened==undefined || opened==false) {
+        elt_block.hide();
+    } else {
+        elt_handler.addClass('down');
+    }
+    elt_handler.click(function(){ 
+        var tltp = elt_handler.accesskey ? elt_handler.accesskey('getTooltip') : false;
+        if (tltp && elt_block.is(':visible')) { tltp.hide(); }
+        elt_block.toggle('slow');
+        elt_handler.toggleClass('down');
+    });
+}
+
+function getNewLi( str ){
+    return $('&lt;li />').html(str);
+}
+
+function getNewA( href, str ){
+    return $('&lt;a />', {'href':href}).html(str);
+}
+
+function getNewInfoItem( str, title, href ){
+    var strong = $('&lt;strong />').html( href!==undefined ? getNewA(href, str) : str );
+    return getNewLi( title+' : ' ).append(strong);
+}
+
+function getPluginManifest( url, callback ) {
+    $.ajax(url, {
+        error: function(jqXHR, textStatus, error) {
+            addMessage('AJAX error! ['+textStatus+(error ? ' : '+error : '')+']');
+            return false;
+        },
+        success: function(data) { callback.apply(this, [data]); }
+    });
+}
+
+function getGitHubCommits( github, callback ) {
+    $.ajax(github+'commits', {
+        method: 'GET',
+        crossDomain: true,
+        data: { page: 1, per_page: 5 },
+        dataType: 'json',
+        error: function(jqXHR, textStatus, error) {
+            addMessage('AJAX error! ['+textStatus+(error ? ' : '+error : '')+']');
+            return false;
+        },
+        success: function(data, textStatus, jqXHR) { 
+            if (data.length>1 || data[0]!==undefined) {
+                callback.apply(this, [data]);
+            } else {
+                callback.apply(this, [null]);
+            }
+        }
+    });
+}
+
+function getGitHubBugs( github, callback ) {
+    $.ajax(github+'issues', {
+        method: 'GET',
+        crossDomain: true,
+        data: { page: 1, per_page: 5 },
+        dataType: 'json',
+        error: function(jqXHR, textStatus, error) {
+            addMessage('AJAX error! ['+textStatus+(error ? ' : '+error : '')+']');
+            return false;
+        },
+        success: function(data, textStatus, jqXHR) {
+            if (data.length>1 || data[0]!==undefined) {
+                callback.apply(this, [data]);
+            } else {
+                callback.apply(this, [null]);
+            }
+        }
+    });
+}
+
+function getUrlFilenameAndQuery( url ){
+    var filename, qm = url.lastIndexOf('#');
+    if (qm!==-1) { filename = url.substr(0,qm); }
+    else { filename = url; }
+    return filename.substring(filename.lastIndexOf('/')+1);
+}
+
+function getUrlFilename( url ){
+    var filename, qm = url.lastIndexOf('?');
+    if (qm!==-1) { filename = url.substr(0,qm); }
+    else { filename = url; }
+    return filename.substring(filename.lastIndexOf('/')+1);
+}
+
+var BACKLINK_VISIBLE;
+function initBacklinks(){
+    // top bottom links
+    $('#short_navigation').hide();
+    // global navigation menu
+    $('#short_menu').hide();
+    $('#short_menu_handler').bind('mouseover', function(){
+        var short_menu = $('#short_menu'),
+            short_menu_ln = $('#short_menu').html().length;
+        updateBacklinks();
+        if (BACKLINK_VISIBLE=='short_tableofcontents') {
+            $('#short_tableofcontents').fadeOut();
+        }
+        $('#short_menu').fadeIn('slow', function(){
+            BACKLINK_VISIBLE='short_menu';
+            $('#short_navigation').bind('mouseleave', function(){ $('#short_menu').fadeOut('slow'); });
+        });
+    });
+    // global content menu
+    $('#short_tableofcontents').hide();
+    $('#short_tableofcontents_handler').bind('mouseover', function(){
+        var short_menu = $('#short_tableofcontents'),
+            short_menu_ln = $('#short_tableofcontents').html().length;
+        updateBacklinks();
+        if (BACKLINK_VISIBLE=='short_menu') {
+            $('#short_menu').fadeOut();
+        }
+        $('#short_tableofcontents').fadeIn('slow', function(){
+            BACKLINK_VISIBLE='short_tableofcontents';
+            $('#short_navigation').bind('mouseleave', function(){ $('#short_tableofcontents').fadeOut('slow'); });
+        });
+    });
+    // scroll interaction
+    $(window).scroll(function(){
+        var nav = $('nav'),
+            nav_poz = nav.position();
+        if ((nav_poz.top+$('nav').height()) &lt; $(window).scrollTop()) {
+            $('#short_navigation').fadeIn('slow');
+        } else {
+            $('#short_navigation').fadeOut('slow');
+        }
+    });
+}
+
+function activateNavigationMenu() {
+    var _done = false,
+        query = getUrlFilenameAndQuery( window.location.href );
+    $('nav li').each(function(i,o){
+        var atag = $(o).find('a').first();
+        if (atag) {
+            atag.bind('click', function(){
+                $('nav li').each(function(j,p){
+                    var natag = $(p).find('a').first();
+                    if (natag && natag.hasClass('active')) { natag.removeClass('active'); }
+                });
+                $(this).addClass('active');
+                updateBacklinks();
+            });
+            if (atag.attr('href')===query) {
+                atag.addClass('active');
+                _done = true;
+            }
+        }
+    });
+    if (!_done) {
+        var page = getUrlFilename( window.location.href );
+        $('nav li').each(function(i,o){
+            var atag = $(o).find('a').first();
+            if (atag && atag.attr('href')===page) { atag.addClass('active'); }
+        });
+    }
+}
+
+function getToHash(){
+    var _hash = window.location.hash;
+    if (_hash!==undefined) {
+        var hash = $('#'+_hash.replace('#', ''));
+        if (hash.length) {
+            var poz = hash.position();
+            $("html:not(:animated),body:not(:animated)").animate({ scrollTop: poz.top });
+        }
+    }
+}
+
+function updateBacklinks() {
+    $('#short_menu').html( $('#navigation_menu').html() );
+    $('#short_tableofcontents').html( $('#page_menu ul').html() );
+//    $('#short_socials').html( $('#menu_socials').html() );
+}
+
+function addCSSValidatorLink( css_filename ){
+    var url = window.location.href,
+        cssfile = url.replace(/(.*)\/.*(\.html$)/i, '$1//'+css_filename);
+    $('#footer a#css_validation').attr('href', 'http://jigsaw.w3.org/css-validator/validator?uri='+encodeURIComponent(cssfile));
+}
+
+function addHTMLValidatorLink( url ){
+    if (url===undefined || url===null) { var url = window.location.href; }
+    $('#footer a#html_validation').attr('href', 'http://html5.validator.nu/?showimagereport=yes&showsource=yes&doc='+encodeURIComponent(url));
+}
+
+var FootNotesStack = [];
+function buildFootNotes(){
+    var bl_sup = $('&lt;sup />'),
+        bl_a_hdlr = $('&lt;a />', { 'class':'footnote_link', 'title':'See footnote' }),
+        bl_a_back = $('&lt;a />', { 'class':'footnote_link', 'title':'Back in content' }).html('&#8617;'),
+        bl_note = $('&lt;li />');
+    $('.note').each(function(i,o){
+        var ref = $(this).attr('data-noteref'), hdlr_id, note_id;
+        if ($.inArray(ref, FootNotesStack)!==-1) {
+            var j = parseInt($.inArray(ref, FootNotesStack)+1);
+            hdlr_id = 'note_'+j+'_intext';
+            note_id = 'note_'+j;
+        }
+        else {
+            var j = parseInt(FootNotesStack.length+1),
+                note_ctt = $(this).html(),
+                note_item = bl_note.clone(),
+                note_back = bl_a_back.clone();
+            hdlr_id = 'note_'+j+'_intext';
+            note_id = 'note_'+j;
+            note_back.attr('href', '#'+hdlr_id);
+            note_item.attr('id', note_id);
+            note_item.html(note_ctt+'&nbsp;');
+            note_item.append(note_back);
+            $('#footnotes_list').append(note_item);
+            FootNotesStack.push(ref || j);
+        }
+        var note_hdlr = bl_a_hdlr.clone(),
+            note_sup = bl_sup.clone();
+        note_hdlr.attr('href', '#'+note_id);
+        note_hdlr.attr('id', hdlr_id);
+        note_hdlr.html(j);
+        note_sup.append(note_hdlr);
+        $(this).replaceWith(note_sup);
+    });
+}
+
+function addMessage( str ){
+    var msg = $('&lt;span />').html(str),
+        msgbox = $('#message_box');
+    msgbox.append(msg);
+    if (!msgbox.is(':visible')) { msgbox.show(1000); }
+    msgbox.delay(5000).hide(1000);
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#_dbg">_dbg</a></li><li><a href="global.html#_dbg_info">_dbg_info</a></li><li><a href="global.html#_dbg_log">_dbg_log</a></li><li><a href="global.html#add_collection_field">add_collection_field</a></li><li><a href="global.html#addClassName">addClassName</a></li><li><a href="global.html#applyCallback">applyCallback</a></li><li><a href="global.html#array_remove">array_remove</a></li><li><a href="global.html#Blind">Blind</a></li><li><a href="global.html#capitaliseFirstLetter">capitaliseFirstLetter</a></li><li><a href="global.html#change_class_check_onload">change_class_check_onload</a></li><li><a href="global.html#change_class_oncheck">change_class_oncheck</a></li><li><a href="global.html#checkAll">checkAll</a></li><li><a href="global.html#dump">dump</a></li><li><a href="global.html#each">each</a></li><li><a href="global.html#Effect">Effect</a></li><li><a href="global.html#EffectRegistry">EffectRegistry</a></li><li><a href="global.html#extend">extend</a></li><li><a href="global.html#Fade">Fade</a></li><li><a href="global.html#field_toggler">field_toggler</a></li><li><a href="global.html#font_size">font_size</a></li><li><a href="global.html#get_url">get_url</a></li><li><a href="global.html#getClasses">getClasses</a></li><li><a href="global.html#getClassNameIndex">getClassNameIndex</a></li><li><a href="global.html#getOffset">getOffset</a></li><li><a href="global.html#getStyleAttribute">getStyleAttribute</a></li><li><a href="global.html#getWindowSizes">getWindowSizes</a></li><li><a href="global.html#hasClassName">hasClassName</a></li><li><a href="global.html#href_goto">href_goto</a></li><li><a href="global.html#html_characters">html_characters</a></li><li><a href="global.html#in_array">in_array</a></li><li><a href="global.html#initHandler">initHandler</a></li><li><a href="global.html#is_defined">is_defined</a></li><li><a href="global.html#is_url">is_url</a></li><li><a href="global.html#join">join</a></li><li><a href="global.html#keyboard_unicodes">keyboard_unicodes</a></li><li><a href="global.html#metadata">metadata</a></li><li><a href="global.html#multiExtend">multiExtend</a></li><li><a href="global.html#NEWPOPUPWINDOW">NEWPOPUPWINDOW</a></li><li><a href="global.html#onDocumentLoad">onDocumentLoad</a></li><li><a href="global.html#opener_focus">opener_focus</a></li><li><a href="global.html#popup_set">popup_set</a></li><li><a href="global.html#Registry">Registry</a></li><li><a href="global.html#remove_collection_field">remove_collection_field</a></li><li><a href="global.html#removeClassName">removeClassName</a></li><li><a href="global.html#Select">Select</a></li><li><a href="global.html#setCookie">setCookie</a></li><li><a href="global.html#settings">settings</a></li><li><a href="global.html#show_hide">show_hide</a></li><li><a href="global.html#show_hide_init">show_hide_init</a></li><li><a href="global.html#Slide">Slide</a></li><li><a href="global.html#TabContent">TabContent</a></li><li><a href="global.html#toggleShowHide">toggleShowHide</a></li><li><a href="global.html#TOOLTIP">TOOLTIP</a></li><li><a href="global.html#trigger_click">trigger_click</a></li><li><a href="global.html#uniqid">uniqid</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Sun Jun 22 2014 23:37:48 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

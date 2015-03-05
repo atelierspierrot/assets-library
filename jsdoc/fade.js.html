@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: js/effects/fade/fade.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: js/effects/fade/fade.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/*
+# ***** BEGIN LICENSE BLOCK *****
+# Assets Library - The open source PHP/JavaScript/CSS library of Les Ateliers Pierrot
+# Copyleft (c) 2013-2014 Pierre Cassat and contributors
+# &lt;www.ateliers-pierrot.fr> - &lt;contact@ateliers-pierrot.fr>
+# License GPL-3.0 &lt;http://www.opensource.org/licenses/gpl-3.0.html>
+# Sources &lt;http://github.com/atelierspierrot/assets-library>
+#
+# Ce programme est un logiciel libre distribué sous licence GNU/GPL.
+#
+# ***** END LICENSE BLOCK ***** */
+
+
+/**
+ * Fade effect
+ */
+function Fade(id) {
+
+    // extendable options
+    this.speed = 7; // speed
+    this.timer = 10; // refresh rate
+
+    // effect presets
+    this.presets = {
+        // speed
+        slow: { speed: 16, timer: 14 },
+        default: { speed: 7, timer: 10 },
+        fast: { speed: 2, timer: 7 },
+    };
+
+    // variables
+    var self, data, effect = new Effect('fade');
+
+    // initialization
+    this.init = function(id) {
+        self = this.getObject(id);
+        var _id = effect.getEffectIdAttribute(self);
+        if (_id===null) {
+            if (arguments[1]!==undefined) {
+                effect.extend(this, arguments[1]);
+            }
+            data = this.getObjectData(self);
+            _id = effect.setInstance(self, data);
+        }
+        else {
+            self = effect.getInstanceElement(_id);
+            data = effect.getInstanceData(_id);
+        }
+    //console.debug('working on div with id['+_id+'] getting self: ', self, ' and data: ', data);
+        if (data.isCollapsed===true) {
+            clearInterval(self.t);
+            self.t = setInterval('this.fadeIn("'+_id+'")', data.timer);
+        }
+        else {
+            clearInterval(self.t);
+            self.t = setInterval('this.fadeOut("'+_id+'")', data.timer);
+        }
+    };
+
+    this.getObject = function(id) {
+        self = {};
+        self = document.getElementById(id);
+        return self;
+    };
+
+    this.getObjectData = function(self) {
+        data = {};
+        data.maxOpacity = getOpacity(self);
+        data.speed = this.speed;
+        data.timer = this.timer;
+        data.isCollapsed = false;
+        return data;
+    };
+
+// --------------
+// Sliding
+// --------------
+
+    // increase the opacity of the div exponentially
+    this.fadeIn = function(id) {
+    //console.debug('expanding el ', id);
+        self = effect.getInstanceElement(id);
+        data = effect.getInstanceData(id);
+        var elo = getOpacity(self)*100;
+        var maxo = data.maxOpacity*100;
+        if (elo &lt; maxo) {
+            var v = (elo + Math.round((maxo - elo) / data.speed));
+            if (v &lt; maxo && v!=elo) {
+                setOpacity(self, parseFloat(v / maxo));
+                return;
+            }
+        }
+        setOpacity(self,data.maxOpacity);
+        clearInterval(self.t);
+        data.isCollapsed = false;
+        effect.setInstanceData(id, data);
+    };
+
+    // reduce the opacity of the div exponentially
+    this.fadeOut = function(id) {
+    //console.debug('collapsing el ', id);
+        self = effect.getInstanceElement(id);
+        data = effect.getInstanceData(id);
+        var elo = getOpacity(self)*100;
+        if (elo > 0) {
+            var v = (elo - Math.round(elo / data.speed));
+            if (v > 0 && v!=elo) {
+                setOpacity(self, parseFloat(v/100));
+                return;
+            }
+        }
+        setOpacity(self,0);
+        clearInterval(self.t);
+        data.isCollapsed = true;
+        effect.setInstanceData(id, data);
+    };
+
+// --------------
+// Utilities
+// --------------
+
+    // get the current opacity style of the div
+    function getOpacity(d) {
+        return effect.getStyleAttribute(d, 'opacity');
+    };
+
+    // set the current opacity style of the div
+    function setOpacity(d,v) {
+        effect.setStyleAttribute(d, 'opacity', v);
+        effect.setStyleAttribute(d, 'filter', 'alpha(opacity='+(v * 100)+');');
+    };
+
+// ------------------
+// Slide Effect
+// ------------------
+
+    init.apply(this, arguments);
+    return false;
+}
+
+// Endfile</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#_dbg">_dbg</a></li><li><a href="global.html#_dbg_info">_dbg_info</a></li><li><a href="global.html#_dbg_log">_dbg_log</a></li><li><a href="global.html#add_collection_field">add_collection_field</a></li><li><a href="global.html#addClassName">addClassName</a></li><li><a href="global.html#applyCallback">applyCallback</a></li><li><a href="global.html#array_remove">array_remove</a></li><li><a href="global.html#Blind">Blind</a></li><li><a href="global.html#capitaliseFirstLetter">capitaliseFirstLetter</a></li><li><a href="global.html#change_class_check_onload">change_class_check_onload</a></li><li><a href="global.html#change_class_oncheck">change_class_oncheck</a></li><li><a href="global.html#checkAll">checkAll</a></li><li><a href="global.html#dump">dump</a></li><li><a href="global.html#each">each</a></li><li><a href="global.html#Effect">Effect</a></li><li><a href="global.html#EffectRegistry">EffectRegistry</a></li><li><a href="global.html#extend">extend</a></li><li><a href="global.html#Fade">Fade</a></li><li><a href="global.html#field_toggler">field_toggler</a></li><li><a href="global.html#font_size">font_size</a></li><li><a href="global.html#get_url">get_url</a></li><li><a href="global.html#getClasses">getClasses</a></li><li><a href="global.html#getClassNameIndex">getClassNameIndex</a></li><li><a href="global.html#getOffset">getOffset</a></li><li><a href="global.html#getStyleAttribute">getStyleAttribute</a></li><li><a href="global.html#getWindowSizes">getWindowSizes</a></li><li><a href="global.html#hasClassName">hasClassName</a></li><li><a href="global.html#href_goto">href_goto</a></li><li><a href="global.html#html_characters">html_characters</a></li><li><a href="global.html#in_array">in_array</a></li><li><a href="global.html#initHandler">initHandler</a></li><li><a href="global.html#is_defined">is_defined</a></li><li><a href="global.html#is_url">is_url</a></li><li><a href="global.html#join">join</a></li><li><a href="global.html#keyboard_unicodes">keyboard_unicodes</a></li><li><a href="global.html#metadata">metadata</a></li><li><a href="global.html#multiExtend">multiExtend</a></li><li><a href="global.html#NEWPOPUPWINDOW">NEWPOPUPWINDOW</a></li><li><a href="global.html#onDocumentLoad">onDocumentLoad</a></li><li><a href="global.html#opener_focus">opener_focus</a></li><li><a href="global.html#popup_set">popup_set</a></li><li><a href="global.html#Registry">Registry</a></li><li><a href="global.html#remove_collection_field">remove_collection_field</a></li><li><a href="global.html#removeClassName">removeClassName</a></li><li><a href="global.html#Select">Select</a></li><li><a href="global.html#setCookie">setCookie</a></li><li><a href="global.html#settings">settings</a></li><li><a href="global.html#show_hide">show_hide</a></li><li><a href="global.html#show_hide_init">show_hide_init</a></li><li><a href="global.html#Slide">Slide</a></li><li><a href="global.html#TabContent">TabContent</a></li><li><a href="global.html#toggleShowHide">toggleShowHide</a></li><li><a href="global.html#TOOLTIP">TOOLTIP</a></li><li><a href="global.html#trigger_click">trigger_click</a></li><li><a href="global.html#uniqid">uniqid</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Sun Jun 22 2014 23:37:48 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

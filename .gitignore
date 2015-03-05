@@ -1,22 +1,9 @@
 # .gitignore
 # Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
 
-# OS & software files
-.DS_Store
-.AppleDouble
-.LSOverride
-.Spotlight-V100
-.Trashes
-Icon
-._*
-*~
-*~lock*
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-.idea/*
-
-# Les Ateliers specifics:
+# any "tmp*" file or dir
+tmp*
+*/tmp*
 
 # the composer lock file
 composer.lock
@@ -26,24 +13,16 @@ user/*
 
 # the external packages installed by Composer, Template Engine or others
 vendor/*
-src/vendor/*
-www/vendor/*
+*/vendor/*
 
 # the documentation, that is NOT under version-control by default
 # this may be commented on the "dev" branch
-jsdoc/*
+#jsdoc/*
 
 # for development ...
 # this may be commented on the "wip" branch
-dev/*
-build/*
-
-# any "tmp*" file or dir
-tmp*
-demo/tmp*
-user/tmp*
-src/tmp*
-www/tmp*
+#dev/*
+#build/*
 
 # Hack to allow keeping an empty directory
 !.gitkeep

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: js/font_tools/font_tools.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: js/font_tools/font_tools.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/*
+# ***** BEGIN LICENSE BLOCK *****
+# Assets Library - The open source PHP/JavaScript/CSS library of Les Ateliers Pierrot
+# Copyleft (c) 2013-2014 Pierre Cassat and contributors
+# &lt;www.ateliers-pierrot.fr> - &lt;contact@ateliers-pierrot.fr>
+# License GPL-3.0 &lt;http://www.opensource.org/licenses/gpl-3.0.html>
+# Sources &lt;http://github.com/atelierspierrot/assets-library>
+#
+# Ce programme est un logiciel libre distribué sous licence GNU/GPL.
+#
+# ***** END LICENSE BLOCK ***** */
+
+
+// Settings : global javascript options of pages
+var settings; if (settings===undefined) settings = [];
+
+// The default units and range for the font-size tool
+settings.defaultFontSizeUnits = [
+    [ 'px', 4 ],
+    [ 'pt', 3 ],
+    [ 'em', 0.3 ],
+    [ '%', 25 ]
+];
+
+// Keep traces of all original font-sizes by id
+var FONTSIZE_ORIGINALS={};
+
+/**
+ * Change a font-size of a DOM block by its ID.
+ * @param string action The action to execute on font-size : '+' to increase it, '-' to decrease it and '0' for the original size
+ * @param string id A dom block ID for selection
+ * @param float range The range to use for increase/decrease font-size
+ * @param string def The default original font-size to use if it's not set in CSS
+ */
+function font_size(action, id, range, def) {
+    if (typeof this.window['_dbg_info'] == 'function') {
+        _dbg_info('[text_size()] New call for action ['+action+'] on dom ID=['+id+'] with range=['+range+'] and default font-size=['+def+']');
+    }
+
+    var _unit, _new_size=false,
+    getParentFontSize = function(_node) {
+        var fontsize = null;
+        while (_node!==undefined && (fontsize===null || fontsize==='')) {
+            _node = _node.parentNode;
+            if (_node!==undefined) {
+                if (_node.currentStyle) {
+                    fontsize = _node.currentStyle['fontSize'];
+                }
+                else if (document.defaultView && document.defaultView.getComputedStyle) {
+                    fontsize = document.defaultView.getComputedStyle(_node,null).getPropertyValue('font-size');
+                }
+                else if (_node.style!==undefined) {
+                    fontsize = _node.style.fontSize;
+                }
+            }
+        }
+        return fontsize;
+    };
+
+    var domobj = document.getElementById( id );
+    if (domobj) {
+        var current_fs = domobj.style.fontSize || getParentFontSize(domobj) || def;
+        if (current_fs===null || current_fs==='') {
+            throw new Error('No font-size defined for dom ID ['+id+']!');
+            return;
+        }
+        if (FONTSIZE_ORIGINALS[id]===undefined) {
+            FONTSIZE_ORIGINALS[id]=current_fs;
+        }
+
+        var current_fs_val, _range;
+        for (var i in settings.defaultFontSizeUnits) {
+            _str = current_fs.replace(settings.defaultFontSizeUnits[i][0], '');
+            if (_str!==current_fs) {
+                _unit = settings.defaultFontSizeUnits[i][0];
+                current_fs_val = parseFloat(_str);
+                _range = range || settings.defaultFontSizeUnits[i][1];
+            }
+        }
+        if (typeof this.window['_dbg'] == 'function') {
+            _dbg('_unit=['+_unit+'] _range=['+_range+'] current_fs_val=['+current_fs_val+']');
+        }
+
+        if (action==='+') { _new_size = (current_fs_val + _range) + _unit; }
+        else if (action==='-') { _new_size = (current_fs_val - _range) + _unit; }
+        else if (action==='0') { _new_size = FONTSIZE_ORIGINALS[id]; }
+
+        if (_new_size) {
+            if (typeof this.window['_dbg'] == 'function') {
+                _dbg('setting size on new value = '+_new_size);
+            }
+            domobj.style.fontSize = _new_size;
+        }
+    }
+}
+
+// Endfile</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#_dbg">_dbg</a></li><li><a href="global.html#_dbg_info">_dbg_info</a></li><li><a href="global.html#_dbg_log">_dbg_log</a></li><li><a href="global.html#add_collection_field">add_collection_field</a></li><li><a href="global.html#addClassName">addClassName</a></li><li><a href="global.html#applyCallback">applyCallback</a></li><li><a href="global.html#array_remove">array_remove</a></li><li><a href="global.html#Blind">Blind</a></li><li><a href="global.html#capitaliseFirstLetter">capitaliseFirstLetter</a></li><li><a href="global.html#change_class_check_onload">change_class_check_onload</a></li><li><a href="global.html#change_class_oncheck">change_class_oncheck</a></li><li><a href="global.html#checkAll">checkAll</a></li><li><a href="global.html#dump">dump</a></li><li><a href="global.html#each">each</a></li><li><a href="global.html#Effect">Effect</a></li><li><a href="global.html#EffectRegistry">EffectRegistry</a></li><li><a href="global.html#extend">extend</a></li><li><a href="global.html#Fade">Fade</a></li><li><a href="global.html#field_toggler">field_toggler</a></li><li><a href="global.html#font_size">font_size</a></li><li><a href="global.html#get_url">get_url</a></li><li><a href="global.html#getClasses">getClasses</a></li><li><a href="global.html#getClassNameIndex">getClassNameIndex</a></li><li><a href="global.html#getOffset">getOffset</a></li><li><a href="global.html#getStyleAttribute">getStyleAttribute</a></li><li><a href="global.html#getWindowSizes">getWindowSizes</a></li><li><a href="global.html#hasClassName">hasClassName</a></li><li><a href="global.html#href_goto">href_goto</a></li><li><a href="global.html#html_characters">html_characters</a></li><li><a href="global.html#in_array">in_array</a></li><li><a href="global.html#initHandler">initHandler</a></li><li><a href="global.html#is_defined">is_defined</a></li><li><a href="global.html#is_url">is_url</a></li><li><a href="global.html#join">join</a></li><li><a href="global.html#keyboard_unicodes">keyboard_unicodes</a></li><li><a href="global.html#metadata">metadata</a></li><li><a href="global.html#multiExtend">multiExtend</a></li><li><a href="global.html#NEWPOPUPWINDOW">NEWPOPUPWINDOW</a></li><li><a href="global.html#onDocumentLoad">onDocumentLoad</a></li><li><a href="global.html#opener_focus">opener_focus</a></li><li><a href="global.html#popup_set">popup_set</a></li><li><a href="global.html#Registry">Registry</a></li><li><a href="global.html#remove_collection_field">remove_collection_field</a></li><li><a href="global.html#removeClassName">removeClassName</a></li><li><a href="global.html#Select">Select</a></li><li><a href="global.html#setCookie">setCookie</a></li><li><a href="global.html#settings">settings</a></li><li><a href="global.html#show_hide">show_hide</a></li><li><a href="global.html#show_hide_init">show_hide_init</a></li><li><a href="global.html#Slide">Slide</a></li><li><a href="global.html#TabContent">TabContent</a></li><li><a href="global.html#toggleShowHide">toggleShowHide</a></li><li><a href="global.html#TOOLTIP">TOOLTIP</a></li><li><a href="global.html#trigger_click">trigger_click</a></li><li><a href="global.html#uniqid">uniqid</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Sun Jun 22 2014 23:37:48 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

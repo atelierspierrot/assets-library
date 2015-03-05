@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: vendor/atelierspierrot/templatengine/vendor_assets/jquery.metadata.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: vendor/atelierspierrot/templatengine/vendor_assets/jquery.metadata.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/*
+ * Metadata - jQuery plugin for parsing metadata from elements
+ *
+ * Copyright (c) 2006 John Resig, Yehuda Katz, J�örn Zaefferer, Paul McLanahan
+ *
+ * Dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
+ *
+ * Revision: $Id$
+ *
+ */
+
+/**
+ * Sets the type of metadata to use. Metadata is encoded in JSON, and each property
+ * in the JSON will become a property of the element itself.
+ *
+ * There are three supported types of metadata storage:
+ *
+ *   attr:  Inside an attribute. The name parameter indicates *which* attribute.
+ *          
+ *   class: Inside the class attribute, wrapped in curly braces: { }
+ *   
+ *   elem:  Inside a child element (e.g. a script tag). The
+ *          name parameter indicates *which* element.
+ *          
+ * The metadata for an element is loaded the first time the element is accessed via jQuery.
+ *
+ * As a result, you can define the metadata type, use $(expr) to load the metadata into the elements
+ * matched by expr, then redefine the metadata type and run another $(expr) for other elements.
+ * 
+ * @name $.metadata.setType
+ *
+ * @example &lt;p id="one" class="some_class {item_id: 1, item_label: 'Label'}">This is a p&lt;/p>
+ * @before $.metadata.setType("class")
+ * @after $("#one").metadata().item_id == 1; $("#one").metadata().item_label == "Label"
+ * @desc Reads metadata from the class attribute
+ * 
+ * @example &lt;p id="one" class="some_class" data="{item_id: 1, item_label: 'Label'}">This is a p&lt;/p>
+ * @before $.metadata.setType("attr", "data")
+ * @after $("#one").metadata().item_id == 1; $("#one").metadata().item_label == "Label"
+ * @desc Reads metadata from a "data" attribute
+ * 
+ * @example &lt;p id="one" class="some_class">&lt;script>{item_id: 1, item_label: 'Label'}&lt;/script>This is a p&lt;/p>
+ * @before $.metadata.setType("elem", "script")
+ * @after $("#one").metadata().item_id == 1; $("#one").metadata().item_label == "Label"
+ * @desc Reads metadata from a nested script element
+ * 
+ * @param String type The encoding type
+ * @param String name The name of the attribute to be used to get metadata (optional)
+ * @cat Plugins/Metadata
+ * @descr Sets the type of encoding to be used when loading metadata for the first time
+ * @type undefined
+ * @see metadata()
+ */
+
+(function($) {
+
+$.extend({
+	metadata : {
+		defaults : {
+			type: 'class',
+			name: 'metadata',
+			cre: /({.*})/,
+			single: 'metadata'
+		},
+		setType: function( type, name ){
+			this.defaults.type = type;
+			this.defaults.name = name;
+		},
+		get: function( elem, opts ){
+			var settings = $.extend({},this.defaults,opts);
+			// check for empty string in single property
+			if ( !settings.single.length ) settings.single = 'metadata';
+			
+			var data = $.data(elem, settings.single);
+			// returned cached data if it already exists
+			if ( data ) return data;
+			
+			data = "{}";
+			
+			if ( settings.type == "class" ) {
+				var m = settings.cre.exec( elem.className );
+				if ( m )
+					data = m[1];
+			} else if ( settings.type == "elem" ) {
+				if( !elem.getElementsByTagName )
+					return undefined;
+				var e = elem.getElementsByTagName(settings.name);
+				if ( e.length )
+					data = $.trim(e[0].innerHTML);
+			} else if ( elem.getAttribute != undefined ) {
+				var attr = elem.getAttribute( settings.name );
+				if ( attr )
+					data = attr;
+			}
+			
+			if ( data.indexOf( '{' ) &lt;0 )
+			data = "{" + data + "}";
+			
+			data = eval("(" + data + ")");
+			
+			$.data( elem, settings.single, data );
+			return data;
+		}
+	}
+});
+
+/**
+ * Returns the metadata object for the first member of the jQuery object.
+ *
+ * @name metadata
+ * @descr Returns element's metadata object
+ * @param Object opts An object contianing settings to override the defaults
+ * @type jQuery
+ * @cat Plugins/Metadata
+ */
+$.fn.metadata = function( opts ){
+	return $.metadata.get( this[0], opts );
+};
+
+})(jQuery);</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#_dbg">_dbg</a></li><li><a href="global.html#_dbg_info">_dbg_info</a></li><li><a href="global.html#_dbg_log">_dbg_log</a></li><li><a href="global.html#add_collection_field">add_collection_field</a></li><li><a href="global.html#addClassName">addClassName</a></li><li><a href="global.html#applyCallback">applyCallback</a></li><li><a href="global.html#array_remove">array_remove</a></li><li><a href="global.html#Blind">Blind</a></li><li><a href="global.html#capitaliseFirstLetter">capitaliseFirstLetter</a></li><li><a href="global.html#change_class_check_onload">change_class_check_onload</a></li><li><a href="global.html#change_class_oncheck">change_class_oncheck</a></li><li><a href="global.html#checkAll">checkAll</a></li><li><a href="global.html#dump">dump</a></li><li><a href="global.html#each">each</a></li><li><a href="global.html#Effect">Effect</a></li><li><a href="global.html#EffectRegistry">EffectRegistry</a></li><li><a href="global.html#extend">extend</a></li><li><a href="global.html#Fade">Fade</a></li><li><a href="global.html#field_toggler">field_toggler</a></li><li><a href="global.html#font_size">font_size</a></li><li><a href="global.html#get_url">get_url</a></li><li><a href="global.html#getClasses">getClasses</a></li><li><a href="global.html#getClassNameIndex">getClassNameIndex</a></li><li><a href="global.html#getOffset">getOffset</a></li><li><a href="global.html#getStyleAttribute">getStyleAttribute</a></li><li><a href="global.html#getWindowSizes">getWindowSizes</a></li><li><a href="global.html#hasClassName">hasClassName</a></li><li><a href="global.html#href_goto">href_goto</a></li><li><a href="global.html#html_characters">html_characters</a></li><li><a href="global.html#in_array">in_array</a></li><li><a href="global.html#initHandler">initHandler</a></li><li><a href="global.html#is_defined">is_defined</a></li><li><a href="global.html#is_url">is_url</a></li><li><a href="global.html#join">join</a></li><li><a href="global.html#keyboard_unicodes">keyboard_unicodes</a></li><li><a href="global.html#metadata">metadata</a></li><li><a href="global.html#multiExtend">multiExtend</a></li><li><a href="global.html#NEWPOPUPWINDOW">NEWPOPUPWINDOW</a></li><li><a href="global.html#onDocumentLoad">onDocumentLoad</a></li><li><a href="global.html#opener_focus">opener_focus</a></li><li><a href="global.html#popup_set">popup_set</a></li><li><a href="global.html#Registry">Registry</a></li><li><a href="global.html#remove_collection_field">remove_collection_field</a></li><li><a href="global.html#removeClassName">removeClassName</a></li><li><a href="global.html#Select">Select</a></li><li><a href="global.html#setCookie">setCookie</a></li><li><a href="global.html#settings">settings</a></li><li><a href="global.html#show_hide">show_hide</a></li><li><a href="global.html#show_hide_init">show_hide_init</a></li><li><a href="global.html#Slide">Slide</a></li><li><a href="global.html#TabContent">TabContent</a></li><li><a href="global.html#toggleShowHide">toggleShowHide</a></li><li><a href="global.html#TOOLTIP">TOOLTIP</a></li><li><a href="global.html#trigger_click">trigger_click</a></li><li><a href="global.html#uniqid">uniqid</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Sun Jun 22 2014 23:37:48 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

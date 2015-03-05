@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: js/accordion/accordion.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">Source: js/accordion/accordion.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/*
+# ***** BEGIN LICENSE BLOCK *****
+# Assets Library - The open source PHP/JavaScript/CSS library of Les Ateliers Pierrot
+# Copyleft (c) 2013-2014 Pierre Cassat and contributors
+# &lt;www.ateliers-pierrot.fr> - &lt;contact@ateliers-pierrot.fr>
+# License GPL-3.0 &lt;http://www.opensource.org/licenses/gpl-3.0.html>
+# Sources &lt;http://github.com/atelierspierrot/assets-library>
+#
+# Ce programme est un logiciel libre distribué sous licence GNU/GPL.
+#
+# ***** END LICENSE BLOCK ***** */
+
+
+/**
+ * Build a set of accordion effect from a list of handlers links toggling a list of contents.
+ */
+Accordion.version = "1.0.0";
+function Accordion() {
+
+    // all object default properties
+    this._headers_blocks        = {};
+    this._contents_blocks       = {};
+    this._indexed_blocks_ids    = [];
+    this._container_id          = 'accordion';
+    this._item_header_mask_id   = 'accordion-header%s';
+    this._item_content_mask_id  = 'accordion-content%s';
+    this._show_class            = 'selected';
+    this._hide_class            = 'hide';
+    this._collapsible           = false;
+    this._cookie_name           = 'jsaccordion';
+    this._use_cookie            = true;
+    this._silent                = false;
+
+    // initialization of the whole TAB object
+    this.init = function() {
+        var container = document.getElementById(this._container_id);
+        if (container) {
+            // grab the tab links and content divs from the page
+            var children = container.childNodes,
+                _header_str = new RegExp( this._item_header_mask_id.replace('%s', '') ),
+                _content_str = new RegExp( this._item_content_mask_id.replace('%s', '') );
+            for (var i=0, len=children.length; i&lt;len; i++) {
+                var _id = children[i].id,
+                    _uniqid = _id && _id.replace(_header_str, '').replace(_content_str, '');
+                // header
+                if (_header_str.test(_id)) {
+                    this._headers_blocks[_uniqid] 	= children[i];
+                    this._indexed_blocks_ids.push(_uniqid);
+                }
+                // content
+                else if (_content_str.test(_id)) {
+                    this._contents_blocks[_uniqid] 	= children[i];
+                }
+            }
+
+            // get the cookie value if so
+            var _cookie, _collapse;
+            if (this._use_cookie) {
+                var _cookie = getCookie( this._cookie_name );
+                if (_cookie && -1!=_cookie.lastIndexOf(':')) {
+                    var _cook_tbl = _cookie.split(":");
+                    _cookie = _cook_tbl[1];
+                    _collapse = _cook_tbl[0];
+                }
+            }
+
+            // assign onclick events to the tab links
+            // highlight the first tab
+            var i=0, _this=this;
+            for (var id in this._headers_blocks) {
+                this._headers_blocks[id].onclick = function(e){ return toggleEvent(e, this, _this); };
+                if (this._use_cookie && _cookie!==null) {
+                    if (_cookie===id) {
+                        if (_collapse!==undefined && _collapse==="collapse") {
+                            this.showItem( this._contents_blocks[id], true );
+                        }
+                        else {
+                            this.showItem( this._contents_blocks[id] );
+                        }
+                    }
+                }
+                else if (i==0) {
+                    this.showItem( this._contents_blocks[id] );
+                }
+                i++;
+            }
+        }
+        else if (!this._silent) {
+            throw new Error('Handlers list for ACCORDION not found!');
+        }
+    };
+
+// ------------------
+// PUBLIC METHODS
+// ------------------
+
+    // show a specific tab by its ID (and collapse it if "_collapse==true")
+    this.showItem = function(_sel, _collapse) {
+        var collapse = _collapse || false;
+        var sel = this.getItemUniqId(_sel) || null;
+
+        // Highlight the selected tab, and dim all others.
+        // Also show the selected content div, and hide all others.
+        for (var id in this._contents_blocks) {
+            if (id===sel) {
+                if (collapse && this._collapsible && !hasClassName(this._contents_blocks[id], this._hide_class)) {
+                    removeClassName( this._headers_blocks[id], this._show_class );
+                    addClassName( this._contents_blocks[id], this._hide_class );
+                    if (this._use_cookie) {
+                        setCookie( 'collapse:'+id, this._cookie_name );
+                    }
+                }
+                else {
+                    addClassName( this._headers_blocks[id], this._show_class );
+                    removeClassName( this._contents_blocks[id], this._hide_class );
+                    if (this._use_cookie) {
+                        setCookie( id, this._cookie_name );
+                    }
+                }
+            }
+            else {
+                removeClassName( this._headers_blocks[id], this._show_class );
+                addClassName( this._contents_blocks[id], this._hide_class );
+            }
+        }
+    };
+
+    // open next tab
+    this.nextItem = function() {
+        var j, _selected = this.getSelectedItem();
+        for (var i=0, len=this._indexed_blocks_ids.length; i&lt;len; i++) {
+            j = parseInt(i+1);
+            if (this._indexed_blocks_ids[i]==_selected) {
+                if (i===len-1) {
+                    return this.showItem(this._indexed_blocks_ids[0]);
+                }
+                else {
+                    return this.showItem(this._indexed_blocks_ids[j]);
+                }
+            }
+        }
+    };
+
+    // open previous tab
+    this.previousItem = function() {
+        var j, _selected = this.getSelectedItem();
+        for (var i=0, len=this._indexed_blocks_ids.length; i&lt;len; i++) {
+            j = parseInt(i-1);
+            if (this._indexed_blocks_ids[i]==_selected) {
+                if (i===0) {
+                    return this.showItem(this._indexed_blocks_ids[len-1]);
+                }
+                else {
+                    return this.showItem(this._indexed_blocks_ids[j]);
+                }
+            }
+        }
+    };
+
+    // get selected tab ID
+    this.getSelectedItem = function() {
+        for (var id in this._contents_blocks) {
+            if (!hasClassName(this._contents_blocks[id], this._hide_class)) {
+                return id;
+            }
+        }
+        return false;
+    };
+
+    // get a selection uniq ID
+    this.getItemUniqId = function(sel) {
+        var _header_str = new RegExp( this._item_header_mask_id.replace('%s', '') ),
+            _content_str = new RegExp( this._item_content_mask_id.replace('%s', '') );
+        if (sel.id) {
+            return sel.id.replace(_header_str, '').replace(_content_str, '');
+        }
+        return false;
+    };
+
+// ------------------
+// PRIVATE METHODS
+// ------------------
+
+    // toggle the "showItem()" method on click event
+    var toggleEvent = function( e, sel, _this ) {
+        _this.showItem( sel, true );
+        // stop the browser following the link
+        return false;
+    };
+
+    if (arguments.length) { extend(this, arguments[0], '_%s'); }
+    if (typeof window['_dbg_info'] == 'function')
+        _dbg_info("[ACCORDION] Creating new accordion with :"
+            +"\n _container_id: "+this._container_id
+            +"\n _item_header_mask_id: "+this._item_header_mask_id
+            +"\n _item_content_mask_id: "+this._item_content_mask_id
+            +"\n _show_class: "+this._show_class
+            +"\n _hide_class: "+this._hide_class
+            +"\n _collapsible: "+this._collapsible
+            +"\n _use_cookie: "+this._use_cookie
+            +"\n _cookie_name: "+this._cookie_name
+            +"\n _silent: "+this._silent
+        );
+    this.init();
+    return this;
+};
+
+// Endfile</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Global</h3><ul><li><a href="global.html#_dbg">_dbg</a></li><li><a href="global.html#_dbg_info">_dbg_info</a></li><li><a href="global.html#_dbg_log">_dbg_log</a></li><li><a href="global.html#add_collection_field">add_collection_field</a></li><li><a href="global.html#addClassName">addClassName</a></li><li><a href="global.html#applyCallback">applyCallback</a></li><li><a href="global.html#array_remove">array_remove</a></li><li><a href="global.html#Blind">Blind</a></li><li><a href="global.html#capitaliseFirstLetter">capitaliseFirstLetter</a></li><li><a href="global.html#change_class_check_onload">change_class_check_onload</a></li><li><a href="global.html#change_class_oncheck">change_class_oncheck</a></li><li><a href="global.html#checkAll">checkAll</a></li><li><a href="global.html#dump">dump</a></li><li><a href="global.html#each">each</a></li><li><a href="global.html#Effect">Effect</a></li><li><a href="global.html#EffectRegistry">EffectRegistry</a></li><li><a href="global.html#extend">extend</a></li><li><a href="global.html#Fade">Fade</a></li><li><a href="global.html#field_toggler">field_toggler</a></li><li><a href="global.html#font_size">font_size</a></li><li><a href="global.html#get_url">get_url</a></li><li><a href="global.html#getClasses">getClasses</a></li><li><a href="global.html#getClassNameIndex">getClassNameIndex</a></li><li><a href="global.html#getOffset">getOffset</a></li><li><a href="global.html#getStyleAttribute">getStyleAttribute</a></li><li><a href="global.html#getWindowSizes">getWindowSizes</a></li><li><a href="global.html#hasClassName">hasClassName</a></li><li><a href="global.html#href_goto">href_goto</a></li><li><a href="global.html#html_characters">html_characters</a></li><li><a href="global.html#in_array">in_array</a></li><li><a href="global.html#initHandler">initHandler</a></li><li><a href="global.html#is_defined">is_defined</a></li><li><a href="global.html#is_url">is_url</a></li><li><a href="global.html#join">join</a></li><li><a href="global.html#keyboard_unicodes">keyboard_unicodes</a></li><li><a href="global.html#metadata">metadata</a></li><li><a href="global.html#multiExtend">multiExtend</a></li><li><a href="global.html#NEWPOPUPWINDOW">NEWPOPUPWINDOW</a></li><li><a href="global.html#onDocumentLoad">onDocumentLoad</a></li><li><a href="global.html#opener_focus">opener_focus</a></li><li><a href="global.html#popup_set">popup_set</a></li><li><a href="global.html#Registry">Registry</a></li><li><a href="global.html#remove_collection_field">remove_collection_field</a></li><li><a href="global.html#removeClassName">removeClassName</a></li><li><a href="global.html#Select">Select</a></li><li><a href="global.html#setCookie">setCookie</a></li><li><a href="global.html#settings">settings</a></li><li><a href="global.html#show_hide">show_hide</a></li><li><a href="global.html#show_hide_init">show_hide_init</a></li><li><a href="global.html#Slide">Slide</a></li><li><a href="global.html#TabContent">TabContent</a></li><li><a href="global.html#toggleShowHide">toggleShowHide</a></li><li><a href="global.html#TOOLTIP">TOOLTIP</a></li><li><a href="global.html#trigger_click">trigger_click</a></li><li><a href="global.html#uniqid">uniqid</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Sun Jun 22 2014 23:37:48 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
