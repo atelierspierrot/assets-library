@@ -43,34 +43,36 @@ JS and CSS dependencies:
 A set of "commons" JS and CSS definitions are defined to homogenize the result and a default
 `test.php` template should be:
 
-    <?php
+```php
+<?php
 
-    @ini_set('display_errors',1); @error_reporting(E_ALL ^ E_NOTICE); 
-    require_once __DIR__.'/../../assets-library.php';
+@ini_set('display_errors',1); @error_reporting(E_ALL ^ E_NOTICE); 
+require_once __DIR__.'/../../assets-library.php';
 
-    $requirements = array(
-        'js'=>array('commons'),
-        'css'=>array('commons'),
-    );
+$requirements = array(
+    'js'=>array('commons'),
+    'css'=>array('commons'),
+);
 
-    ?><html>
-    <head>
-    <title>Test of XXX feature</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+?><html>
+<head>
+<title>Test of XXX feature</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
-    <!-- Commons -->
-    <script type="text/javascript" src="<?php echo build_requirements_url('js', $requirements['js']); ?>"></script>
-    <link href="<?php echo build_requirements_url('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
+<!-- Commons -->
+<script type="text/javascript" src="<?php echo build_requirements_url('js', $requirements['js']); ?>"></script>
+<link href="<?php echo build_requirements_url('css', $requirements['css']); ?>" media="screen" rel="stylesheet" type="text/css" />
 
-    <!-- Preset -->
-    <script type="text/javascript" src="<?php echo build_preset_url('js', 'XXX'); ?>"></script>
-    <link href="<?php echo build_preset_url('css', 'XXX'); ?>" media="screen" rel="stylesheet" type="text/css" />
+<!-- Preset -->
+<script type="text/javascript" src="<?php echo build_preset_url('js', 'XXX'); ?>"></script>
+<link href="<?php echo build_preset_url('css', 'XXX'); ?>" media="screen" rel="stylesheet" type="text/css" />
 
-    </head>
-    <body>
-        Test content page
-    </body>
-    </html>
+</head>
+<body>
+    Test content page
+</body>
+</html>
+```
 
 You can add any other requirements in the `$requirements` array, keeping in mind that the
 `preset` calls will load all dependencies declared in the "composer.json" file.
