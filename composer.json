@@ -9,10 +9,6 @@
         "name": "Les Ateliers Pierrot & contributors",
         "email": "contact@ateliers-pierrot.fr",
         "homepage": "http://www.ateliers-pierrot.fr/"
-    },{
-        "name": "Pierre Cassat",
-        "email": "me@e-piwi.fr",
-        "homepage": "http://github.com/piwi"
     }],
     "require": {
         "atelierspierrot/assets-manager": "1.*"
